@@ -1,5 +1,55 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# 允许前端跨域访问
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# 健康检查
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+# 登录接口
+@app.post("/api/login")
+def login(username: str, password: str):
+    return {
+        "code": 200,
+        "msg": "登录成功",
+        "token": "test_token_123"
+    }
+
+# 获取用户信息
+@app.get("/api/user/info")
+def user_info():
+    return {
+        "code": 200,
+        "data": {
+            "name": "测试用户",
+            "role": "student"
+        }
+    }
+
+# AP 规划数据
+@app.get("/api/ap/plans")
+def ap_plans():
+    return {
+        "code": 200,
+        "data": [
+            {"course": "AP CS A", "score": 5},
+            {"course": "AP Calculus BC", "score": 5}
+        ]
+    }
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 # 初始化FastAPI应用
