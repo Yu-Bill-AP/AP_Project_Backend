@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - AP Planner</title>
+
+```
+<style>
+    body {
+        margin: 0;
+        font-family: "PingFang SC", sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        width: 320px;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+
+    input:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 12px;
+        border: none;
+        border-radius: 8px;
+        background-color: #3498db;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    button:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+    }
+
+    .error {
+        color: red;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .footer {
+        margin-top: 15px;
+        font-size: 13px;
+    }
+
+    .footer a {
+        color: #3498db;
+        text-decoration: none;
+    }
+
+    .help {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="help" onclick="showHelp()">❓</div>
+
+<div class="container">
+    <h1>AP Planner</h1>
+    <div class="subtitle">登录你的账号</div>
+
+```
+<input id="username" type="text" placeholder="请输入用户名">
+<input id="password" type="password" placeholder="请输入密码">
+
+<button id="login-btn" onclick="login()">立即登录</button>
+
+<div id="error-msg" class="error"></div>
+
+<div class="footer">
+    没有账号？<a href="register.html">去注册</a>
+</div>
+```
+
+</div>
+
+<script>
+const BASE_URL = "http://127.0.0.1:8000";
+
+async function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const btn = document.getElementById("login-btn");
+    const errorMsg = document.getElementById("error-msg");
+
+    errorMsg.innerText = "";
+
+    if (!username || !password) {
+        errorMsg.innerText = "请输入用户名和密码";
+        return;
+    }
+
+    btn.innerText = "登录中...";
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(`${BASE_URL}/api/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.code !== 200) {
+            errorMsg.innerText = data.msg || "登录失败";
+            return;
+        }
+
+        // 保存token
+        localStorage.setItem("token", data.token);
+
+        // 跳转
+        window.location.href = "dashboard.html";
+
+    } catch (error) {
+        errorMsg.innerText = "网络错误，请检查后端是否启动";
+    } finally {
+        btn.innerText = "立即登录";
+        btn.disabled = false;
+    }
+}
+
+function showHelp() {
+    alert("登录后可以填写你的成绩信息，系统会帮你匹配院校并给出升学建议。");
+}
+</script>
+
+</body>
+</html>

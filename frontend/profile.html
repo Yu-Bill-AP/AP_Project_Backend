@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>完善信息 - AP Planner</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "PingFang SC", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+        }
+
+        .navbar {
+            height: 64px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .container {
+            max-width: 760px;
+            margin: 40px auto;
+            background: white;
+            padding: 32px;
+            border-radius: 18px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .step-title {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .step-subtitle {
+            color: #7f8c8d;
+            margin-bottom: 24px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9eef3;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 20%;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 18px;
+            border: 1px solid #dce3ea;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .secondary {
+            background: #eef3f8;
+            color: #2c3e50;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #888;
+            margin-top: -10px;
+            margin-bottom: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <strong>📚 AP Planner</strong>
+    <button class="secondary" onclick="goDashboard()">返回首页</button>
+</nav>
+
+<div class="container">
+    <h1 class="step-title" id="step-title">Step 1 / 5 基础信息</h1>
+    <p class="step-subtitle" id="step-subtitle">先填写你的基本申请方向。</p>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div class="form-step active">
+        <label>当前年级</label>
+        <select id="grade">
+            <option value="9年级上">9年级上</option>
+            <option value="9年级下">9年级下</option>
+            <option value="10年级上">10年级上</option>
+            <option value="10年级下">10年级下</option>
+            <option value="11年级上">11年级上</option>
+            <option value="11年级下">11年级下</option>
+            <option value="12年级上">12年级上</option>
+            <option value="12年级下">12年级下</option>
+        </select>
+
+        <label>目标国家 / 地区</label>
+        <select id="target-country">
+            <option value="美国">美国</option>
+            <option value="英国">英国</option>
+            <option value="加拿大">加拿大</option>
+            <option value="中国香港">中国香港</option>
+        </select>
+
+        <label>目标专业方向</label>
+        <input id="major" placeholder="例如：计算机 / 商科 / 生物 / 工程">
+    </div>
+
+    <div class="form-step">
+        <label>加权 GPA</label>
+        <input id="weighted-gpa" type="number" step="0.01" placeholder="例如：4.20">
+
+        <label>未加权 GPA</label>
+        <input id="unweighted-gpa" type="number" step="0.01" placeholder="例如：3.80">
+
+        <p class="hint">Demo阶段先填当前整体GPA，后面再升级为多学期GPA。</p>
+    </div>
+
+    <div class="form-step">
+        <label>AP 课程 1</label>
+        <input id="ap-course-1" placeholder="例如：AP Calculus BC">
+
+        <label>目标/已出分数</label>
+        <select id="ap-score-1">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">暂未出分</option>
+        </select>
+
+        <label>AP 课程 2</label>
+        <input id="ap-course-2" placeholder="例如：AP Physics C">
+
+        <label>目标/已出分数</label>
+        <select id="ap-score-2">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">暂未出分</option>
+        </select>
+    </div>
+
+    <div class="form-step">
+        <label>SAT / ACT 类型</label>
+        <select id="sat-act-type">
+            <option value="SAT">SAT</option>
+            <option value="ACT">ACT</option>
+        </select>
+
+        <label>SAT / ACT 分数</label>
+        <input id="sat-act-score" type="number" placeholder="例如：1450">
+
+        <label>语言成绩</label>
+        <select id="language-test-type">
+            <option value="托福">托福</option>
+            <option value="雅思">雅思</option>
+            <option value="多邻国">多邻国</option>
+        </select>
+
+        <label>语言成绩分数</label>
+        <input id="language-test-score" type="number" placeholder="例如：105">
+    </div>
+
+    <div class="form-step">
+        <label>活动 / 背景类型</label>
+        <select id="activity-type">
+            <option value="科研项目">科研项目</option>
+            <option value="竞赛">竞赛</option>
+            <option value="夏校">夏校</option>
+            <option value="课外活动">课外活动</option>
+            <option value="学术项目">学术项目</option>
+        </select>
+
+        <label>活动描述</label>
+        <textarea id="activity-desc" placeholder="简单描述你的活动经历，例如：参加过数学建模、科研项目、志愿活动等"></textarea>
+    </div>
+
+    <div class="btn-row">
+        <button class="secondary" onclick="prevStep()" id="prev-btn">上一步</button>
+        <button class="primary" onclick="nextStep()" id="next-btn">下一步</button>
+    </div>
+</div>
+
+<script>
+let currentStep = 0;
+
+const steps = document.querySelectorAll(".form-step");
+const title = document.getElementById("step-title");
+const subtitle = document.getElementById("step-subtitle");
+const progressFill = document.getElementById("progress-fill");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+const titles = [
+    "Step 1 / 5 基础信息",
+    "Step 2 / 5 GPA 成绩",
+    "Step 3 / 5 AP 课程",
+    "Step 4 / 5 标化成绩",
+    "Step 5 / 5 活动背景"
+];
+
+const subtitles = [
+    "先填写你的基本申请方向。",
+    "填写你的当前GPA情况。",
+    "填写你已经学习或计划学习的AP课程。",
+    "填写SAT/ACT和语言成绩。",
+    "补充你的活动和背景信息。"
+];
+
+function updateStep() {
+    steps.forEach((step, index) => {
+        step.classList.toggle("active", index === currentStep);
+    });
+
+    title.textContent = titles[currentStep];
+    subtitle.textContent = subtitles[currentStep];
+    progressFill.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+
+    prevBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
+    nextBtn.textContent = currentStep === steps.length - 1 ? "提交信息" : "下一步";
+}
+
+function nextStep() {
+    if (currentStep < steps.length - 1) {
+        currentStep++;
+        updateStep();
+    } else {
+        submitProfile();
+    }
+}
+
+function prevStep() {
+    if (currentStep > 0) {
+        currentStep--;
+        updateStep();
+    }
+}
+
+function submitProfile() {
+    const profileData = {
+        grade: document.getElementById("grade").value,
+        targetCountry: document.getElementById("target-country").value,
+        major: document.getElementById("major").value,
+        weightedGpa: document.getElementById("weighted-gpa").value,
+        unweightedGpa: document.getElementById("unweighted-gpa").value,
+        apCourses: [
+            {
+                course: document.getElementById("ap-course-1").value,
+                score: document.getElementById("ap-score-1").value
+            },
+            {
+                course: document.getElementById("ap-course-2").value,
+                score: document.getElementById("ap-score-2").value
+            }
+        ],
+        satAct: {
+            type: document.getElementById("sat-act-type").value,
+            score: document.getElementById("sat-act-score").value
+        },
+        languageTest: {
+            type: document.getElementById("language-test-type").value,
+            score: document.getElementById("language-test-score").value
+        },
+        activity: {
+            type: document.getElementById("activity-type").value,
+            description: document.getElementById("activity-desc").value
+        }
+    };
+
+    localStorage.setItem("profileData", JSON.stringify(profileData));
+    alert("信息已保存，下一步我们会把它接入后端数据库。");
+    window.location.href = "dashboard.html";
+}
+
+function goDashboard() {
+    window.location.href = "dashboard.html";
+}
+
+updateStep();
+</script>
+
+</body>
+</html>

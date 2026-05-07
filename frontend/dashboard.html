@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AP Planner</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            height: 64px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #eef3f8;
+            color: #2c3e50;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #dde8f2;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border-radius: 18px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(52,152,219,0.25);
+        }
+
+        .hero-card h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .hero-card p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .summary-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .summary-item .label {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .summary-item .value {
+            margin-top: 6px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+        }
+
+        .progress-box {
+            margin-top: 12px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e9eef3;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 60%;
+            height: 100%;
+            background: #3498db;
+            border-radius: 999px;
+        }
+
+        .primary-btn {
+            margin-top: 18px;
+            border: none;
+            background: #3498db;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .primary-btn:hover {
+            background: #2980b9;
+        }
+
+        .school-list,
+        .suggestion-list,
+        .ap-list {
+            list-style: none;
+        }
+
+        .school-list li,
+        .suggestion-list li,
+        .ap-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eef1f4;
+            font-size: 14px;
+        }
+
+        .school-list li:last-child,
+        .suggestion-list li:last-child,
+        .ap-list li:last-child {
+            border-bottom: none;
+        }
+
+        .school-tag {
+            display: inline-block;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            margin-right: 8px;
+            background: #eef6ff;
+            color: #2980b9;
+        }
+
+        .ap-score {
+            float: right;
+            background: #3498db;
+            color: white;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        .empty {
+            color: #888;
+            font-size: 14px;
+            padding: 12px 0;
+        }
+
+        .error {
+            color: #d63031;
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">📚 AP Planner</div>
+    <div class="nav-right">
+        <span id="nav-user">学生中心</span>
+        <button class="logout-btn" onclick="logout()">退出登录</button>
+    </div>
+</nav>
+
+<div class="container">
+
+    <section class="hero-card">
+        <h1 id="welcome-title">欢迎回来</h1>
+        <p>这里是你的 AP 升学规划中心，查看当前状态并继续完善申请信息。</p>
+
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div class="label">当前年级</div>
+                <div class="value" id="grade-value">加载中</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">规划完成度</div>
+                <div class="value">60%</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">AP 课程数</div>
+                <div class="value" id="ap-count">0</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-grid">
+
+        <div>
+            <section class="card">
+                <h2>📈 升学规划进度</h2>
+                <p>你已经完成了基础账号创建。下一步建议继续完善 GPA、AP、标化和活动背景信息。</p>
+
+                <div class="progress-box">
+                    <div class="progress-text">
+                        <span>当前进度</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <button class="primary-btn" onclick="goProfile()">继续完善信息</button>
+            </section>
+
+            <section class="card">
+                <h2>📚 我的 AP 课程</h2>
+                <ul id="ap-list" class="ap-list">
+                    <li class="empty">正在加载 AP 课程...</li>
+                </ul>
+            </section>
+        </div>
+
+        <div>
+            <section class="card">
+                <h2>🎯 推荐院校预览</h2>
+                <ul class="school-list">
+                    <li><span class="school-tag">Match</span>UCLA</li>
+                    <li><span class="school-tag">Match</span>NYU</li>
+                    <li><span class="school-tag">Reach</span>UC Berkeley</li>
+                </ul>
+                <button class="primary-btn" onclick="goMatch()">查看完整匹配结果</button>
+            </section>
+
+            <section class="card">
+                <h2>📋 最近规划建议</h2>
+                <ul class="suggestion-list">
+                    <li>建议将 SAT 目标提高至 1500+</li>
+                    <li>补充 1-2 个学术型活动背景</li>
+                    <li>考虑选择 AP Physics C 或 AP Statistics</li>
+                </ul>
+            </section>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const BASE_URL = "http://127.0.0.1:8000";
+
+function loadLocalProfileData() {
+    const raw = localStorage.getItem("profileData");
+
+    if (!raw) {
+        return;
+    }
+
+    const profile = JSON.parse(raw);
+
+    if (profile.grade) {
+        document.getElementById("grade-value").textContent = profile.grade;
+    }
+
+    const validApCourses = profile.apCourses.filter(item => item.course);
+    document.getElementById("ap-count").textContent = validApCourses.length;
+
+    const list = document.getElementById("ap-list");
+    list.innerHTML = "";
+
+    if (validApCourses.length === 0) {
+        list.innerHTML = `<li class="empty">暂无 AP 课程数据</li>`;
+    } else {
+        validApCourses.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${item.course}
+                <span class="ap-score">目标 ${item.score}</span>
+            `;
+            list.appendChild(li);
+        });
+    }
+}
+
+window.onload = async function () {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    loadLocalProfileData();
+
+    await loadUserInfo(token);
+    // await loadAPPlans(token);
+};
+
+async function loadUserInfo(token) {
+    try {
+        const res = await fetch(`${BASE_URL}/api/user/info`, {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+});
+        const data = await res.json();
+
+    if (data.code !== 200) {
+        console.log("用户信息接口失败：", data);
+        document.getElementById("welcome-title").textContent =
+            data.msg || "用户信息加载失败";
+        return;
+    }
+        const user = data.data;
+
+        document.getElementById("welcome-title").textContent =
+            `欢迎回来，${user.name}同学 👋`;
+
+        document.getElementById("nav-user").textContent =
+            `${user.name}同学`;
+
+        document.getElementById("grade-value").textContent =
+            user.current_grade_term || "未填写";
+
+    } catch (error) {
+        console.error(error);
+        document.getElementById("welcome-title").textContent =
+            "用户信息加载失败";
+    }
+}
+
+async function loadAPPlans(token) {
+    const list = document.getElementById("ap-list");
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/ap/plans`, {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+});
+        const data = await res.json();
+
+        list.innerHTML = "";
+
+        if (data.code !== 200) {
+            list.innerHTML = `<li class="error">${data.msg || "加载失败"}</li>`;
+            return;
+        }
+
+        if (!data.data || data.data.length === 0) {
+            list.innerHTML = `<li class="empty">暂无 AP 课程数据</li>`;
+            document.getElementById("ap-count").textContent = "0";
+            return;
+        }
+
+        document.getElementById("ap-count").textContent = data.data.length;
+
+        data.data.forEach(plan => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                ${plan.course}
+                <span class="ap-score">目标 ${plan.score}</span>
+            `;
+            list.appendChild(li);
+        });
+
+    } catch (error) {
+        console.error(error);
+        list.innerHTML = `<li class="error">网络错误，无法加载 AP 课程</li>`;
+    }
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+
+function goProfile() {
+    window.location.href = "profile.html";
+}
+
+function goMatch() {
+    window.location.href = "match.html";
+}
+</script>
+
+</body>
+</html>
