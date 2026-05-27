@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的规划 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .plans-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .plan-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .plan-question {
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .plan-meta {
+            color: #7f8c8d;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .plan-answer {
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            margin: 0;
+        }
+
+        .delete-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 10px;
+            background: #fff1f0;
+            color: #c0392b;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .delete-btn:hover {
+            background: #ffe3e0;
+        }
+
+        .empty {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 28px;
+            color: #7f8c8d;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .primary-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: white;
+            background: #3498db;
+            border-radius: 8px;
+            padding: 10px 14px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>我的规划</h1>
+            <p>查看 AI 规划对话记录，保留关键建议，方便后续继续完善申请方案。</p>
+        </section>
+
+        <section id="plans-list" class="plans-list">
+            <div class="empty">正在加载规划记录...</div>
+        </section>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+let currentToken = "";
+
+function escapeHtml(text) {
+    return String(text || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+async function loadPlans() {
+    const list = document.getElementById("plans-list");
+
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/ai-plans`, {
+            headers: {
+                "Authorization": `Bearer ${currentToken}`
+            }
+        });
+        const result = await response.json();
+
+        if (result.code !== 200) {
+            list.innerHTML = `<div class="empty">${escapeHtml(result.msg || "加载失败")}</div>`;
+            return;
+        }
+
+        if (!result.data || result.data.length === 0) {
+            list.innerHTML = `
+                <div class="empty">
+                    暂无规划记录
+                    <br>
+                    <a class="primary-link" href="ai-plan.html">去生成AI规划</a>
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = result.data.map(item => `
+            <article class="plan-card">
+                <div class="plan-header">
+                    <div>
+                        <p class="plan-question">${escapeHtml(item.question)}</p>
+                        <div class="plan-meta">${escapeHtml(item.created_at)} · ${escapeHtml(item.source)}</div>
+                    </div>
+                    <button class="delete-btn" onclick="deletePlan(${item.id})">删除</button>
+                </div>
+                <p class="plan-answer">${escapeHtml(item.answer)}</p>
+            </article>
+        `).join("");
+    } catch (error) {
+        list.innerHTML = `<div class="empty">网络错误，请检查后端服务是否启动。</div>`;
+    }
+}
+
+async function deletePlan(planId) {
+    if (!confirm("确定删除这条规划记录吗？")) {
+        return;
+    }
+
+    const response = await fetch(`${AUTH_BASE_URL}/api/ai-plans/${planId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${currentToken}`
+        }
+    });
+    const result = await response.json();
+
+    if (result.code !== 200) {
+        alert(result.msg || "删除失败");
+        return;
+    }
+
+    await loadPlans();
+}
+
+requireLogin((user, token) => {
+    currentToken = token;
+    renderAppLayout(user);
+    loadPlans();
+});
+</script>
+</body>
+</html>

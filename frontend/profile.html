@@ -3,27 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>完善信息 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
     <style>
-        body {
-            margin: 0;
-            font-family: "PingFang SC", Arial, sans-serif;
-            background: #f5f7fa;
-            color: #2c3e50;
-        }
-
-        .navbar {
-            height: 64px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 32px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        }
-
         .container {
             max-width: 760px;
-            margin: 40px auto;
+            margin: 0 auto;
             background: white;
             padding: 32px;
             border-radius: 18px;
@@ -118,10 +102,10 @@
 
 <body>
 
-<nav class="navbar">
-    <strong>📚 AP Planner</strong>
-    <button class="secondary" onclick="goDashboard()">返回首页</button>
-</nav>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
 
 <div class="container">
     <h1 class="step-title" id="step-title">Step 1 / 5 基础信息</h1>
@@ -234,7 +218,11 @@
         <button class="primary" onclick="nextStep()" id="next-btn">下一步</button>
     </div>
 </div>
+</main>
+</div>
 
+<script src="auth.js"></script>
+<script src="layout.js"></script>
 <script>
 let currentStep = 0;
 
@@ -290,8 +278,8 @@ function prevStep() {
     }
 }
 
-function submitProfile() {
-    const profileData = {
+function collectProfileData() {
+    return {
         grade: document.getElementById("grade").value,
         targetCountry: document.getElementById("target-country").value,
         major: document.getElementById("major").value,
@@ -320,17 +308,111 @@ function submitProfile() {
             description: document.getElementById("activity-desc").value
         }
     };
+}
 
-    localStorage.setItem("profileData", JSON.stringify(profileData));
-    alert("信息已保存，下一步我们会把它接入后端数据库。");
-    window.location.href = "dashboard.html";
+function fillProfileForm(profile) {
+    if (!profile) {
+        return;
+    }
+
+    document.getElementById("grade").value = profile.grade || "9年级上";
+    document.getElementById("target-country").value = profile.targetCountry || "美国";
+    document.getElementById("major").value = profile.major || "";
+    document.getElementById("weighted-gpa").value = profile.weightedGpa || "";
+    document.getElementById("unweighted-gpa").value = profile.unweightedGpa || "";
+
+    const apCourses = profile.apCourses || [];
+    if (apCourses[0]) {
+        document.getElementById("ap-course-1").value = apCourses[0].course || "";
+        document.getElementById("ap-score-1").value = apCourses[0].score || "5";
+    }
+    if (apCourses[1]) {
+        document.getElementById("ap-course-2").value = apCourses[1].course || "";
+        document.getElementById("ap-score-2").value = apCourses[1].score || "5";
+    }
+
+    if (profile.satAct) {
+        document.getElementById("sat-act-type").value = profile.satAct.type || "SAT";
+        document.getElementById("sat-act-score").value = profile.satAct.score || "";
+    }
+
+    if (profile.languageTest) {
+        document.getElementById("language-test-type").value = profile.languageTest.type || "托福";
+        document.getElementById("language-test-score").value = profile.languageTest.score || "";
+    }
+
+    if (profile.activity) {
+        document.getElementById("activity-type").value = profile.activity.type || "科研项目";
+        document.getElementById("activity-desc").value = profile.activity.description || "";
+    }
+}
+
+async function loadProfile(token) {
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/profile/me`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
+
+        if (result.code === 200 && result.data) {
+            fillProfileForm(result.data);
+            localStorage.setItem("profileData", JSON.stringify(result.data));
+        }
+    } catch (error) {
+        console.error("Profile加载失败：", error);
+    }
+}
+
+async function submitProfile() {
+    const profileData = collectProfileData();
+    const token = getToken();
+
+    if (!token) {
+        logout();
+        return;
+    }
+
+    nextBtn.textContent = "保存中...";
+    nextBtn.disabled = true;
+
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/profile/save`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(profileData)
+        });
+        const result = await response.json();
+
+        if (result.code !== 200) {
+            alert(result.msg || "保存失败，请稍后重试。");
+            return;
+        }
+
+        localStorage.setItem("profileData", JSON.stringify(profileData));
+        alert("信息已保存到后端数据库。");
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        alert("网络错误，请检查后端是否启动。");
+    } finally {
+        nextBtn.textContent = "提交信息";
+        nextBtn.disabled = false;
+    }
 }
 
 function goDashboard() {
     window.location.href = "dashboard.html";
 }
 
-updateStep();
+requireLogin((user, token) => {
+    renderAppLayout(user);
+    updateStep();
+    loadProfile(token);
+});
 </script>
 
 </body>

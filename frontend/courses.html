@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP课程库 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .course-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .course-card h2 {
+            font-size: 18px;
+            margin: 0 0 10px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            background: #eef6ff;
+            color: #2980b9;
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 12px;
+        }
+
+        .course-card p {
+            color: #5d6d7e;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 900px) {
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>AP课程库</h1>
+            <p>按方向查看常见 AP 课程，快速判断难度、适合专业和申请价值。</p>
+        </section>
+
+        <section class="course-grid">
+            <article class="course-card">
+                <h2>AP Calculus BC</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 高</span>
+                    <span class="tag">理工/商科</span>
+                </div>
+                <p>适合数学基础较强、目标工程、计算机、经济方向的学生，是高含金量理科课程。</p>
+            </article>
+
+            <article class="course-card">
+                <h2>AP Computer Science A</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 中高</span>
+                    <span class="tag">计算机</span>
+                </div>
+                <p>以 Java 编程和面向对象思想为核心，适合申请计算机、数据科学和工程方向。</p>
+            </article>
+
+            <article class="course-card">
+                <h2>AP Physics C</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 高</span>
+                    <span class="tag">工程/物理</span>
+                </div>
+                <p>对微积分和物理建模要求较高，适合目标工程、物理、机械、电气等专业。</p>
+            </article>
+
+            <article class="course-card">
+                <h2>AP Statistics</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 中</span>
+                    <span class="tag">商科/社科</span>
+                </div>
+                <p>强调数据分析和统计推断，适合商科、心理学、社会科学和数据方向学生。</p>
+            </article>
+
+            <article class="course-card">
+                <h2>AP Economics</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 中</span>
+                    <span class="tag">经济/商科</span>
+                </div>
+                <p>包含宏观与微观经济学，可展示商科兴趣和基础分析能力。</p>
+            </article>
+
+            <article class="course-card">
+                <h2>AP Biology</h2>
+                <div class="course-meta">
+                    <span class="tag">难度 中高</span>
+                    <span class="tag">生物/医学</span>
+                </div>
+                <p>适合生命科学、生物工程、医学预科方向，内容广、记忆和理解要求都较高。</p>
+            </article>
+        </section>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+requireLogin((user) => {
+    renderAppLayout(user);
+});
+</script>
+</body>
+</html>

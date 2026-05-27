@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人设置 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 22px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            margin: 0 0 16px;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            margin-bottom: 16px;
+            border: 1px solid #dce3ea;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        input[disabled] {
+            background: #f5f7fa;
+            color: #7f8c8d;
+        }
+
+        .primary-btn {
+            border: none;
+            background: #3498db;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .primary-btn:hover {
+            background: #2980b9;
+        }
+
+        .message {
+            min-height: 18px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .success {
+            color: #27ae60;
+        }
+
+        .error {
+            color: #d63031;
+        }
+
+        @media (max-width: 900px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>个人设置</h1>
+            <p>管理账号基础信息和登录密码。升学资料请在“个人信息完善”页面继续维护。</p>
+        </section>
+
+        <div class="settings-grid">
+            <section class="card">
+                <h2>基础信息</h2>
+                <label>用户名</label>
+                <input id="username" disabled>
+
+                <label>邮箱</label>
+                <input id="email" type="email" placeholder="请输入邮箱">
+
+                <label>真实姓名</label>
+                <input id="name" placeholder="请输入真实姓名">
+
+                <label>当前年级</label>
+                <select id="current-grade-term">
+                    <option value="9年级上">9年级上</option>
+                    <option value="9年级下">9年级下</option>
+                    <option value="10年级上">10年级上</option>
+                    <option value="10年级下">10年级下</option>
+                    <option value="11年级上">11年级上</option>
+                    <option value="11年级下">11年级下</option>
+                    <option value="12年级上">12年级上</option>
+                    <option value="12年级下">12年级下</option>
+                </select>
+
+                <button class="primary-btn" onclick="saveSettings()">保存基础信息</button>
+                <div id="settings-msg" class="message"></div>
+            </section>
+
+            <section class="card">
+                <h2>修改密码</h2>
+                <label>旧密码</label>
+                <input id="old-password" type="password" placeholder="请输入旧密码">
+
+                <label>新密码</label>
+                <input id="new-password" type="password" placeholder="至少8位">
+
+                <label>确认新密码</label>
+                <input id="confirm-password" type="password" placeholder="再次输入新密码">
+
+                <button class="primary-btn" onclick="changePassword()">修改密码</button>
+                <div id="password-msg" class="message"></div>
+            </section>
+        </div>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+let currentToken = "";
+
+function setMessage(id, text, type) {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = `message ${type}`;
+}
+
+function fillUserInfo(user) {
+    document.getElementById("username").value = user.username || "";
+    document.getElementById("email").value = user.email || "";
+    document.getElementById("name").value = user.name || "";
+    document.getElementById("current-grade-term").value = user.current_grade_term || "9年级上";
+}
+
+async function saveSettings() {
+    const email = document.getElementById("email").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const currentGradeTerm = document.getElementById("current-grade-term").value;
+
+    if (!name) {
+        setMessage("settings-msg", "请填写真实姓名", "error");
+        return;
+    }
+
+    const response = await fetch(`${AUTH_BASE_URL}/api/user/settings`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentToken}`
+        },
+        body: JSON.stringify({
+            email,
+            name,
+            current_grade_term: currentGradeTerm
+        })
+    });
+    const result = await response.json();
+
+    if (result.code !== 200) {
+        setMessage("settings-msg", result.msg || "保存失败", "error");
+        return;
+    }
+
+    setMessage("settings-msg", "保存成功", "success");
+}
+
+async function changePassword() {
+    const oldPassword = document.getElementById("old-password").value;
+    const newPassword = document.getElementById("new-password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (!oldPassword || !newPassword || !confirmPassword) {
+        setMessage("password-msg", "请完整填写密码信息", "error");
+        return;
+    }
+
+    if (newPassword.length < 8) {
+        setMessage("password-msg", "新密码至少8位", "error");
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        setMessage("password-msg", "两次输入的新密码不一致", "error");
+        return;
+    }
+
+    const response = await fetch(`${AUTH_BASE_URL}/api/user/password`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentToken}`
+        },
+        body: JSON.stringify({
+            old_password: oldPassword,
+            new_password: newPassword
+        })
+    });
+    const result = await response.json();
+
+    if (result.code !== 200) {
+        setMessage("password-msg", result.msg || "修改失败", "error");
+        return;
+    }
+
+    document.getElementById("old-password").value = "";
+    document.getElementById("new-password").value = "";
+    document.getElementById("confirm-password").value = "";
+    setMessage("password-msg", "密码修改成功", "success");
+}
+
+requireLogin((user, token) => {
+    currentToken = token;
+    renderAppLayout(user);
+    fillUserInfo(user);
+});
+</script>
+</body>
+</html>

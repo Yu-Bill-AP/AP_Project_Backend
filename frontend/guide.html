@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>升学指南 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .guide-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 22px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .guide-card h2 {
+            font-size: 18px;
+            margin: 0 0 14px;
+        }
+
+        .guide-card ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #536475;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .template-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .template-list li {
+            border-bottom: 1px solid #eef1f4;
+            padding: 12px 0;
+            color: #536475;
+            font-size: 14px;
+        }
+
+        .template-list li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>升学指南</h1>
+            <p>集中整理 AP 选课、申请材料和时间线，帮助你准备答辩演示中的完整申请流程。</p>
+        </section>
+
+        <section class="guide-grid">
+            <article class="guide-card">
+                <h2>申请准备重点</h2>
+                <ul>
+                    <li>保持稳定 GPA，并解释课程难度和上升趋势。</li>
+                    <li>AP 课程选择要和目标专业形成逻辑关系。</li>
+                    <li>标化成绩、语言成绩和活动背景需要共同支撑申请方向。</li>
+                    <li>推荐信和文书应突出真实经历，而不是重复成绩单信息。</li>
+                </ul>
+            </article>
+
+            <article class="guide-card">
+                <h2>AP 选课建议</h2>
+                <ul>
+                    <li>计算机方向优先考虑 Calculus BC、CSA、Statistics。</li>
+                    <li>工程方向优先考虑 Calculus BC、Physics C、Chemistry。</li>
+                    <li>商科方向可组合 Economics、Statistics、Calculus AB/BC。</li>
+                    <li>生物医学方向可组合 Biology、Chemistry、Statistics。</li>
+                </ul>
+            </article>
+
+            <article class="guide-card">
+                <h2>时间线参考</h2>
+                <ul>
+                    <li>9-10 年级：建立 GPA 和核心课程基础。</li>
+                    <li>10-11 年级：集中完成 AP、标化和活动项目。</li>
+                    <li>11 年级暑假：确定选校名单，准备文书素材。</li>
+                    <li>12 年级上：提交申请，跟进补充材料和面试。</li>
+                </ul>
+            </article>
+
+            <article class="guide-card">
+                <h2>申请模板清单</h2>
+                <ul class="template-list">
+                    <li>个人活动列表模板</li>
+                    <li>选校对比表模板</li>
+                    <li>文书素材整理模板</li>
+                    <li>AP 课程规划表模板</li>
+                </ul>
+            </article>
+        </section>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+requireLogin((user) => {
+    renderAppLayout(user);
+});
+</script>
+</body>
+</html>
