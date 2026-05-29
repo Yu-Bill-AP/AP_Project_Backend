@@ -31,6 +31,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.05);
             overflow: hidden;
+            border: 1px solid #e8eef4;
         }
 
         .chat-window {
@@ -61,7 +62,7 @@
         }
 
         .message.user .bubble {
-            background: #3498db;
+            background: #2f6f9f;
             color: white;
         }
 
@@ -90,11 +91,17 @@
             font-family: inherit;
         }
 
+        textarea:focus {
+            border-color: #2f6f9f;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(47,111,159,0.12);
+        }
+
         button {
             border: none;
             border-radius: 8px;
             padding: 0 22px;
-            background: #3498db;
+            background: #2f6f9f;
             color: white;
             cursor: pointer;
             font-size: 14px;
@@ -102,7 +109,7 @@
         }
 
         button:hover {
-            background: #2980b9;
+            background: #245d87;
         }
 
         button:disabled {
@@ -128,7 +135,7 @@
         }
 
         .hint-btn:hover {
-            background: #eef6ff;
+            background: #e8f2fa;
         }
 
         @media (max-width: 800px) {
@@ -154,7 +161,7 @@
     <div class="content-wrap">
         <section class="page-header">
             <h1>AI规划</h1>
-            <p>围绕 AP 选课、GPA、标化、活动背景和院校申请进行专项对话。</p>
+            <p>围绕 AP 选课、GPA、标化、活动背景和院校申请进行专项对话。新成绩和经历会自动同步到Profile库。</p>
         </section>
 
         <div class="hint-list">
@@ -162,12 +169,13 @@
             <button class="hint-btn" onclick="usePrompt('请根据我的Profile生成一份升学规划。')">生成规划报告</button>
             <button class="hint-btn" onclick="usePrompt('我的活动背景应该怎么提升？')">活动背景提升</button>
             <button class="hint-btn" onclick="usePrompt('我适合申请哪些层次的学校？')">院校层次判断</button>
+            <button class="hint-btn" onclick="usePrompt('我新增了 AP Calculus BC 5分，请更新我的规划。')">同步新成绩</button>
         </div>
 
         <section class="chat-card">
             <div id="chat-window" class="chat-window">
                 <div class="message assistant">
-                    <div class="bubble">你好，我是 AP Planner 的升学规划 AI 顾问。你可以问我 AP 选课、GPA、标化、活动背景、目标专业和院校匹配相关问题。</div>
+                    <div class="bubble">你好，我是 AP Planner 的升学规划 AI 顾问。你可以问我 AP 选课、GPA、标化、活动背景、目标专业和院校匹配相关问题。你也可以直接告诉我新成绩或新活动，我会尝试写入Profile库并重新判断优先级。</div>
                 </div>
             </div>
 
@@ -189,18 +197,25 @@ function appendMessage(role, text) {
     const chatWindow = document.getElementById("chat-window");
     const message = document.createElement("div");
     message.className = `message ${role}`;
-    message.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+    const content = role === "assistant" ? formatPlanningText(text) : escapeHtml(text);
+    message.innerHTML = `<div class="bubble">${content}</div>`;
     chatWindow.appendChild(message);
     chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 function escapeHtml(text) {
-    return text
+    return String(text || "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+}
+
+function formatPlanningText(text) {
+    return escapeHtml(text)
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br>");
 }
 
 function usePrompt(text) {
@@ -238,6 +253,9 @@ async function sendMessage() {
         }
 
         appendMessage("assistant", result.data.answer);
+        if (result.data.detected_updates && result.data.detected_updates.length) {
+            localStorage.removeItem("profileData");
+        }
     } catch (error) {
         appendMessage("assistant", "网络错误，请检查后端服务是否启动。");
     } finally {

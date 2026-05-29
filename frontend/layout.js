@@ -1,6 +1,9 @@
 const APP_NAV_ITEMS = [
     { label: "仪表盘", href: "dashboard.html" },
     { label: "AP课程库", href: "courses.html" },
+    { label: "院校匹配", href: "match.html" },
+    { label: "申请时间线", href: "timeline.html" },
+    { label: "背景库", href: "portfolio.html" },
     { label: "AI规划", href: "ai-plan.html" },
     { label: "我的规划", href: "my-plans.html" },
     { label: "升学指南", href: "guide.html" },

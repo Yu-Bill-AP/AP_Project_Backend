@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请时间线 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .focus-card,
+        .timeline-card {
+            background: #ffffff;
+            border: 1px solid #e8eef4;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .focus-card {
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .focus-card h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .focus-card p {
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-card {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 18px;
+            padding: 20px;
+        }
+
+        .period {
+            color: #2f6f9f;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .timeline-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .timeline-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        @media (max-width: 760px) {
+            .timeline-card {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>申请时间线</h1>
+            <p>根据年级和当前短板动态排序，把GPA、语言、AP、活动和文书放到合适阶段。</p>
+        </section>
+
+        <section class="focus-card">
+            <h2>当前阶段重点</h2>
+            <p id="current-focus">正在生成阶段重点...</p>
+        </section>
+
+        <section id="timeline" class="timeline">
+            <article class="timeline-card">
+                <div class="period">加载中</div>
+                <div>
+                    <h3>正在读取画像</h3>
+                    <ul>
+                        <li>请稍候。</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+function getGradeNumber(grade) {
+    const match = String(grade || "").match(/9|10|11|12/);
+    return match ? Number(match[0]) : 10;
+}
+
+function buildTimeline(analysis) {
+    const grade = getGradeNumber(analysis.profile.grade);
+    const topPriority = analysis.priorities[0];
+    const coursePlan = analysis.coursePlan;
+    const items = [];
+
+    if (grade <= 10) {
+        items.push({
+            period: "现在-本学期",
+            title: "稳定GPA和基础方向",
+            tasks: [
+                `最高优先级：${topPriority.name}`,
+                "把校内成绩稳定在可解释、可持续的水平",
+                "AP先控制在1-2门，不用为了数量牺牲GPA"
+            ]
+        });
+        items.push({
+            period: "接下来6个月",
+            title: "探索专业画像",
+            tasks: [
+                `核心AP可优先考虑：${coursePlan.core.slice(0, 2).join("、") || "先补充Profile"}`,
+                `平衡课程可考虑：${coursePlan.balance[0] || "English Language或社科课程"}`,
+                "活动和竞赛以尝试为主，先验证兴趣和投入方式"
+            ]
+        });
+    } else if (grade === 11) {
+        items.push({
+            period: "现在-暑假前",
+            title: "形成申请主线",
+            tasks: [
+                "确认目标专业和院校层次",
+                "把AP、语言和活动串成同一个申请方向",
+                "开始整理文书素材，但不必过早定稿"
+            ]
+        });
+        items.push({
+            period: "11年级暑假",
+            title: "准备申请材料",
+            tasks: [
+                "完成选校初稿和活动列表",
+                "补齐语言或标化短板",
+                "开始主文书和补充文书素材库"
+            ]
+        });
+    } else {
+        items.push({
+            period: "现在-申请季",
+            title: "收束申请材料",
+            tasks: [
+                "减少高风险新增任务，优先完成已有材料",
+                "明确Reach、Match、Likely三档选校",
+                "集中处理文书、推荐信和补充材料"
+            ]
+        });
+    }
+
+    items.push({
+        period: "持续更新",
+        title: "资料库维护",
+        tasks: analysis.nextActions
+    });
+
+    return items;
+}
+
+function renderTimeline(analysis) {
+    document.getElementById("current-focus").textContent =
+        `${analysis.priorities[0].name} 是当前最重要事项。${analysis.priorities[0].reason}`;
+
+    document.getElementById("timeline").innerHTML = buildTimeline(analysis).map(item => `
+        <article class="timeline-card">
+            <div class="period">${item.period}</div>
+            <div>
+                <h3>${item.title}</h3>
+                <ul>${item.tasks.map(task => `<li>${task}</li>`).join("")}</ul>
+            </div>
+        </article>
+    `).join("");
+}
+
+async function loadAnalysis(token) {
+    const response = await fetch(`${AUTH_BASE_URL}/api/planning/analysis`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    const result = await response.json();
+    if (result.code === 200) {
+        renderTimeline(result.data);
+    }
+}
+
+requireLogin((user, token) => {
+    renderAppLayout(user);
+    loadAnalysis(token);
+});
+</script>
+</body>
+</html>

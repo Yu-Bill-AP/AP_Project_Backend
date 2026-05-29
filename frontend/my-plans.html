@@ -62,8 +62,11 @@
             color: #536475;
             font-size: 14px;
             line-height: 1.7;
-            white-space: pre-wrap;
             margin: 0;
+        }
+
+        .plan-answer strong {
+            color: #2c3e50;
         }
 
         .delete-btn {
@@ -93,7 +96,7 @@
             display: inline-block;
             margin-top: 14px;
             color: white;
-            background: #3498db;
+            background: #2f6f9f;
             border-radius: 8px;
             padding: 10px 14px;
             text-decoration: none;
@@ -133,6 +136,12 @@ function escapeHtml(text) {
         .replaceAll("'", "&#039;");
 }
 
+function formatPlanningText(text) {
+    return escapeHtml(text)
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br>");
+}
+
 async function loadPlans() {
     const list = document.getElementById("plans-list");
 
@@ -169,7 +178,7 @@ async function loadPlans() {
                     </div>
                     <button class="delete-btn" onclick="deletePlan(${item.id})">删除</button>
                 </div>
-                <p class="plan-answer">${escapeHtml(item.answer)}</p>
+                <p class="plan-answer">${formatPlanningText(item.answer)}</p>
             </article>
         `).join("");
     } catch (error) {

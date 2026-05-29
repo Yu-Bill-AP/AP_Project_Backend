@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景库 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e8eef4;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin: 0 0 14px;
+        }
+
+        .data-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .data-list li {
+            border-bottom: 1px solid #eef1f4;
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 11px 0;
+        }
+
+        .data-list li:last-child {
+            border-bottom: none;
+        }
+
+        .field-label {
+            color: #506172;
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        textarea {
+            min-height: 120px;
+            padding: 12px;
+            resize: vertical;
+        }
+
+        .primary-btn {
+            border: none;
+            background: #2f6f9f;
+            color: #ffffff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 12px;
+            padding: 11px 16px;
+        }
+
+        .primary-btn:hover {
+            background: #245d87;
+        }
+
+        .message {
+            color: #6b7b8c;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 10px;
+            min-height: 18px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #e8f2fa;
+            color: #2f6f9f;
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>背景库</h1>
+            <p>集中查看AP、课程兴趣、活动、竞赛、科研、志愿和夏校记录。对话页新增的信息也会进入这里。</p>
+        </section>
+
+        <div class="portfolio-grid">
+            <section>
+                <div class="card">
+                    <h2>AP与课程兴趣</h2>
+                    <ul id="course-list" class="data-list">
+                        <li>正在加载课程记录...</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>背景经历</h2>
+                    <ul id="experience-list" class="data-list">
+                        <li>正在加载背景经历...</li>
+                    </ul>
+                </div>
+            </section>
+
+            <aside>
+                <div class="card">
+                    <h2>画像标签</h2>
+                    <div id="profile-tags" class="tag-row">
+                        <span class="tag">加载中</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>快速同步</h2>
+                    <label class="field-label" for="quick-note">新增成绩或经历</label>
+                    <textarea id="quick-note" placeholder="例如：我新增了 AP Psychology 5分。或：我参加了心理学相关志愿活动。"></textarea>
+                    <button id="sync-btn" class="primary-btn" onclick="syncNote()">写入背景库</button>
+                    <div id="sync-msg" class="message"></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+let currentToken = "";
+
+function escapeHtml(text) {
+    return String(text || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function renderProfile(profile, analysis) {
+    const apCourses = (profile.apCourses || []).filter(item => item.course);
+    const interests = profile.courseInterests || [];
+    const courseItems = [
+        ...apCourses.map(item => `AP：${item.course}，分数/目标 ${item.score || "暂未出分"}`),
+        ...interests.map(item => `课程兴趣：${item}`)
+    ];
+    document.getElementById("course-list").innerHTML = courseItems.length
+        ? courseItems.map(item => `<li>${escapeHtml(item)}</li>`).join("")
+        : "<li>暂无课程记录。</li>";
+
+    const portfolio = profile.portfolio || {};
+    const experienceItems = [];
+    if (profile.activity && profile.activity.description) {
+        experienceItems.push(`${profile.activity.type || "活动"}：${profile.activity.description}`);
+    }
+    Object.keys(portfolio).forEach(bucket => {
+        (portfolio[bucket] || []).forEach(item => {
+            experienceItems.push(`${bucket}：${item}`);
+        });
+    });
+    document.getElementById("experience-list").innerHTML = experienceItems.length
+        ? experienceItems.map(item => `<li>${escapeHtml(item)}</li>`).join("")
+        : "<li>暂无背景经历。可以用右侧快速同步添加。</li>";
+
+    document.getElementById("profile-tags").innerHTML = [
+        analysis.profile.majorTrack,
+        analysis.profile.gpaStatus.status,
+        analysis.profile.languageStatus.status,
+        `${analysis.profile.apCount}门AP`
+    ].map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("");
+}
+
+async function loadData() {
+    const [profileResponse, analysisResponse] = await Promise.all([
+        fetch(`${AUTH_BASE_URL}/api/profile/me`, {
+            headers: { "Authorization": `Bearer ${currentToken}` }
+        }),
+        fetch(`${AUTH_BASE_URL}/api/planning/analysis`, {
+            headers: { "Authorization": `Bearer ${currentToken}` }
+        })
+    ]);
+    const profileResult = await profileResponse.json();
+    const analysisResult = await analysisResponse.json();
+
+    if (profileResult.code === 200 && analysisResult.code === 200) {
+        renderProfile(profileResult.data, analysisResult.data);
+    }
+}
+
+async function syncNote() {
+    const textarea = document.getElementById("quick-note");
+    const button = document.getElementById("sync-btn");
+    const message = document.getElementById("sync-msg");
+    const text = textarea.value.trim();
+
+    if (!text) {
+        message.textContent = "请先输入要同步的成绩或经历。";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "同步中...";
+    message.textContent = "";
+
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/ai-chat`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${currentToken}`
+            },
+            body: JSON.stringify({ message: text })
+        });
+        const result = await response.json();
+        if (result.code !== 200) {
+            message.textContent = result.msg || "同步失败。";
+            return;
+        }
+
+        const updates = result.data.detected_updates || [];
+        message.textContent = updates.length ? `已同步：${updates.join("；")}` : "已记录对话，但没有识别到结构化资料。";
+        textarea.value = "";
+        await loadData();
+    } catch (error) {
+        message.textContent = "网络错误，请检查后端服务是否启动。";
+    } finally {
+        button.disabled = false;
+        button.textContent = "写入背景库";
+    }
+}
+
+requireLogin((user, token) => {
+    currentToken = token;
+    renderAppLayout(user);
+    loadData();
+});
+</script>
+</body>
+</html>

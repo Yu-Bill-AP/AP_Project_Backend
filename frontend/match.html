@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>院校匹配 - AP Planner</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        .content-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 22px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6b7b8c;
+            font-size: 15px;
+        }
+
+        .match-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 16px;
+        }
+
+        .card,
+        .school-card {
+            background: #ffffff;
+            border: 1px solid #e8eef4;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .card {
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .signal {
+            background: #f7fafc;
+            border: 1px solid #e8eef4;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .signal span {
+            color: #6b7b8c;
+            display: block;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .signal strong {
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        .school-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .school-card {
+            padding: 18px;
+        }
+
+        .school-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .school-top h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .tier {
+            background: #e8f2fa;
+            color: #2f6f9f;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .school-card p,
+        .card p {
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .action-list li {
+            border-bottom: 1px solid #eef1f4;
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 11px 0;
+        }
+
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 900px) {
+            .match-layout,
+            .signal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="app-topbar" class="app-topbar"></header>
+<div class="app-shell">
+<aside id="app-sidebar" class="app-sidebar"></aside>
+<main class="page-content">
+    <div class="content-wrap">
+        <section class="page-header">
+            <h1>院校匹配</h1>
+            <p>根据当前画像给出 Reach、Match、Likely 三档参考，并指出影响匹配层次的关键变量。</p>
+        </section>
+
+        <section class="card">
+            <h2>当前匹配信号</h2>
+            <div class="signal-grid">
+                <div class="signal">
+                    <span>目标方向</span>
+                    <strong id="signal-major">加载中</strong>
+                </div>
+                <div class="signal">
+                    <span>GPA状态</span>
+                    <strong id="signal-gpa">加载中</strong>
+                </div>
+                <div class="signal">
+                    <span>语言状态</span>
+                    <strong id="signal-language">加载中</strong>
+                </div>
+            </div>
+        </section>
+
+        <div class="match-layout">
+            <section>
+                <div id="school-list" class="school-list">
+                    <article class="school-card">
+                        <p>正在生成院校匹配结果...</p>
+                    </article>
+                </div>
+            </section>
+
+            <aside>
+                <section class="card">
+                    <h2>匹配解释</h2>
+                    <p id="match-note">系统会优先看GPA和课程强度，再结合语言、AP组合和背景活动判断院校层次。</p>
+                </section>
+
+                <section class="card">
+                    <h2>下一步</h2>
+                    <ul id="next-actions" class="action-list">
+                        <li>正在读取画像分析...</li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+    </div>
+</main>
+</div>
+
+<script src="auth.js"></script>
+<script src="layout.js"></script>
+<script>
+const SCHOOL_POOLS = {
+    "美国": {
+        reach: ["MIT", "Stanford University", "UC Berkeley"],
+        match: ["UCLA", "University of Michigan", "NYU"],
+        likely: ["Purdue University", "UC Irvine", "Northeastern University"]
+    },
+    "英国": {
+        reach: ["University of Oxford", "University of Cambridge", "Imperial College London"],
+        match: ["UCL", "University of Edinburgh", "University of Manchester"],
+        likely: ["University of Bristol", "University of Warwick", "University of Glasgow"]
+    },
+    "加拿大": {
+        reach: ["University of Toronto", "University of Waterloo", "UBC"],
+        match: ["McGill University", "McMaster University", "University of Alberta"],
+        likely: ["Simon Fraser University", "University of Ottawa", "York University"]
+    },
+    "中国香港": {
+        reach: ["University of Hong Kong", "Chinese University of Hong Kong", "HKUST"],
+        match: ["City University of Hong Kong", "Hong Kong Polytechnic University", "Hong Kong Baptist University"],
+        likely: ["Lingnan University", "Education University of Hong Kong", "Hong Kong Metropolitan University"]
+    }
+};
+
+function getPool(country) {
+    return SCHOOL_POOLS[country] || SCHOOL_POOLS["美国"];
+}
+
+function getReadinessScore(analysis) {
+    let score = 0;
+    const gpa = analysis.profile.gpaStatus.status;
+    const language = analysis.profile.languageStatus.status;
+    const apCount = analysis.profile.apCount || 0;
+
+    score += gpa === "strong" ? 38 : gpa === "stable" ? 28 : 12;
+    score += language === "strong" ? 24 : language === "stable" ? 18 : 8;
+    score += Math.min(apCount * 7, 21);
+    score += analysis.weaknesses.length <= 1 ? 12 : 5;
+    return score;
+}
+
+function renderSchools(analysis) {
+    const pool = getPool(analysis.profile.targetCountry);
+    const score = getReadinessScore(analysis);
+    const reachCount = score >= 75 ? 3 : score >= 58 ? 2 : 1;
+    const matchCount = score >= 50 ? 3 : 2;
+    const likelyCount = 3;
+    const groups = [
+        ["Reach", pool.reach.slice(0, reachCount), "冲刺档需要更强的GPA稳定性、课程强度和背景证明。"],
+        ["Match", pool.match.slice(0, matchCount), "匹配档适合围绕当前画像继续补短板并保持成绩。"],
+        ["Likely", pool.likely.slice(0, likelyCount), "保底档用于保证申请组合安全，不代表一定录取。"]
+    ];
+
+    document.getElementById("school-list").innerHTML = groups.flatMap(group => {
+        const [tier, schools, note] = group;
+        return schools.map(name => `
+            <article class="school-card">
+                <div class="school-top">
+                    <h3>${name}</h3>
+                    <span class="tier">${tier}</span>
+                </div>
+                <p>${note}</p>
+            </article>
+        `);
+    }).join("");
+}
+
+function renderAnalysis(analysis) {
+    document.getElementById("signal-major").textContent = analysis.profile.majorTrack;
+    document.getElementById("signal-gpa").textContent = analysis.profile.gpaStatus.label;
+    document.getElementById("signal-language").textContent = analysis.profile.languageStatus.label;
+    document.getElementById("match-note").textContent =
+        `${analysis.persona.direction}。${analysis.persona.balance}`;
+    document.getElementById("next-actions").innerHTML = analysis.nextActions
+        .map(item => `<li>${item}</li>`)
+        .join("");
+    renderSchools(analysis);
+}
+
+async function loadAnalysis(token) {
+    const response = await fetch(`${AUTH_BASE_URL}/api/planning/analysis`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    const result = await response.json();
+    if (result.code === 200) {
+        renderAnalysis(result.data);
+    }
+}
+
+requireLogin((user, token) => {
+    renderAppLayout(user);
+    loadAnalysis(token);
+});
+</script>
+</body>
+</html>

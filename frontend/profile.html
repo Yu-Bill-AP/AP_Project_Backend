@@ -2,26 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>完善信息 - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
         .container {
-            max-width: 760px;
+            max-width: 720px;
             margin: 0 auto;
             background: white;
-            padding: 32px;
-            border-radius: 18px;
+            padding: 28px;
+            border-radius: 8px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            border: 1px solid #e8eef4;
         }
 
         .step-title {
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 8px;
+            line-height: 1.25;
         }
 
         .step-subtitle {
-            color: #7f8c8d;
+            color: #6b7b8c;
             margin-bottom: 24px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .progress-bar {
@@ -35,7 +40,7 @@
         .progress-fill {
             height: 100%;
             width: 20%;
-            background: #3498db;
+            background: #2f6f9f;
             transition: width 0.3s ease;
         }
 
@@ -49,17 +54,43 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             font-weight: 600;
+            font-size: 14px;
+            color: #2c3e50;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 11px;
+            min-height: 44px;
+            padding: 10px 12px;
             margin-bottom: 18px;
             border: 1px solid #dce3ea;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 14px;
+            color: #2c3e50;
+            background-color: #ffffff;
+        }
+
+        select {
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            background-color: #ffffff !important;
+            background-image:
+                linear-gradient(45deg, transparent 50%, #506172 50%),
+                linear-gradient(135deg, #506172 50%, transparent 50%) !important;
+            background-position:
+                calc(100% - 18px) calc(50% - 3px),
+                calc(100% - 13px) calc(50% - 3px) !important;
+            background-repeat: no-repeat !important;
+            background-size: 5px 5px, 5px 5px !important;
+            padding-right: 40px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2f6f9f;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(47,111,159,0.12);
         }
 
         textarea {
@@ -71,19 +102,24 @@
             display: flex;
             justify-content: space-between;
             margin-top: 24px;
+            gap: 12px;
         }
 
         button {
             border: none;
             padding: 11px 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
         }
 
         .primary {
-            background: #3498db;
+            background: #2f6f9f;
             color: white;
+        }
+
+        .primary:hover {
+            background: #245d87;
         }
 
         .secondary {
@@ -93,9 +129,23 @@
 
         .hint {
             font-size: 13px;
-            color: #888;
+            color: #6b7b8c;
             margin-top: -10px;
             margin-bottom: 18px;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 22px;
+            }
+
+            .btn-row {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -108,8 +158,8 @@
 <main class="page-content">
 
 <div class="container">
-    <h1 class="step-title" id="step-title">Step 1 / 5 基础信息</h1>
-    <p class="step-subtitle" id="step-subtitle">先填写你的基本申请方向。</p>
+    <h1 class="step-title" id="step-title">Step 1 / 5 基础背调</h1>
+    <p class="step-subtitle" id="step-subtitle">先建立你的申请画像，后续推荐会根据资料实时调整。</p>
 
     <div class="progress-bar">
         <div class="progress-fill" id="progress-fill"></div>
@@ -234,7 +284,7 @@ const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 
 const titles = [
-    "Step 1 / 5 基础信息",
+    "Step 1 / 5 基础背调",
     "Step 2 / 5 GPA 成绩",
     "Step 3 / 5 AP 课程",
     "Step 4 / 5 标化成绩",
@@ -242,7 +292,7 @@ const titles = [
 ];
 
 const subtitles = [
-    "先填写你的基本申请方向。",
+    "先填写你的年级、目标地区和专业方向，这是首次登录必须完成的画像基础。",
     "填写你的当前GPA情况。",
     "填写你已经学习或计划学习的AP课程。",
     "填写SAT/ACT和语言成绩。",
@@ -369,6 +419,13 @@ async function submitProfile() {
     const profileData = collectProfileData();
     const token = getToken();
 
+    if (!profileData.grade || !profileData.targetCountry || !profileData.major.trim()) {
+        alert("请先完成当前年级、目标地区和目标专业方向。");
+        currentStep = 0;
+        updateStep();
+        return;
+    }
+
     if (!token) {
         logout();
         return;
@@ -394,7 +451,7 @@ async function submitProfile() {
         }
 
         localStorage.setItem("profileData", JSON.stringify(profileData));
-        alert("信息已保存到后端数据库。");
+        alert("基础背调已完成，系统会开始生成你的申请画像。");
         window.location.href = "dashboard.html";
     } catch (error) {
         alert("网络错误，请检查后端是否启动。");
@@ -412,7 +469,7 @@ requireLogin((user, token) => {
     renderAppLayout(user);
     updateStep();
     loadProfile(token);
-});
+}, { requireProfile: false });
 </script>
 
 </body>

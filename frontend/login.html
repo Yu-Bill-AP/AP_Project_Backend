@@ -21,8 +21,9 @@
         width: 320px;
         background: white;
         padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        border: 1px solid #e8eef4;
         text-align: center;
     }
 
@@ -47,8 +48,9 @@
     }
 
     input:focus {
-        border-color: #3498db;
+        border-color: #2f6f9f;
         outline: none;
+        box-shadow: 0 0 0 3px rgba(47,111,159,0.12);
     }
 
     button {
@@ -57,14 +59,14 @@
         margin-top: 12px;
         border: none;
         border-radius: 8px;
-        background-color: #3498db;
+        background-color: #2f6f9f;
         color: white;
         font-size: 15px;
         cursor: pointer;
     }
 
     button:hover {
-        background-color: #2980b9;
+        background-color: #245d87;
     }
 
     button:disabled {
@@ -84,7 +86,7 @@
     }
 
     .footer a {
-        color: #3498db;
+        color: #2f6f9f;
         text-decoration: none;
     }
 
@@ -92,8 +94,14 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        font-size: 20px;
+        color: #2f6f9f;
+        font-size: 13px;
+        font-weight: 700;
         cursor: pointer;
+        background: #ffffff;
+        border: 1px solid #e8eef4;
+        border-radius: 8px;
+        padding: 8px 10px;
     }
 </style>
 
@@ -101,7 +109,7 @@
 
 <body>
 
-<div class="help" onclick="showHelp()">❓</div>
+<div class="help" onclick="showHelp()">帮助</div>
 
 <div class="container">
     <h1>AP Planner</h1>
@@ -160,7 +168,8 @@ async function login() {
         }
 
         localStorage.setItem("token", data.token);
-        window.location.href = "dashboard.html";
+        const status = await getOnboardingStatus(data.token);
+        window.location.href = status.requires_onboarding ? "profile.html" : "dashboard.html";
 
     } catch (error) {
         errorMsg.innerText = "网络错误，请检查后端是否启动";

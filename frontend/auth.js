@@ -14,6 +14,33 @@ function redirectToLogin() {
     window.location.href = "login.html";
 }
 
+function getCurrentPage() {
+    return window.location.pathname.split("/").pop() || "dashboard.html";
+}
+
+function isProfilePage() {
+    return getCurrentPage() === "profile.html";
+}
+
+async function getOnboardingStatus(token) {
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/onboarding/status`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+
+        if (data.code !== 200) {
+            return { completed: false, requires_onboarding: true };
+        }
+
+        return data.data;
+    } catch (error) {
+        return { completed: false, requires_onboarding: true };
+    }
+}
+
 async function verifyToken() {
     const token = getToken();
 
@@ -45,12 +72,21 @@ async function verifyToken() {
     }
 }
 
-async function requireLogin(onVerified) {
+async function requireLogin(onVerified, options = {}) {
     const auth = await verifyToken();
 
     if (!auth) {
         redirectToLogin();
         return;
+    }
+
+    const shouldRequireProfile = options.requireProfile !== false && !isProfilePage();
+    if (shouldRequireProfile) {
+        const status = await getOnboardingStatus(auth.token);
+        if (status.requires_onboarding) {
+            window.location.href = "profile.html";
+            return;
+        }
     }
 
     if (typeof onVerified === "function") {
@@ -62,7 +98,8 @@ async function redirectIfLoggedIn() {
     const auth = await verifyToken();
 
     if (auth) {
-        window.location.href = "dashboard.html";
+        const status = await getOnboardingStatus(auth.token);
+        window.location.href = status.requires_onboarding ? "profile.html" : "dashboard.html";
     }
 }
 

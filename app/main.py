@@ -17,12 +17,16 @@ from datetime import datetime, timedelta
 import os
 from typing import Any, List, Optional, Union
 import re
+import copy
 
 load_dotenv()
 
 # 配置项（生产环境建议用.env文件）
 SQLALCHEMY_DATABASE_URL = "sqlite:///./ap_project.db"
-SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-202405")  # 环境变量优先
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "ap-planner-dev-secret-key-change-in-production-202405",
+)  # 环境变量优先
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 ALLOW_ORIGINS = os.getenv("ALLOW_ORIGINS", "*").split(",")  # 生产环境配置具体域名
@@ -334,6 +338,552 @@ def is_admission_related(message: str) -> bool:
     ]
     return any(keyword in text for keyword in keywords)
 
+AP_OFFICIAL_COURSES = [
+    "AP 2-D Art and Design",
+    "AP 3-D Art and Design",
+    "AP Art History",
+    "AP Drawing",
+    "AP Music Theory",
+    "AP English Language and Composition",
+    "AP English Literature and Composition",
+    "AP African American Studies",
+    "AP Comparative Government and Politics",
+    "AP European History",
+    "AP Human Geography",
+    "AP Macroeconomics",
+    "AP Microeconomics",
+    "AP Psychology",
+    "AP United States Government and Politics",
+    "AP United States History",
+    "AP World History: Modern",
+    "AP Calculus AB",
+    "AP Calculus BC",
+    "AP Computer Science A",
+    "AP Computer Science Principles",
+    "AP Precalculus",
+    "AP Statistics",
+    "AP Biology",
+    "AP Chemistry",
+    "AP Environmental Science",
+    "AP Physics 1: Algebra-Based",
+    "AP Physics 2: Algebra-Based",
+    "AP Physics C: Electricity and Magnetism",
+    "AP Physics C: Mechanics",
+    "AP Chinese Language and Culture",
+    "AP French Language and Culture",
+    "AP German Language and Culture",
+    "AP Italian Language and Culture",
+    "AP Japanese Language and Culture",
+    "AP Latin",
+    "AP Spanish Language and Culture",
+    "AP Spanish Literature and Culture",
+    "AP Seminar",
+    "AP Research",
+    "AP Business with Personal Finance",
+    "AP Cybersecurity",
+]
+
+COURSE_RECOMMENDATION_RULES = {
+    "计算机": {
+        "core": ["AP Calculus BC", "AP Computer Science A", "AP Statistics"],
+        "support": ["AP Computer Science Principles", "AP Physics C: Mechanics"],
+        "balance": ["AP English Language and Composition", "AP United States History", "AP Psychology"],
+        "reason": "计算机方向需要数学、编程和数据能力，同时用一门写作或社科课程避免课程画像过度单一。",
+    },
+    "工程": {
+        "core": ["AP Calculus BC", "AP Physics C: Mechanics", "AP Chemistry"],
+        "support": ["AP Physics C: Electricity and Magnetism", "AP Statistics"],
+        "balance": ["AP English Language and Composition", "AP Human Geography"],
+        "reason": "工程方向重点看微积分、物理和自然科学强度，但仍需要沟通写作或社会议题理解来平衡申请画像。",
+    },
+    "商科": {
+        "core": ["AP Microeconomics", "AP Macroeconomics", "AP Statistics"],
+        "support": ["AP Calculus AB", "AP Calculus BC", "AP Business with Personal Finance"],
+        "balance": ["AP English Language and Composition", "AP Psychology"],
+        "reason": "商科/经济方向需要经济学、数据和数学基础，再用写作或心理学补足表达和人群理解。",
+    },
+    "生物医学": {
+        "core": ["AP Biology", "AP Chemistry", "AP Statistics"],
+        "support": ["AP Psychology", "AP Calculus AB"],
+        "balance": ["AP English Language and Composition", "AP Human Geography"],
+        "reason": "生物医学方向需要生物、化学和统计支撑，同时保留写作或社科课程体现医学人文意识。",
+    },
+    "人文社科": {
+        "core": ["AP English Language and Composition", "AP United States History", "AP Psychology"],
+        "support": ["AP Comparative Government and Politics", "AP World History: Modern"],
+        "balance": ["AP Statistics", "AP Environmental Science"],
+        "reason": "人文社科方向重点看阅读、写作、史料和社会分析能力，再用统计或环境科学补充数据视角。",
+    },
+    "艺术": {
+        "core": ["AP 2-D Art and Design", "AP Drawing", "AP Art History"],
+        "support": ["AP Music Theory", "AP 3-D Art and Design"],
+        "balance": ["AP English Language and Composition", "AP Psychology"],
+        "reason": "艺术方向需要作品集和艺术史理解，同时用写作或心理学强化表达、叙事和观众理解。",
+    },
+}
+
+HUMANITIES_COURSE_HINTS = [
+    "english", "history", "government", "psychology", "human geography",
+    "art history", "language", "literature", "seminar", "research"
+]
+
+def to_float(value: Any) -> Optional[float]:
+    if value in (None, ""):
+        return None
+
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+def get_grade_number(grade: Optional[str]) -> Optional[int]:
+    if not grade:
+        return None
+
+    match = re.search(r"(9|10|11|12)", grade)
+    return int(match.group(1)) if match else None
+
+def infer_major_track(major: Optional[str]) -> str:
+    text = (major or "").lower()
+    if any(keyword in text for keyword in ["计算机", "computer", "cs", "data", "数据", "ai", "人工智能", "软件"]):
+        return "计算机"
+    if any(keyword in text for keyword in ["工程", "engineer", "物理", "机械", "电子", "电气", "材料"]):
+        return "工程"
+    if any(keyword in text for keyword in ["商", "经济", "金融", "business", "econ", "finance", "management"]):
+        return "商科"
+    if any(keyword in text for keyword in ["生物", "医学", "医", "bio", "medicine", "health", "neuro"]):
+        return "生物医学"
+    if any(keyword in text for keyword in ["艺术", "设计", "音乐", "art", "design", "music", "architecture"]):
+        return "艺术"
+    if any(keyword in text for keyword in ["历史", "政治", "心理", "社会", "传媒", "文学", "教育", "human", "social"]):
+        return "人文社科"
+    return "未确定"
+
+def get_language_status(profile_data: dict) -> dict:
+    language = profile_data.get("languageTest") or {}
+    test_type = language.get("type") or language.get("test_type") or ""
+    score = to_float(language.get("score"))
+
+    if score is None:
+        return {"status": "missing", "label": "未填写", "score": None}
+
+    if test_type == "托福":
+        stable = score >= 100
+        strong = score >= 105
+    elif test_type == "雅思":
+        stable = score >= 7
+        strong = score >= 7.5
+    elif test_type == "多邻国":
+        stable = score >= 125
+        strong = score >= 135
+    else:
+        stable = score >= 100
+        strong = score >= 110
+
+    if strong:
+        status = "strong"
+    elif stable:
+        status = "stable"
+    else:
+        status = "weak"
+
+    return {"status": status, "label": f"{test_type}{score:g}", "score": score}
+
+def get_gpa_status(profile_data: dict) -> dict:
+    weighted = to_float(profile_data.get("weightedGpa"))
+    unweighted = to_float(profile_data.get("unweightedGpa"))
+    anchor = unweighted if unweighted is not None else weighted
+
+    if anchor is None:
+        return {"status": "missing", "label": "未填写", "score": None}
+
+    if unweighted is not None:
+        if unweighted >= 3.8:
+            status = "strong"
+        elif unweighted >= 3.55:
+            status = "stable"
+        else:
+            status = "weak"
+    else:
+        if weighted >= 4.15:
+            status = "strong"
+        elif weighted >= 3.85:
+            status = "stable"
+        else:
+            status = "weak"
+
+    label_parts = []
+    if weighted is not None:
+        label_parts.append(f"加权{weighted:g}")
+    if unweighted is not None:
+        label_parts.append(f"未加权{unweighted:g}")
+    return {"status": status, "label": " / ".join(label_parts), "score": anchor}
+
+def get_existing_ap_courses(profile_data: dict) -> list[dict]:
+    courses = profile_data.get("apCourses") or []
+    return [item for item in courses if isinstance(item, dict) and item.get("course")]
+
+def get_course_interests(profile_data: dict) -> list[str]:
+    interests = profile_data.get("courseInterests") or []
+    return [item for item in interests if isinstance(item, str) and item.strip()]
+
+def has_humanities_balance(ap_courses: list[dict], course_interests: Optional[list[str]] = None) -> bool:
+    course_names = [str(item.get("course", "")) for item in ap_courses]
+    course_names.extend(course_interests or [])
+
+    for course_name in course_names:
+        course = course_name.lower()
+        if any(keyword in course for keyword in HUMANITIES_COURSE_HINTS):
+            return True
+    return False
+
+def prioritize_interested_courses(courses: list[str], course_interests: list[str]) -> list[str]:
+    interest_set = set(course_interests)
+    return sorted(courses, key=lambda course: 0 if course in interest_set else 1)
+
+def missing_profile_fields(profile_data: Optional[dict]) -> list[str]:
+    if not profile_data:
+        return ["grade", "targetCountry", "major"]
+
+    required_fields = ["grade", "targetCountry", "major"]
+    return [field for field in required_fields if not profile_data.get(field)]
+
+def build_student_strategy(profile_data: Optional[dict]) -> dict:
+    profile = profile_data or {}
+    grade_number = get_grade_number(profile.get("grade"))
+    country = profile.get("targetCountry") or "未填写"
+    major_track = infer_major_track(profile.get("major"))
+    gpa_status = get_gpa_status(profile)
+    language_status = get_language_status(profile)
+    ap_courses = get_existing_ap_courses(profile)
+    course_interests = get_course_interests(profile)
+    rules = COURSE_RECOMMENDATION_RULES.get(major_track) or COURSE_RECOMMENDATION_RULES["人文社科"]
+    us_application = "美国" in country
+
+    gpa_priority = 90 if grade_number in (9, 10) else 80
+    if gpa_status["status"] in ["missing", "weak"]:
+        gpa_priority = 100
+    elif gpa_status["status"] == "stable":
+        gpa_priority = max(gpa_priority, 85)
+    else:
+        gpa_priority = 75
+
+    language_priority = 70 if us_application else 55
+    if language_status["status"] == "missing":
+        language_priority = 82 if grade_number in (10, 11) else 68
+    elif language_status["status"] == "weak":
+        language_priority = 90
+    elif language_status["status"] == "stable":
+        language_priority = 62
+    elif language_status["status"] == "strong":
+        language_priority = 45
+
+    if gpa_status["status"] == "weak":
+        ap_priority = 48
+        ap_load = "先稳住校内成绩，AP建议控制在1-2门高相关课程。"
+    elif grade_number in (9, 10):
+        ap_priority = 62
+        ap_load = "可以试探性选择1-2门与方向高度相关的AP，不要牺牲GPA。"
+    elif grade_number == 11:
+        ap_priority = 82
+        ap_load = "可以形成3-5门核心AP组合，注意难度和出分确定性。"
+    else:
+        ap_priority = 58
+        ap_load = "12年级更适合补强已有逻辑，不建议盲目增加高风险课程。"
+
+    stable_gpa = gpa_status["status"] in ["stable", "strong"]
+    stable_language = language_status["status"] in ["stable", "strong"]
+    activity_priority = 58
+    competition_priority = 50
+    if stable_gpa and stable_language:
+        activity_priority = 82
+        competition_priority = 76
+    elif gpa_status["status"] == "weak":
+        activity_priority = 45
+        competition_priority = 42
+    elif grade_number in (10, 11):
+        activity_priority = 68
+        competition_priority = 62
+
+    essay_priority = 28
+    if grade_number == 11:
+        essay_priority = 62
+    elif grade_number == 12:
+        essay_priority = 92
+
+    exploration_priority = 70 if grade_number in (9, 10) else 45
+    if major_track == "未确定":
+        exploration_priority = 88
+
+    priorities = [
+        {"name": "GPA", "score": gpa_priority, "reason": f"当前GPA状态：{gpa_status['label']}。"},
+        {"name": "语言成绩", "score": language_priority, "reason": f"当前语言状态：{language_status['label']}。"},
+        {"name": "AP课程", "score": ap_priority, "reason": ap_load},
+        {"name": "活动背景", "score": activity_priority, "reason": "在硬性成绩稳定后，用持续活动体现申请方向和个人画像。"},
+        {"name": "竞赛/科研", "score": competition_priority, "reason": "适合作为专业兴趣证明，但不应压过GPA和语言短板。"},
+        {"name": "文书准备", "score": essay_priority, "reason": "低年级先积累素材，高年级再集中打磨文书表达。"},
+        {"name": "申请人设探索", "score": exploration_priority, "reason": "通过课程、活动和阅读逐步验证目标专业，不需要过早包装。"},
+    ]
+    priorities.sort(key=lambda item: item["score"], reverse=True)
+
+    existing_course_names = {item.get("course") for item in ap_courses}
+    included_core_courses = [course for course in rules["core"] if course in existing_course_names]
+    included_support_courses = [course for course in rules["support"] if course in existing_course_names]
+    included_balance_courses = [
+        course
+        for course in rules["balance"]
+        if course in existing_course_names or course in course_interests
+    ]
+    core_courses = [course for course in rules["core"] if course not in existing_course_names]
+    support_courses = [course for course in rules["support"] if course not in existing_course_names]
+    balance_courses = []
+    interested_balance_courses = [
+        course
+        for course in course_interests
+        if course in rules["balance"] and course not in existing_course_names
+    ]
+    interested_support_courses = [
+        course
+        for course in course_interests
+        if course in rules["support"] and course not in existing_course_names
+    ]
+
+    support_courses = prioritize_interested_courses(
+        list(dict.fromkeys(interested_support_courses + support_courses)),
+        course_interests,
+    )
+    if not has_humanities_balance(ap_courses):
+        balance_courses = list(dict.fromkeys(interested_balance_courses + [
+            course for course in rules["balance"] if course not in existing_course_names
+        ]))
+        balance_courses = prioritize_interested_courses(balance_courses, course_interests)
+
+    weaknesses = []
+    if gpa_status["status"] in ["missing", "weak"]:
+        weaknesses.append("GPA是当前最大短板，优先保证校内成绩和课程稳定性。")
+    if us_application and language_status["status"] in ["missing", "weak"]:
+        weaknesses.append("语言成绩仍需尽快补齐或提高，否则会限制美国申请范围。")
+    if not ap_courses:
+        weaknesses.append("AP记录较少，需要从目标专业核心课开始建立课程强度。")
+    elif not has_humanities_balance(ap_courses, course_interests):
+        weaknesses.append("当前AP组合偏专业课，建议补一门写作/历史/社科类课程平衡画像。")
+    if course_interests:
+        weaknesses.append(f"你最近表达过对 {course_interests[-1]} 的兴趣，系统已纳入课程组合判断。")
+    if not profile.get("activity", {}).get("description") and not profile.get("portfolio"):
+        weaknesses.append("活动和背景信息不足，后续需要沉淀可描述、可持续的经历。")
+
+    next_actions = [
+        f"未来4-8周优先处理：{priorities[0]['name']}。",
+        ap_load,
+        "每次Profile更新或AI对话补充新成绩后，系统会重新计算优先级和短板。"
+    ]
+    if balance_courses:
+        next_actions.append(f"为避免方向失衡，可从 {balance_courses[0]} 开始补充一门平衡课程。")
+
+    return {
+        "profile": {
+            "grade": profile.get("grade") or "未填写",
+            "targetCountry": country,
+            "major": profile.get("major") or "未填写",
+            "majorTrack": major_track,
+            "gpaStatus": gpa_status,
+            "languageStatus": language_status,
+            "apCount": len(ap_courses),
+            "courseInterests": course_interests,
+        },
+        "priorities": priorities,
+        "coursePlan": {
+            "includedCore": included_core_courses[:3],
+            "includedSupport": included_support_courses[:2],
+            "includedBalance": included_balance_courses[:2],
+            "core": core_courses[:3],
+            "support": support_courses[:2],
+            "balance": balance_courses[:2],
+            "loadAdvice": ap_load,
+            "reason": rules["reason"],
+        },
+        "weaknesses": weaknesses,
+        "nextActions": next_actions,
+        "persona": {
+            "direction": f"{major_track}方向申请者" if major_track != "未确定" else "仍在探索方向的申请者",
+            "balance": "建议形成“专业核心能力 + 一门表达/人文/社科平衡课 + 可持续活动”的画像。",
+        }
+    }
+
+def format_strategy_for_prompt(strategy: dict) -> str:
+    priorities = "\n".join(
+        [f"- {item['name']}：{item['score']}，{item['reason']}" for item in strategy["priorities"][:5]]
+    )
+    course_plan = strategy["coursePlan"]
+    weaknesses = "\n".join([f"- {item}" for item in strategy["weaknesses"]]) or "- 暂无明显短板"
+    return (
+        f"画像方向：{strategy['persona']['direction']}\n"
+        f"优先级：\n{priorities}\n"
+        f"推荐核心AP：{', '.join(course_plan['core']) or '暂无'}\n"
+        f"平衡课程：{', '.join(course_plan['balance']) or '暂无'}\n"
+        f"短板：\n{weaknesses}"
+    )
+
+def normalize_course_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", value.lower())
+
+AP_COURSE_KEY_MAP = {normalize_course_key(course): course for course in AP_OFFICIAL_COURSES}
+
+def find_official_ap_course(message: str) -> Optional[str]:
+    compact_message = normalize_course_key(message)
+    for key, course in AP_COURSE_KEY_MAP.items():
+        if key and key in compact_message:
+            return course
+
+    aliases = {
+        "calc bc": "AP Calculus BC",
+        "calculus bc": "AP Calculus BC",
+        "calc ab": "AP Calculus AB",
+        "calculus ab": "AP Calculus AB",
+        "csa": "AP Computer Science A",
+        "csp": "AP Computer Science Principles",
+        "physics c": "AP Physics C: Mechanics",
+        "apush": "AP United States History",
+        "psych": "AP Psychology",
+        "ap心理": "AP Psychology",
+        "心理学": "AP Psychology",
+        "心理": "AP Psychology",
+        "ap统计": "AP Statistics",
+        "统计学": "AP Statistics",
+        "ap微积分bc": "AP Calculus BC",
+        "微积分bc": "AP Calculus BC",
+        "ap微积分ab": "AP Calculus AB",
+        "微积分ab": "AP Calculus AB",
+        "ap计算机": "AP Computer Science A",
+        "计算机a": "AP Computer Science A",
+        "ap物理c": "AP Physics C: Mechanics",
+        "ap生物": "AP Biology",
+        "ap化学": "AP Chemistry",
+        "ap宏观": "AP Macroeconomics",
+        "ap微观": "AP Microeconomics",
+        "stats": "AP Statistics",
+        "bio": "AP Biology",
+        "chem": "AP Chemistry",
+        "macro": "AP Macroeconomics",
+        "micro": "AP Microeconomics",
+    }
+    lower_message = message.lower()
+    for alias, course in aliases.items():
+        if alias in lower_message:
+            return course
+    return None
+
+def add_course_interest(profile_data: dict, course: str) -> bool:
+    interests = profile_data.setdefault("courseInterests", [])
+    if course in interests:
+        return False
+    interests.append(course)
+    return True
+
+def remove_unscored_ap_course(profile_data: dict, course: str) -> bool:
+    ap_courses = profile_data.get("apCourses") or []
+    remaining_courses = [
+        item
+        for item in ap_courses
+        if not (
+            item.get("course") == course
+            and str(item.get("score", "")).strip() in ["", "0", "暂未出分"]
+        )
+    ]
+    changed = len(remaining_courses) != len(ap_courses)
+    if changed:
+        profile_data["apCourses"] = remaining_courses
+    return changed
+
+def upsert_ap_course(profile_data: dict, course: str, score: int) -> None:
+    ap_courses = profile_data.setdefault("apCourses", [])
+    for item in ap_courses:
+        if item.get("course") == course:
+            item["score"] = score
+            return
+    ap_courses.append({"course": course, "score": score})
+
+def append_portfolio_item(profile_data: dict, bucket: str, description: str) -> bool:
+    portfolio = profile_data.setdefault("portfolio", {})
+    items = portfolio.setdefault(bucket, [])
+    normalized = description.strip()
+    if not normalized or normalized in items:
+        return False
+    items.append(normalized[:180])
+    return True
+
+def apply_profile_updates_from_message(message: str, profile_data: Optional[dict]) -> tuple[dict, list[str]]:
+    data = copy.deepcopy(profile_data or {})
+    updates = []
+    text = message.strip()
+
+    course = find_official_ap_course(text)
+    if course:
+        score_match = re.search(r"([1-5])\s*分", text)
+        score = int(score_match.group(1)) if score_match else 0
+        question_or_interest_intent = any(
+            keyword in text
+            for keyword in ["想学", "要学", "要不要", "适合", "推荐", "可以选", "该选", "是吗", "吗", "辅修", "感兴趣"]
+        )
+        is_confirmed_course = score > 0 or any(
+            keyword in text
+            for keyword in ["新增", "增加", "拿到", "获得", "考了", "出了", "已学", "在学", "选了"]
+        )
+
+        if is_confirmed_course and not question_or_interest_intent:
+            upsert_ap_course(data, course, score)
+            updates.append(f"AP课程：{course}，分数/目标 {score if score else '暂未出分'}")
+        else:
+            moved_from_ap = remove_unscored_ap_course(data, course)
+            if add_course_interest(data, course) or moved_from_ap:
+                updates.append(f"课程兴趣：{course}")
+
+    gpa_match = re.search(r"(?:gpa|GPA)[：:\s]*(\d(?:\.\d+)?)", text)
+    if gpa_match:
+        gpa_value = gpa_match.group(1)
+        if "加权" in text or "weighted" in text.lower():
+            data["weightedGpa"] = gpa_value
+            updates.append(f"加权GPA：{gpa_value}")
+        else:
+            data["unweightedGpa"] = gpa_value
+            updates.append(f"未加权GPA：{gpa_value}")
+
+    sat_match = re.search(r"\bSAT[：:\s]*(1[0-6]\d{2}|[4-9]\d{2})", text, re.IGNORECASE)
+    act_match = re.search(r"\bACT[：:\s]*([1-3]?\d)", text, re.IGNORECASE)
+    if sat_match:
+        data["satAct"] = {"type": "SAT", "score": sat_match.group(1)}
+        updates.append(f"SAT：{sat_match.group(1)}")
+    elif act_match:
+        data["satAct"] = {"type": "ACT", "score": act_match.group(1)}
+        updates.append(f"ACT：{act_match.group(1)}")
+
+    language_patterns = [
+        ("托福", r"(?:托福|TOEFL)[：:\s]*(\d{2,3})"),
+        ("雅思", r"(?:雅思|IELTS)[：:\s]*(\d(?:\.\d)?)"),
+        ("多邻国", r"(?:多邻国|Duolingo)[：:\s]*(\d{2,3})"),
+    ]
+    for test_type, pattern in language_patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            data["languageTest"] = {"type": test_type, "score": match.group(1)}
+            updates.append(f"{test_type}：{match.group(1)}")
+            break
+
+    activity_buckets = [
+        ("竞赛", "competitions"),
+        ("科研", "research"),
+        ("夏校", "summerPrograms"),
+        ("志愿", "volunteer"),
+        ("活动", "activities"),
+    ]
+    if any(verb in text for verb in ["参加", "新增", "增加", "完成", "获得", "拿到"]):
+        for keyword, bucket in activity_buckets:
+            if keyword in text and append_portfolio_item(data, bucket, text):
+                updates.append(f"背景库新增：{keyword}")
+                break
+
+    return data, updates
+
 def build_profile_summary(profile_data: Optional[dict]) -> str:
     if not profile_data:
         return "用户尚未完善个人Profile。"
@@ -352,30 +902,35 @@ def build_profile_summary(profile_data: Optional[dict]) -> str:
         f"AP课程：{', '.join(ap_courses) if ap_courses else '未填写'}\n"
         f"SAT/ACT：{profile_data.get('satAct') or '未填写'}\n"
         f"语言成绩：{profile_data.get('languageTest') or '未填写'}\n"
-        f"活动背景：{profile_data.get('activity') or '未填写'}"
+        f"活动背景：{profile_data.get('activity') or '未填写'}\n"
+        f"背景库：{profile_data.get('portfolio') or '未填写'}"
     )
 
 def local_planning_answer(message: str, profile_data: Optional[dict]) -> str:
-    profile = profile_data or {}
-    major = (profile.get("major") or "").lower()
-    ap_courses = [item.get("course", "") for item in profile.get("apCourses", []) if item.get("course")]
+    strategy = build_student_strategy(profile_data)
+    course_plan = strategy["coursePlan"]
+    included_courses = (
+        course_plan.get("includedCore", [])
+        + course_plan.get("includedSupport", [])
+        + course_plan.get("includedBalance", [])
+    )
     suggestions = [
         "这是基于当前资料生成的本地规划建议：",
-        f"1. 你目前的目标方向是：{profile.get('major') or '未填写'}，建议先把目标专业和目标国家补充清楚。",
-        f"2. 当前AP课程数量为 {len(ap_courses)} 门，建议围绕目标专业形成3-5门核心AP组合。",
-        "3. 如果GPA或标化暂未填写，优先补全这些硬性指标，方便后续做院校层次判断。",
+        f"1. 当前画像：{strategy['persona']['direction']}，目标地区是 {strategy['profile']['targetCountry']}。",
+        f"2. 当前最高优先级是 {strategy['priorities'][0]['name']}：{strategy['priorities'][0]['reason']}",
+        f"3. AP核心建议：{', '.join(course_plan['core']) or '先补充目标专业和现有AP信息'}。",
     ]
 
-    if "computer" in major or "计算机" in major:
-        suggestions.append("4. 计算机方向建议重点考虑 AP CSA、Calculus BC、Statistics，并补充编程或科研项目。")
-    elif "business" in major or "商" in major or "经济" in major:
-        suggestions.append("4. 商科/经济方向建议重点考虑 Economics、Statistics、Calculus，并补充商业分析或竞赛经历。")
-    elif "engineer" in major or "工程" in major:
-        suggestions.append("4. 工程方向建议重点考虑 Calculus BC、Physics C、Chemistry，并补充工程实践项目。")
+    if included_courses:
+        suggestions.append(f"4. 已纳入组合判断：{', '.join(included_courses)}。")
+    elif course_plan["balance"]:
+        suggestions.append(f"4. 为避免画像失衡，建议补充平衡课程：{', '.join(course_plan['balance'])}。")
     else:
-        suggestions.append("4. 建议根据目标专业选择2门高相关AP，再用1-2门跨学科课程展示综合能力。")
+        suggestions.append("4. 当前AP组合暂未发现明显失衡，下一步更适合围绕短板做深。")
 
-    suggestions.append("5. 你可以继续追问：我该补哪些AP、活动背景怎么规划、目标院校层次如何判断。")
+    if strategy["weaknesses"]:
+        suggestions.append(f"5. 当前短板：{strategy['weaknesses'][0]}")
+    suggestions.append("你可以继续补充新成绩或活动，我会把它写入Profile库并重新计算优先级。")
     return "\n".join(suggestions)
 
 def call_deepseek_ai(message: str, profile_summary: str) -> str:
@@ -595,8 +1150,15 @@ def save_profile(
     except HTTPException as e:
         return {"code": e.status_code, "msg": e.detail, "data": None}
 
-    profile_data = data.model_dump()
     profile = db.query(Profile).filter(Profile.user_id == user_id).first()
+    profile_data = data.model_dump()
+    if profile and isinstance(profile.data, dict):
+        for preserved_key in ["portfolio"]:
+            if preserved_key in profile.data and preserved_key not in profile_data:
+                profile_data[preserved_key] = profile.data[preserved_key]
+        for preserved_key in ["courseInterests"]:
+            if preserved_key in profile.data and preserved_key not in profile_data:
+                profile_data[preserved_key] = profile.data[preserved_key]
 
     if profile:
         profile.data = profile_data
@@ -605,7 +1167,7 @@ def save_profile(
         db.add(profile)
 
     db.commit()
-    return {"code": 200, "msg": "保存成功"}
+    return {"code": 200, "msg": "保存成功", "data": {"analysis": build_student_strategy(profile_data)}}
 
 @app.get("/api/profile/me", summary="获取当前用户Profile")
 def get_my_profile(
@@ -628,6 +1190,47 @@ def get_my_profile(
         return {"code": 404, "msg": "暂无资料", "data": None}
 
     return {"code": 200, "msg": "success", "data": profile.data}
+
+@app.get("/api/onboarding/status", summary="获取首次背调完成状态")
+def get_onboarding_status(
+    authorization: str = Header(None),
+    db: Session = Depends(get_db)
+):
+    user_id, error_response = get_user_id_from_authorization(authorization)
+    if error_response:
+        return error_response
+
+    profile = db.query(Profile).filter(Profile.user_id == user_id).first()
+    profile_data = profile.data if profile else None
+    missing_fields = missing_profile_fields(profile_data)
+
+    return {
+        "code": 200,
+        "msg": "success",
+        "data": {
+            "completed": len(missing_fields) == 0,
+            "missing_fields": missing_fields,
+            "requires_onboarding": len(missing_fields) > 0,
+        }
+    }
+
+@app.get("/api/planning/analysis", summary="获取当前用户智能画像分析")
+def get_planning_analysis(
+    authorization: str = Header(None),
+    db: Session = Depends(get_db)
+):
+    user_id, error_response = get_user_id_from_authorization(authorization)
+    if error_response:
+        return error_response
+
+    profile = db.query(Profile).filter(Profile.user_id == user_id).first()
+    profile_data = profile.data if profile else None
+
+    return {
+        "code": 200,
+        "msg": "success",
+        "data": build_student_strategy(profile_data)
+    }
 
 @app.post("/api/ai-chat", summary="升学规划AI对话")
 def ai_chat(
@@ -654,8 +1257,23 @@ def ai_chat(
         }
 
     profile = db.query(Profile).filter(Profile.user_id == user_id).first()
-    profile_data = profile.data if profile else None
-    profile_summary = build_profile_summary(profile_data)
+    profile_data = profile.data if profile else {}
+    updated_profile_data, detected_updates = apply_profile_updates_from_message(message, profile_data)
+
+    if detected_updates:
+        if profile:
+            profile.data = updated_profile_data
+        else:
+            profile = Profile(user_id=user_id, data=updated_profile_data)
+            db.add(profile)
+        db.flush()
+        profile_data = updated_profile_data
+
+    strategy = build_student_strategy(profile_data)
+    profile_summary = (
+        f"{build_profile_summary(profile_data)}\n\n"
+        f"系统画像分析：\n{format_strategy_for_prompt(strategy)}"
+    )
 
     try:
         answer = call_deepseek_ai(message, profile_summary)
@@ -664,6 +1282,13 @@ def ai_chat(
         answer = local_planning_answer(message, profile_data)
         source = "local_fallback"
         print(f"DeepSeek调用失败，已使用本地fallback: {e}")
+
+    if detected_updates:
+        answer = (
+            f"我已把这次信息纳入Profile库：{'; '.join(detected_updates)}。\n"
+            "下面是基于更新后画像的判断：\n\n"
+            f"{answer}"
+        )
 
     history = AIPlanHistory(
         user_id=user_id,
@@ -680,7 +1305,9 @@ def ai_chat(
         "data": {
             "id": history.id,
             "source": source,
-            "answer": answer
+            "answer": answer,
+            "detected_updates": detected_updates,
+            "analysis": strategy
         }
     }
 

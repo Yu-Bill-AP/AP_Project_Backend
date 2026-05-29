@@ -9,6 +9,9 @@ AP Planner 是一个纯登录制的 AP 升学规划 Web 应用，包含账号注
 - 仪表盘：`/dashboard.html`
 - 个人信息完善：`/profile.html`
 - AP课程库：`/courses.html`
+- 院校匹配：`/match.html`
+- 申请时间线：`/timeline.html`
+- 背景库：`/portfolio.html`
 - 升学指南：`/guide.html`
 - AI规划：`/ai-plan.html`
 - 我的规划：`/my-plans.html`
@@ -39,9 +42,18 @@ http://127.0.0.1:8000/login.html
 DEEPSEEK_API_KEY=你的DeepSeek API Key
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-chat
+SECRET_KEY=请替换为至少32字节的随机密钥
 ```
 
 `.env` 已加入 `.gitignore`，不要提交到 GitHub。
+
+## 本地测试
+
+```bash
+venv/bin/python test.py
+```
+
+测试脚本会验证健康检查、测试账号登录、用户信息和 AP 规划接口是否可用。
 
 ## 测试账号
 

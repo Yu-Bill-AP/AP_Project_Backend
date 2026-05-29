@@ -67,12 +67,13 @@
         }
 
         .hero-card {
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: white;
-            border-radius: 18px;
+            background: #ffffff;
+            color: #2c3e50;
+            border-radius: 8px;
             padding: 32px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 24px rgba(52,152,219,0.25);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            border: 1px solid #e8eef4;
         }
 
         .hero-card h1 {
@@ -81,7 +82,7 @@
         }
 
         .hero-card p {
-            opacity: 0.9;
+            color: #6b7b8c;
             font-size: 15px;
         }
 
@@ -93,14 +94,15 @@
         }
 
         .summary-item {
-            background: rgba(255,255,255,0.15);
-            border-radius: 12px;
+            background: #f7fafc;
+            border-radius: 8px;
             padding: 16px;
+            border: 1px solid #e8eef4;
         }
 
         .summary-item .label {
             font-size: 13px;
-            opacity: 0.85;
+            color: #6b7b8c;
         }
 
         .summary-item .value {
@@ -117,10 +119,11 @@
 
         .card {
             background: #ffffff;
-            border-radius: 16px;
+            border-radius: 8px;
             padding: 24px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.05);
             margin-bottom: 24px;
+            border: 1px solid #e8eef4;
         }
 
         .card h2 {
@@ -151,23 +154,23 @@
         .progress-fill {
             width: 60%;
             height: 100%;
-            background: #3498db;
+            background: #2f6f9f;
             border-radius: 999px;
         }
 
         .primary-btn {
             margin-top: 18px;
             border: none;
-            background: #3498db;
+            background: #2f6f9f;
             color: white;
             padding: 11px 18px;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
         }
 
         .primary-btn:hover {
-            background: #2980b9;
+            background: #245d87;
         }
 
         .school-list,
@@ -196,17 +199,70 @@
             padding: 3px 8px;
             border-radius: 999px;
             margin-right: 8px;
-            background: #eef6ff;
-            color: #2980b9;
+            background: #e8f2fa;
+            color: #2f6f9f;
         }
 
         .ap-score {
             float: right;
-            background: #3498db;
+            background: #2f6f9f;
             color: white;
             padding: 3px 9px;
             border-radius: 999px;
             font-size: 12px;
+        }
+
+        .priority-list,
+        .weakness-list,
+        .course-rec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .priority-item {
+            display: grid;
+            grid-template-columns: 86px 1fr 42px;
+            gap: 10px;
+            align-items: center;
+            padding: 11px 0;
+            border-bottom: 1px solid #eef1f4;
+            font-size: 14px;
+        }
+
+        .priority-item:last-child,
+        .weakness-list li:last-child,
+        .course-rec-list li:last-child {
+            border-bottom: none;
+        }
+
+        .priority-bar {
+            height: 8px;
+            background: #e8eef4;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .priority-bar span {
+            display: block;
+            height: 100%;
+            background: #2f6f9f;
+        }
+
+        .weakness-list li,
+        .course-rec-list li {
+            padding: 11px 0;
+            border-bottom: 1px solid #eef1f4;
+            color: #536475;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .section-note {
+            color: #6b7b8c;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 12px;
         }
 
         .empty {
@@ -256,7 +312,7 @@
             </div>
             <div class="summary-item">
                 <div class="label">规划完成度</div>
-                <div class="value">60%</div>
+                <div class="value" id="completion-value">0%</div>
             </div>
             <div class="summary-item">
                 <div class="label">AP 课程数</div>
@@ -269,16 +325,16 @@
 
         <div>
             <section class="card">
-                <h2>📈 升学规划进度</h2>
-                <p>你已经完成了基础账号创建。下一步建议继续完善 GPA、AP、标化和活动背景信息。</p>
+                <h2>升学规划进度</h2>
+                <p id="focus-text">系统正在根据你的资料计算当前优先级。</p>
 
                 <div class="progress-box">
                     <div class="progress-text">
                         <span>当前进度</span>
-                        <span>60%</span>
+                        <span id="progress-text-value">0%</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                        <div class="progress-fill" id="progress-fill"></div>
                     </div>
                 </div>
 
@@ -286,30 +342,44 @@
             </section>
 
             <section class="card">
-                <h2>📚 我的 AP 课程</h2>
+                <h2>我的 AP 课程</h2>
                 <ul id="ap-list" class="ap-list">
                     <li class="empty">正在加载 AP 课程...</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>智能优先级</h2>
+                <ul id="priority-list" class="priority-list">
+                    <li class="empty">正在生成画像分析...</li>
                 </ul>
             </section>
         </div>
 
         <div>
             <section class="card">
-                <h2>🎯 推荐院校预览</h2>
+                <h2>AP 组合建议</h2>
+                <p class="section-note" id="course-plan-reason">系统会根据专业方向、GPA和当前AP组合判断核心课和平衡课。</p>
+                <ul id="course-rec-list" class="course-rec-list">
+                    <li class="empty">正在生成课程建议...</li>
+                </ul>
+                <button class="primary-btn" onclick="goCourses()">查看课程库</button>
+            </section>
+
+            <section class="card">
+                <h2>推荐院校预览</h2>
                 <ul class="school-list">
                     <li><span class="school-tag">Match</span>UCLA</li>
                     <li><span class="school-tag">Match</span>NYU</li>
                     <li><span class="school-tag">Reach</span>UC Berkeley</li>
                 </ul>
-                <button class="primary-btn" onclick="goMatch()">查看完整匹配结果</button>
+                <button class="primary-btn" onclick="goMatch()">查看院校匹配</button>
             </section>
 
             <section class="card">
-                <h2>📋 最近规划建议</h2>
-                <ul class="suggestion-list">
-                    <li>建议将 SAT 目标提高至 1500+</li>
-                    <li>补充 1-2 个学术型活动背景</li>
-                    <li>考虑选择 AP Physics C 或 AP Statistics</li>
+                <h2>当前短板</h2>
+                <ul class="weakness-list" id="weakness-list">
+                    <li class="empty">正在分析短板...</li>
                 </ul>
             </section>
         </div>
@@ -338,7 +408,7 @@ function loadLocalProfileData() {
         document.getElementById("grade-value").textContent = profile.grade;
     }
 
-    const validApCourses = profile.apCourses.filter(item => item.course);
+    const validApCourses = (profile.apCourses || []).filter(item => item.course);
     document.getElementById("ap-count").textContent = validApCourses.length;
 
     const list = document.getElementById("ap-list");
@@ -380,6 +450,37 @@ async function loadProfileData(token) {
     }
 }
 
+function calculateCompletion(profile, analysis) {
+    let score = 0;
+    if (profile.grade) {
+        score += 15;
+    }
+    if (profile.targetCountry) {
+        score += 15;
+    }
+    if (profile.major) {
+        score += 15;
+    }
+    if (profile.weightedGpa || profile.unweightedGpa) {
+        score += 20;
+    }
+    if ((profile.apCourses || []).some(item => item.course)) {
+        score += 15;
+    }
+    if (profile.languageTest && profile.languageTest.score) {
+        score += 10;
+    }
+    if (profile.activity && profile.activity.description) {
+        score += 10;
+    }
+
+    if (analysis && analysis.profile && analysis.profile.majorTrack !== "未确定") {
+        score = Math.max(score, 55);
+    }
+
+    return Math.min(score, 100);
+}
+
 function renderProfileData(profile) {
     if (profile.grade) {
         document.getElementById("grade-value").textContent = profile.grade;
@@ -406,18 +507,76 @@ function renderProfileData(profile) {
     });
 }
 
+async function loadPlanningAnalysis(token) {
+    try {
+        const response = await fetch(`${BASE_URL}/api/planning/analysis`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const result = await response.json();
+
+        if (result.code === 200 && result.data) {
+            renderPlanningAnalysis(result.data);
+        }
+    } catch (error) {
+        console.error("画像分析加载失败：", error);
+    }
+}
+
+function renderPlanningAnalysis(analysis) {
+    const profile = JSON.parse(localStorage.getItem("profileData") || "{}");
+    const completion = calculateCompletion(profile, analysis);
+    document.getElementById("completion-value").textContent = `${completion}%`;
+    document.getElementById("progress-text-value").textContent = `${completion}%`;
+    document.getElementById("progress-fill").style.width = `${completion}%`;
+
+    if (analysis.priorities && analysis.priorities.length) {
+        const top = analysis.priorities[0];
+        document.getElementById("focus-text").textContent =
+            `当前最优先的是 ${top.name}。${top.reason}`;
+
+        document.getElementById("priority-list").innerHTML = analysis.priorities.slice(0, 5).map(item => `
+            <li class="priority-item">
+                <span>${item.name}</span>
+                <div class="priority-bar"><span style="width:${item.score}%"></span></div>
+                <strong>${item.score}</strong>
+            </li>
+        `).join("");
+    }
+
+    const plan = analysis.coursePlan || {};
+    document.getElementById("course-plan-reason").textContent = plan.reason || "暂无课程组合建议。";
+    const recItems = [
+        ...(plan.includedCore || []).map(course => `已纳入核心：${course}`),
+        ...(plan.includedSupport || []).map(course => `已纳入支撑：${course}`),
+        ...(plan.includedBalance || []).map(course => `已纳入平衡：${course}`),
+        ...(plan.core || []).map(course => `核心课：${course}`),
+        ...(plan.support || []).map(course => `支撑课：${course}`),
+        ...(plan.balance || []).map(course => `平衡课：${course}`)
+    ];
+    document.getElementById("course-rec-list").innerHTML = recItems.length
+        ? recItems.map(item => `<li>${item}</li>`).join("")
+        : `<li class="empty">先完善目标专业和AP信息，系统会生成课程组合。</li>`;
+
+    document.getElementById("weakness-list").innerHTML = analysis.weaknesses && analysis.weaknesses.length
+        ? analysis.weaknesses.map(item => `<li>${item}</li>`).join("")
+        : `<li class="empty">当前暂无明显短板，建议继续保持资料更新。</li>`;
+}
+
 window.onload = function () {
     requireLogin(async (user, token) => {
         renderAppLayout(user);
         renderUserInfo(user);
         await loadProfileData(token);
+        await loadPlanningAnalysis(token);
         // await loadAPPlans(token);
     });
 };
 
 function renderUserInfo(user) {
     document.getElementById("welcome-title").textContent =
-        `欢迎回来，${user.name}同学 👋`;
+        `欢迎回来，${user.name}同学`;
 
     document.getElementById("grade-value").textContent =
         user.current_grade_term || "未填写";
@@ -470,6 +629,10 @@ function goProfile() {
 
 function goMatch() {
     window.location.href = "match.html";
+}
+
+function goCourses() {
+    window.location.href = "courses.html";
 }
 </script>
 
