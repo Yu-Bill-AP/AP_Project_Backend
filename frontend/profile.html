@@ -1,476 +1,172 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>完善信息 - AP Planner</title>
+    <title>Application profile - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            background: white;
-            padding: 28px;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-            border: 1px solid #e8eef4;
-        }
-
-        .step-title {
-            font-size: 26px;
-            margin-bottom: 8px;
-            line-height: 1.25;
-        }
-
-        .step-subtitle {
-            color: #6b7b8c;
-            margin-bottom: 24px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background: #e9eef3;
-            border-radius: 999px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 20%;
-            background: #2f6f9f;
-            transition: width 0.3s ease;
-        }
-
-        .form-step {
-            display: none;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #2c3e50;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            min-height: 44px;
-            padding: 10px 12px;
-            margin-bottom: 18px;
-            border: 1px solid #dce3ea;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #2c3e50;
-            background-color: #ffffff;
-        }
-
-        select {
-            appearance: none !important;
-            -webkit-appearance: none !important;
-            background-color: #ffffff !important;
-            background-image:
-                linear-gradient(45deg, transparent 50%, #506172 50%),
-                linear-gradient(135deg, #506172 50%, transparent 50%) !important;
-            background-position:
-                calc(100% - 18px) calc(50% - 3px),
-                calc(100% - 13px) calc(50% - 3px) !important;
-            background-repeat: no-repeat !important;
-            background-size: 5px 5px, 5px 5px !important;
-            padding-right: 40px;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: #2f6f9f;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(47,111,159,0.12);
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .btn-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 24px;
-            gap: 12px;
-        }
-
-        button {
-            border: none;
-            padding: 11px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .primary {
-            background: #2f6f9f;
-            color: white;
-        }
-
-        .primary:hover {
-            background: #245d87;
-        }
-
-        .secondary {
-            background: #eef3f8;
-            color: #2c3e50;
-        }
-
-        .hint {
-            font-size: 13px;
-            color: #6b7b8c;
-            margin-top: -10px;
-            margin-bottom: 18px;
-        }
-
-        @media (max-width: 760px) {
-            .container {
-                padding: 22px;
-            }
-
-            .btn-row {
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
+        :root { --ink:#1d2d3d; --muted:#647587; --line:#dfe7ee; --blue:#17689e; --pale:#f4f8fb; --green:#177b57; --amber:#a76500; }
+        * { box-sizing: border-box; }
+        body { background:#f4f7fa; color:var(--ink); }
+        .profile-wrap { max-width:1180px; margin:0 auto; padding:30px 24px 56px; }
+        .hero { display:grid; grid-template-columns:1.5fr .9fr; gap:24px; padding:30px; background:linear-gradient(120deg,#173d5b,#17689e); color:#fff; border-radius:18px; box-shadow:0 16px 34px rgba(22,76,111,.16); }
+        .eyebrow { margin:0 0 8px; font-size:13px; opacity:.75; letter-spacing:.08em; }
+        h1 { margin:0; font-size:30px; letter-spacing:-.02em; }
+        .hero p { max-width:650px; margin:12px 0 0; line-height:1.7; color:#e6f2fa; }
+        .save-status { display:inline-flex; margin-top:18px; padding:6px 10px; border:1px solid rgba(255,255,255,.28); border-radius:999px; font-size:13px; }
+        .readiness { align-self:center; background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:18px; }
+        .readiness-top { display:flex; justify-content:space-between; align-items:baseline; }
+        .readiness strong { font-size:30px; }
+        .readiness-bar { height:9px; overflow:hidden; background:rgba(255,255,255,.25); border-radius:999px; margin:13px 0 9px; }
+        .readiness-bar span { display:block; height:100%; background:#b7f1da; border-radius:inherit; transition:width .25s; }
+        .readiness small { color:#e0f2f8; line-height:1.5; }
+        .section-nav { display:flex; flex-wrap:wrap; gap:9px; margin:20px 0; }
+        .section-nav button { background:#fff; border:1px solid var(--line); color:#395269; border-radius:999px; padding:9px 13px; cursor:pointer; font-size:13px; }
+        .section-nav button:hover { border-color:var(--blue); color:var(--blue); }
+        .layout { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:22px; align-items:start; }
+        .form-stack { display:grid; gap:18px; }
+        .card, .side-card { background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 4px 16px rgba(22,49,72,.035); }
+        .card { scroll-margin-top:22px; padding:25px; }
+        .card-head { display:flex; gap:14px; align-items:flex-start; justify-content:space-between; margin-bottom:21px; }
+        .card-title { display:flex; gap:12px; }
+        .number { width:28px; height:28px; display:grid; place-items:center; border-radius:8px; color:var(--blue); background:#eaf4fa; font-size:13px; font-weight:700; flex:0 0 auto; }
+        h2 { margin:0; font-size:18px; }
+        .card-head p, .field-help { margin:5px 0 0; color:var(--muted); font-size:13px; line-height:1.55; }
+        .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+        .grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+        .field { min-width:0; }
+        label { display:block; margin:0 0 7px; color:#2e4354; font-weight:650; font-size:13px; }
+        .required { color:#bd3a3a; margin-left:2px; }
+        input, select, textarea { width:100%; min-height:42px; border:1px solid #cddae4; border-radius:9px; padding:9px 11px; color:var(--ink); font:inherit; background:#fff; }
+        textarea { min-height:92px; resize:vertical; }
+        input:focus, select:focus, textarea:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(23,104,158,.12); }
+        .hint-box { margin-top:17px; padding:12px 14px; background:var(--pale); border-left:3px solid #86bddc; border-radius:7px; color:#486477; font-size:13px; line-height:1.6; }
+        .ap-summary { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+        .pill { display:inline-flex; align-items:center; white-space:nowrap; border-radius:999px; padding:5px 9px; background:#edf4f8; color:#486477; font-size:12px; }
+        .ap-list { display:grid; gap:10px; }
+        .ap-row { display:grid; grid-template-columns:minmax(180px,1.65fr) .92fr .92fr .7fr 38px; gap:9px; padding:12px; border:1px solid #e1e9ef; border-radius:11px; background:#fbfdff; align-items:end; }
+        .ap-row label { font-size:11px; color:#607687; margin-bottom:5px; }
+        .ap-row input, .ap-row select { min-height:38px; padding:7px 8px; font-size:13px; }
+        .icon-button { width:38px; height:38px; border:1px solid #f0caca; border-radius:8px; background:#fff7f7; color:#a23d3d; cursor:pointer; font-size:18px; }
+        .add-button, .secondary-button { border:1px solid #a9c8dc; color:#17689e; background:#f5fbff; border-radius:9px; padding:9px 13px; font:inherit; font-size:13px; font-weight:650; cursor:pointer; }
+        .add-button { margin-top:12px; }
+        .subsection { padding-top:19px; margin-top:20px; border-top:1px solid #e9eef2; }
+        .subsection h3 { margin:0 0 5px; font-size:15px; }
+        .source-note { display:flex; gap:8px; margin:13px 0 0; padding:11px 12px; background:#fff8eb; color:#7b570f; border-radius:8px; font-size:12.5px; line-height:1.55; }
+        .source-note[hidden] { display:none; }
+        .check-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:13px; }
+        .check-item { display:flex; align-items:flex-start; gap:9px; padding:11px; border:1px solid #e1e9ef; border-radius:9px; color:#496375; font-size:13px; line-height:1.45; background:#fbfdff; }
+        .check-item input { width:16px; min-height:16px; margin:2px 0 0; flex:0 0 auto; accent-color:var(--blue); }
+        .side-card { padding:18px; position:sticky; top:18px; }
+        .side-card h3 { margin:0 0 12px; font-size:15px; }
+        .side-list { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+        .side-list li { display:flex; gap:8px; font-size:13px; line-height:1.45; color:#536d80; }
+        .dot { width:8px; height:8px; margin-top:5px; border-radius:50%; background:#bdcad3; flex:0 0 auto; }
+        .dot.done { background:var(--green); }.dot.pending { background:#ddaa46; }
+        .save-button { width:100%; border:0; border-radius:10px; padding:12px 14px; color:#fff; background:var(--blue); font:inherit; font-weight:700; cursor:pointer; }
+        .save-button:hover { background:#10557f; }.save-button:disabled { opacity:.65; cursor:wait; }
+        .side-note { margin:12px 0 0; color:var(--muted); font-size:12px; line-height:1.55; }
+        .toast { position:fixed; right:24px; bottom:22px; z-index:30; max-width:340px; padding:12px 15px; border-radius:10px; background:#183d5a; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.18); font-size:13px; transform:translateY(90px); opacity:0; transition:.22s ease; }.toast.show { transform:translateY(0); opacity:1; }
+        @media (max-width:900px) { .hero,.layout { grid-template-columns:1fr; }.side-card { position:static; }.side-card .save-button { display:none; } }
+        @media (max-width:650px) { .profile-wrap { padding:18px 14px 42px; }.hero,.card { padding:20px; border-radius:13px; }h1{font-size:25px}.grid,.grid-3,.check-grid{grid-template-columns:1fr}.ap-row{grid-template-columns:1fr 1fr}.ap-row .course-field{grid-column:1/-1}.ap-row .remove-cell{grid-column:2;justify-self:end}.section-nav{flex-wrap:nowrap;overflow:auto;padding-bottom:3px}.section-nav button{white-space:nowrap} }
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-
-<body>
-
+<body data-notebook-page="profile">
 <header id="app-topbar" class="app-topbar"></header>
-<div class="app-shell">
-<aside id="app-sidebar" class="app-sidebar"></aside>
-<main class="page-content">
-
-<div class="container">
-    <h1 class="step-title" id="step-title">Step 1 / 5 基础背调</h1>
-    <p class="step-subtitle" id="step-subtitle">先建立你的申请画像，后续推荐会根据资料实时调整。</p>
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill"></div>
+<div class="app-shell"><aside id="app-sidebar" class="app-sidebar"></aside><main class="page-content">
+    <div class="profile-wrap">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">APPLICATION PROFILE</p>
+                <h1>Application profile</h1>
+                <p>Keep official, mock and estimated scores separate. Official scores support requirements checks; other scores help with planning.</p>
+                <span class="save-status" id="save-status">Loading your profile...</span>
+            </div>
+            <div class="readiness"><div class="readiness-top"><span>Profile completeness</span><strong id="readiness-number">0%</strong></div><div class="readiness-bar"><span id="readiness-fill"></span></div><small id="readiness-copy">Add your details to start matching courses and universities.</small></div>
+        </section>
+        <nav class="section-nav" aria-label="Profile sections">
+            <button type="button" data-target="identity-card">1 Direction</button><button type="button" data-target="academic-card">2 School grades</button><button type="button" data-target="ap-card">3 AP courses</button><button type="button" data-target="tests-card">4 Test scores</button><button type="button" data-target="context-card">5 Background</button>
+        </nav>
+        <div class="layout"><form class="form-stack" id="profile-form" novalidate>
+            <section class="card" id="identity-card">
+                <div class="card-head"><div class="card-title"><span class="number">1</span><div><h2>Application direction</h2><p>Your grade, destination and interests guide the recommendations.</p></div></div></div>
+                <div class="grid-3">
+                    <div class="field"><label for="grade">Current grade<span class="required">*</span></label><select id="grade"><option value="9年级上">Grade 9 · Fall</option><option value="9年级下">Grade 9 · Spring</option><option value="10年级上">Grade 10 · Fall</option><option value="10年级下">Grade 10 · Spring</option><option value="11年级上">Grade 11 · Fall</option><option value="11年级下">Grade 11 · Spring</option><option value="12年级上">Grade 12 · Fall</option><option value="12年级下">Grade 12 · Spring</option></select></div>
+                    <div class="field"><label for="target-country">Destination<span class="required">*</span></label><select id="target-country"><option value="美国">United States</option><option value="英国">United Kingdom</option><option value="加拿大">Canada</option><option value="中国香港">Hong Kong</option></select></div>
+                    <div class="field"><label for="graduation-year">Graduation year</label><input id="graduation-year" type="number" min="2026" max="2035" placeholder="e.g. 2028"></div>
+                </div>
+                <div class="grid" style="margin-top:16px"><div class="field"><label for="major">Major / interests<span class="required">*</span></label><input id="major" placeholder="e.g. Computer science, Economics, or CS + Design"></div><div class="field"><label for="application-round">Application round</label><select id="application-round"><option value="">Undecided</option><option value="ED/EA">Mainly ED / EA</option><option value="RD">Mainly RD</option><option value="rolling">Rolling / multiple destinations</option></select></div></div>
+            </section>
+            <section class="card" id="academic-card">
+                <div class="card-head"><div class="card-title"><span class="number">2</span><div><h2>School grades &amp; curriculum</h2><p>Add your unweighted GPA first. Leave it blank if you do not know the conversion.</p></div></div></div>
+                <div class="grid"><div class="field"><label for="unweighted-gpa">Unweighted GPA</label><input id="unweighted-gpa" type="number" step="0.01" min="0" max="5" placeholder="e.g. 3.82"><p class="field-help">Used first when comparing academic preparation.</p></div><div class="field"><label for="weighted-gpa">Weighted GPA</label><input id="weighted-gpa" type="number" step="0.01" min="0" max="6" placeholder="e.g. 4.20"><p class="field-help">Use your school's GPA scale.</p></div></div>
+                <div class="grid" style="margin-top:16px"><div class="field"><label for="gpa-scale">Weighted GPA scale</label><select id="gpa-scale"><option value="">Undecided</option><option value="4.0">4.0 scale</option><option value="4.3">4.3 scale</option><option value="5.0">5.0 scale</option><option value="other">Other / not applicable</option></select></div><div class="field"><label for="curriculum">Curriculum</label><select id="curriculum"><option value="">Not added</option><option value="AP">AP / US curriculum</option><option value="IB">IB</option><option value="A-Level">A-Level</option><option value="国内普高">Chinese national curriculum</option><option value="其他">Other international curriculum</option></select></div></div>
+                <div class="hint-box">GPA targets are comparison points, not admission cutoffs. If your school does not report GPA, use curriculum, AP and transcript information.</div>
+            </section>
+            <section class="card" id="ap-card">
+                <div class="card-head"><div class="card-title"><span class="number">3</span><div><h2>AP course records</h2><p>Add completed, current, planned and self-study AP courses.</p></div></div><div class="ap-summary"><span class="pill" id="ap-total">0 recorded</span><span class="pill" id="ap-related">0 to match</span></div></div>
+                <div class="ap-list" id="ap-list"></div><button class="add-button" type="button" id="add-ap">+ Add AP course</button>
+                <div class="hint-box">Course status and score source are separate. Estimated scores support planning and do not count as earned results.</div>
+            </section>
+            <section class="card" id="tests-card">
+                <div class="card-head"><div class="card-title"><span class="number">4</span><div><h2>Tests &amp; English</h2><p>Official results support requirements checks. Mock and estimated results support preparation plans.</p></div></div></div>
+                <div class="subsection" style="padding-top:0;margin-top:0;border-top:0"><h3>SAT / ACT</h3><div class="grid-3"><div class="field"><label for="sat-act-type">Test</label><select id="sat-act-type"><option value="SAT">SAT</option><option value="ACT">ACT</option></select></div><div class="field"><label for="sat-score-source">Score source</label><select id="sat-score-source"><option value="">Not taken</option><option value="official">Official</option><option value="mock">Mock</option><option value="estimated">Estimated</option><option value="planned">Planned</option></select></div><div class="field"><label for="sat-test-date">Test / planned date</label><input id="sat-test-date" type="month"></div></div><div class="grid-3" style="margin-top:16px"><div class="field"><label for="sat-act-score">Total / composite</label><input id="sat-act-score" type="number" placeholder="SAT, e.g. 1450"></div><div class="field"><label id="sat-verbal-label" for="sat-verbal">Reading &amp; writing</label><input id="sat-verbal" type="number" placeholder="Optional"></div><div class="field"><label id="sat-math-label" for="sat-math">Math</label><input id="sat-math" type="number" placeholder="Optional"></div></div></div>
+                <div class="subsection"><h3>English proficiency</h3><div class="grid-3"><div class="field"><label for="language-test-type">Test</label><select id="language-test-type"><option value="托福">TOEFL iBT</option><option value="雅思">IELTS Academic</option><option value="多邻国">Duolingo English Test</option></select></div><div class="field"><label for="language-score-source">Score source</label><select id="language-score-source"><option value="">Not taken</option><option value="official">Official</option><option value="mock">Mock</option><option value="estimated">Estimated</option><option value="planned">Planned</option></select></div><div class="field"><label for="language-test-date">Test / planned date</label><input id="language-test-date" type="month"></div></div><div class="grid" style="margin-top:16px"><div class="field" id="language-score-scale-wrap"><label for="language-score-scale">TOEFL scale</label><select id="language-score-scale"><option value="legacy120">Before Jan 21, 2026: 0–120</option><option value="new6">From Jan 21, 2026: 1–6</option></select></div><div class="field"><label for="language-variant">Test version</label><select id="language-variant"></select><p class="field-help" id="language-variant-help">Choose the version on your score report; acceptance varies by university.</p></div></div><div class="grid" style="margin-top:16px"><div class="field"><label id="language-total-label" for="language-test-score">Total score</label><input id="language-test-score" type="number" step="0.5" placeholder="TOEFL, e.g. 105"></div><div class="field"><label for="language-target">Next target score (optional)</label><input id="language-target" type="number" step="0.5" placeholder="e.g. 105"></div></div><div class="grid-3" style="margin-top:16px"><div class="field"><label for="language-reading">Reading</label><input id="language-reading" type="number" step="0.5" placeholder="Optional"></div><div class="field"><label for="language-listening">Listening</label><input id="language-listening" type="number" step="0.5" placeholder="Optional"></div><div class="field"><label for="language-speaking">Speaking</label><input id="language-speaking" type="number" step="0.5" placeholder="Optional"></div></div><div class="grid" style="margin-top:16px"><div class="field"><label for="language-writing">Writing</label><input id="language-writing" type="number" step="0.5" placeholder="Optional"></div></div><p class="field-help" id="language-help">TOEFL section scores use 0–30. You can start with a mock total only.</p><div class="source-note" id="test-source-note" hidden>This is not an official result. It supports planning; university requirements still need official results or a confirmed waiver.</div></div>
+            </section>
+            <section class="card" id="context-card">
+                <div class="card-head"><div class="card-title"><span class="number">5</span><div><h2>Background &amp; experience</h2><p>Add context for university requirements, activities and essays.</p></div></div></div>
+                <div class="grid"><div class="field"><label for="english-medium-years">Years taught in English</label><select id="english-medium-years"><option value="">Undecided</option><option value="0">0 years</option><option value="1">Less than 2 years</option><option value="2">2 years</option><option value="3">3 years</option><option value="4">4+ years</option></select><p class="field-help">Some universities may offer a waiver. Confirm their policy and required school evidence.</p></div><div class="field"><label for="financial-aid">Need-based financial aid</label><select id="financial-aid"><option value="">Undecided</option><option value="yes">Yes, include aid and budget policies</option><option value="no">No, not currently</option></select></div></div><label class="check-item" style="margin-top:12px"><input id="primary-english-instruction" type="checkbox"><span>My school's main teaching language is English. Check each university's waiver policy.</span></label>
+                <div class="subsection"><h3>Application materials</h3><p class="field-help">Mark materials you have started preparing. This does not indicate university approval.</p><div class="check-grid"><label class="check-item"><input id="material-graded-written-paper" type="checkbox"><span>Graded English writing sample and teacher comments</span></label><label class="check-item"><input id="material-caltech-foundations" type="checkbox"><span>Caltech foundations checked: math, calculus, physics and chemistry</span></label><label class="check-item"><input id="material-transcript" type="checkbox"><span>School transcript / School Report available</span></label><label class="check-item"><input id="material-teacher-recommendations" type="checkbox"><span>Core-subject teacher recommenders identified</span></label></div></div>
+                <div class="subsection"><h3>Main activity</h3><div class="grid"><div class="field"><label for="activity-type">Activity type</label><select id="activity-type"><option value="科研项目">Research</option><option value="竞赛">Competition</option><option value="夏校">Summer school</option><option value="课外活动">Extracurricular</option><option value="学术项目">Academic project</option><option value="志愿服务">Volunteering</option></select></div><div class="field"><label for="activity-hours">Time commitment</label><input id="activity-hours" placeholder="e.g. 4 hours a week for 18 months"></div></div><div class="field" style="margin-top:16px"><label for="activity-desc">Activity description</label><textarea id="activity-desc" placeholder="Describe your role, work, results and next steps. You can add more later."></textarea></div></div>
+            </section>
+        </form>
+        <aside class="side-card"><h3>Profile checklist</h3><ul class="side-list" id="checklist"></ul><button class="save-button" type="button" id="save-profile">Save &amp; update matches</button><p class="side-note">Saved details are shared across Dashboard, Matches and AI Planner. Unsaved browser drafts do not replace your saved profile.</p></aside></div>
     </div>
-
-    <div class="form-step active">
-        <label>当前年级</label>
-        <select id="grade">
-            <option value="9年级上">9年级上</option>
-            <option value="9年级下">9年级下</option>
-            <option value="10年级上">10年级上</option>
-            <option value="10年级下">10年级下</option>
-            <option value="11年级上">11年级上</option>
-            <option value="11年级下">11年级下</option>
-            <option value="12年级上">12年级上</option>
-            <option value="12年级下">12年级下</option>
-        </select>
-
-        <label>目标国家 / 地区</label>
-        <select id="target-country">
-            <option value="美国">美国</option>
-            <option value="英国">英国</option>
-            <option value="加拿大">加拿大</option>
-            <option value="中国香港">中国香港</option>
-        </select>
-
-        <label>目标专业方向</label>
-        <input id="major" placeholder="例如：计算机 / 商科 / 生物 / 工程">
-    </div>
-
-    <div class="form-step">
-        <label>加权 GPA</label>
-        <input id="weighted-gpa" type="number" step="0.01" placeholder="例如：4.20">
-
-        <label>未加权 GPA</label>
-        <input id="unweighted-gpa" type="number" step="0.01" placeholder="例如：3.80">
-
-        <p class="hint">Demo阶段先填当前整体GPA，后面再升级为多学期GPA。</p>
-    </div>
-
-    <div class="form-step">
-        <label>AP 课程 1</label>
-        <input id="ap-course-1" placeholder="例如：AP Calculus BC">
-
-        <label>目标/已出分数</label>
-        <select id="ap-score-1">
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-            <option value="0">暂未出分</option>
-        </select>
-
-        <label>AP 课程 2</label>
-        <input id="ap-course-2" placeholder="例如：AP Physics C">
-
-        <label>目标/已出分数</label>
-        <select id="ap-score-2">
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-            <option value="0">暂未出分</option>
-        </select>
-    </div>
-
-    <div class="form-step">
-        <label>SAT / ACT 类型</label>
-        <select id="sat-act-type">
-            <option value="SAT">SAT</option>
-            <option value="ACT">ACT</option>
-        </select>
-
-        <label>SAT / ACT 分数</label>
-        <input id="sat-act-score" type="number" placeholder="例如：1450">
-
-        <label>语言成绩</label>
-        <select id="language-test-type">
-            <option value="托福">托福</option>
-            <option value="雅思">雅思</option>
-            <option value="多邻国">多邻国</option>
-        </select>
-
-        <label>语言成绩分数</label>
-        <input id="language-test-score" type="number" placeholder="例如：105">
-    </div>
-
-    <div class="form-step">
-        <label>活动 / 背景类型</label>
-        <select id="activity-type">
-            <option value="科研项目">科研项目</option>
-            <option value="竞赛">竞赛</option>
-            <option value="夏校">夏校</option>
-            <option value="课外活动">课外活动</option>
-            <option value="学术项目">学术项目</option>
-        </select>
-
-        <label>活动描述</label>
-        <textarea id="activity-desc" placeholder="简单描述你的活动经历，例如：参加过数学建模、科研项目、志愿活动等"></textarea>
-    </div>
-
-    <div class="btn-row">
-        <button class="secondary" onclick="prevStep()" id="prev-btn">上一步</button>
-        <button class="primary" onclick="nextStep()" id="next-btn">下一步</button>
-    </div>
-</div>
-</main>
-</div>
-
-<script src="auth.js"></script>
-<script src="layout.js"></script>
+</main></div><datalist id="ap-course-options"></datalist><div class="toast" id="toast" role="status"></div>
+<script src="auth.js"></script><script src="layout.js"></script>
 <script>
-let currentStep = 0;
+const DRAFT_KEY = "ap_planner_profile_draft_v2";
+let apCourses = [];
+let serverProfile = null;
+let courseNames = [];
+const $ = id => document.getElementById(id);
+const inputValue = id => $(id).value.trim();
+const sourceText = { official:"正式出分", mock:"模考", estimated:"预估", planned:"计划考试" };
 
-const steps = document.querySelectorAll(".form-step");
-const title = document.getElementById("step-title");
-const subtitle = document.getElementById("step-subtitle");
-const progressFill = document.getElementById("progress-fill");
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-
-const titles = [
-    "Step 1 / 5 基础背调",
-    "Step 2 / 5 GPA 成绩",
-    "Step 3 / 5 AP 课程",
-    "Step 4 / 5 标化成绩",
-    "Step 5 / 5 活动背景"
-];
-
-const subtitles = [
-    "先填写你的年级、目标地区和专业方向，这是首次登录必须完成的画像基础。",
-    "填写你的当前GPA情况。",
-    "填写你已经学习或计划学习的AP课程。",
-    "填写SAT/ACT和语言成绩。",
-    "补充你的活动和背景信息。"
-];
-
-function updateStep() {
-    steps.forEach((step, index) => {
-        step.classList.toggle("active", index === currentStep);
-    });
-
-    title.textContent = titles[currentStep];
-    subtitle.textContent = subtitles[currentStep];
-    progressFill.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
-
-    prevBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
-    nextBtn.textContent = currentStep === steps.length - 1 ? "提交信息" : "下一步";
+function escapeHtml(value) { return String(value || "").replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char])); }
+function showToast(message) { const toast = $("toast"); toast.textContent = message; toast.classList.add("show"); window.clearTimeout(showToast.timer); showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 3000); }
+function validAp(course) { return course && course.course && course.course.trim(); }
+function defaultAp() { return { course:"", status:"planned", scoreSource:"estimated", score:"", examYear:"" }; }
+function renderApRows() {
+    if (!apCourses.length) apCourses = [defaultAp()];
+    $("ap-list").innerHTML = apCourses.map((item,index) => `<div class="ap-row" data-index="${index}"><div class="field course-field"><label>课程名称</label><input list="ap-course-options" data-key="course" value="${escapeHtml(item.course)}" placeholder="输入或选择，例如 AP Calculus BC"></div><div class="field"><label>学习状态</label><select data-key="status"><option value="completed" ${item.status === "completed" ? "selected" : ""}>已完成</option><option value="ongoing" ${item.status === "ongoing" ? "selected" : ""}>正在学习</option><option value="planned" ${item.status === "planned" ? "selected" : ""}>计划学习</option><option value="self_study" ${item.status === "self_study" ? "selected" : ""}>自学 / 仅考试</option></select></div><div class="field"><label>分数来源</label><select data-key="scoreSource"><option value="" ${!item.scoreSource ? "selected" : ""}>暂无分数</option><option value="official" ${item.scoreSource === "official" ? "selected" : ""}>正式出分</option><option value="mock" ${item.scoreSource === "mock" ? "selected" : ""}>模考</option><option value="estimated" ${item.scoreSource === "estimated" ? "selected" : ""}>预估</option></select></div><div class="field"><label>分数 / 年份</label><input data-key="score" type="number" min="0" max="5" value="${escapeHtml(item.score)}" placeholder="0–5"><input data-key="examYear" type="number" min="2025" max="2035" value="${escapeHtml(item.examYear)}" placeholder="考试年" style="margin-top:6px"></div><div class="remove-cell"><button class="icon-button" type="button" data-remove="${index}" aria-label="删除此课程">×</button></div></div>`).join("");
+    updateApSummary();
 }
-
-function nextStep() {
-    if (currentStep < steps.length - 1) {
-        currentStep++;
-        updateStep();
-    } else {
-        submitProfile();
-    }
-}
-
-function prevStep() {
-    if (currentStep > 0) {
-        currentStep--;
-        updateStep();
-    }
-}
-
-function collectProfileData() {
-    return {
-        grade: document.getElementById("grade").value,
-        targetCountry: document.getElementById("target-country").value,
-        major: document.getElementById("major").value,
-        weightedGpa: document.getElementById("weighted-gpa").value,
-        unweightedGpa: document.getElementById("unweighted-gpa").value,
-        apCourses: [
-            {
-                course: document.getElementById("ap-course-1").value,
-                score: document.getElementById("ap-score-1").value
-            },
-            {
-                course: document.getElementById("ap-course-2").value,
-                score: document.getElementById("ap-score-2").value
-            }
-        ],
-        satAct: {
-            type: document.getElementById("sat-act-type").value,
-            score: document.getElementById("sat-act-score").value
-        },
-        languageTest: {
-            type: document.getElementById("language-test-type").value,
-            score: document.getElementById("language-test-score").value
-        },
-        activity: {
-            type: document.getElementById("activity-type").value,
-            description: document.getElementById("activity-desc").value
-        }
-    };
-}
-
-function fillProfileForm(profile) {
-    if (!profile) {
-        return;
-    }
-
-    document.getElementById("grade").value = profile.grade || "9年级上";
-    document.getElementById("target-country").value = profile.targetCountry || "美国";
-    document.getElementById("major").value = profile.major || "";
-    document.getElementById("weighted-gpa").value = profile.weightedGpa || "";
-    document.getElementById("unweighted-gpa").value = profile.unweightedGpa || "";
-
-    const apCourses = profile.apCourses || [];
-    if (apCourses[0]) {
-        document.getElementById("ap-course-1").value = apCourses[0].course || "";
-        document.getElementById("ap-score-1").value = apCourses[0].score || "5";
-    }
-    if (apCourses[1]) {
-        document.getElementById("ap-course-2").value = apCourses[1].course || "";
-        document.getElementById("ap-score-2").value = apCourses[1].score || "5";
-    }
-
-    if (profile.satAct) {
-        document.getElementById("sat-act-type").value = profile.satAct.type || "SAT";
-        document.getElementById("sat-act-score").value = profile.satAct.score || "";
-    }
-
-    if (profile.languageTest) {
-        document.getElementById("language-test-type").value = profile.languageTest.type || "托福";
-        document.getElementById("language-test-score").value = profile.languageTest.score || "";
-    }
-
-    if (profile.activity) {
-        document.getElementById("activity-type").value = profile.activity.type || "科研项目";
-        document.getElementById("activity-desc").value = profile.activity.description || "";
-    }
-}
-
-async function loadProfile(token) {
-    try {
-        const response = await fetch(`${AUTH_BASE_URL}/api/profile/me`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-        const result = await response.json();
-
-        if (result.code === 200 && result.data) {
-            fillProfileForm(result.data);
-            localStorage.setItem("profileData", JSON.stringify(result.data));
-        }
-    } catch (error) {
-        console.error("Profile加载失败：", error);
-    }
-}
-
-async function submitProfile() {
-    const profileData = collectProfileData();
-    const token = getToken();
-
-    if (!profileData.grade || !profileData.targetCountry || !profileData.major.trim()) {
-        alert("请先完成当前年级、目标地区和目标专业方向。");
-        currentStep = 0;
-        updateStep();
-        return;
-    }
-
-    if (!token) {
-        logout();
-        return;
-    }
-
-    nextBtn.textContent = "保存中...";
-    nextBtn.disabled = true;
-
-    try {
-        const response = await fetch(`${AUTH_BASE_URL}/api/profile/save`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(profileData)
-        });
-        const result = await response.json();
-
-        if (result.code !== 200) {
-            alert(result.msg || "保存失败，请稍后重试。");
-            return;
-        }
-
-        localStorage.setItem("profileData", JSON.stringify(profileData));
-        alert("基础背调已完成，系统会开始生成你的申请画像。");
-        window.location.href = "dashboard.html";
-    } catch (error) {
-        alert("网络错误，请检查后端是否启动。");
-    } finally {
-        nextBtn.textContent = "提交信息";
-        nextBtn.disabled = false;
-    }
-}
-
-function goDashboard() {
-    window.location.href = "dashboard.html";
-}
-
-requireLogin((user, token) => {
-    renderAppLayout(user);
-    updateStep();
-    loadProfile(token);
-}, { requireProfile: false });
-</script>
-
-</body>
-</html>
+function updateApSummary() { const filled = apCourses.filter(validAp); const major = inputValue("major").toLowerCase(); const related = filled.filter(item => { const name = item.course.toLowerCase(); return (major.includes("计算机") || major.includes("computer")) && /(computer|calculus|statistics|physics)/.test(name) || (major.includes("生物") || major.includes("医")) && /(biology|chemistry|environmental|calculus)/.test(name) || (major.includes("工程") || major.includes("物理")) && /(physics|calculus|computer)/.test(name); }).length; $("ap-total").textContent = `${filled.length} 门已记录`; $("ap-related").textContent = major ? `${related} 门与方向相关` : "填写专业后匹配"; }
+function syncApFromDom() { document.querySelectorAll(".ap-row").forEach(row => { const item = apCourses[Number(row.dataset.index)]; row.querySelectorAll("[data-key]").forEach(control => item[control.dataset.key] = control.value); }); updateApSummary(); }
+function updateLanguageLabels() { const type = $("language-test-type").value; const scale = $("language-score-scale").value; const config = { "托福": [scale === "new6" ? "TOEFL iBT 总分（1–6）" : "TOEFL iBT 总分（0–120）", scale === "new6" ? "2026-01-21 起的 TOEFL 使用 1–6 分制；请按成绩报告填写各项。" : "TOEFL 小分范围为 0–30；如你只有模考总分，也可以先只填总分。"], "雅思": ["IELTS Academic 总分（0–9）", "IELTS 单项与总分可填 0–9，支持 0.5 分；总分与单项请按成绩报告填写。"], "多邻国": ["DET 总分（10–160）", "DET 可以录入总分及可用的小分；不同届次成绩报告字段可能不同，缺少的可留空。"] }; const variants = { "托福":[["standard","常规 TOEFL 单次成绩"],["home_edition","TOEFL iBT Home Edition"],["mybest","MyBest TOEFL"],["other","其他 / 不确定"]], "雅思":[["standard","IELTS Academic 常规考试"],["one_skill_retake","IELTS One Skill Retake"],["other","其他 / 不确定"]], "多邻国":[["standard","DET 常规成绩"],["other","其他 / 不确定"]] }; const previous = $("language-variant").value; $("language-variant").innerHTML = variants[type].map(([value,label]) => `<option value="${value}">${label}</option>`).join(""); if (variants[type].some(([value]) => value === previous)) $("language-variant").value = previous; $("language-score-scale-wrap").hidden = type !== "托福"; $("language-total-label").textContent = config[type][0]; $("language-help").textContent = config[type][1]; }
+function updateTestLabels() { const isSat = $("sat-act-type").value === "SAT"; $("sat-verbal-label").textContent = isSat ? "阅读与文法（200–800）" : "English / Reading（可选）"; $("sat-math-label").textContent = isSat ? "数学（200–800）" : "Math / Science（可选）"; $("sat-act-score").placeholder = isSat ? "SAT 例如 1450" : "ACT 例如 33"; }
+function updateSourceNote() { const sources = [$("sat-score-source").value, $("language-score-source").value]; $("test-source-note").hidden = !sources.some(source => source && source !== "official"); }
+function valueOrUndefined(value) { return value === "" ? undefined : value; }
+function collectProfileData() { syncApFromDom(); return { grade: $("grade").value, targetCountry: $("target-country").value, major: inputValue("major"), weightedGpa: valueOrUndefined(inputValue("weighted-gpa")), unweightedGpa: valueOrUndefined(inputValue("unweighted-gpa")), apCourses: apCourses.filter(validAp).map(item => ({ course:item.course.trim(), status:item.status || "planned", scoreSource:item.scoreSource || "", score:valueOrUndefined(item.score), examYear:valueOrUndefined(item.examYear) })), satAct: { type:$("sat-act-type").value, scoreSource:$("sat-score-source").value, score:valueOrUndefined(inputValue("sat-act-score")), verbal:valueOrUndefined(inputValue("sat-verbal")), math:valueOrUndefined(inputValue("sat-math")), testDate:valueOrUndefined($("sat-test-date").value) }, languageTest: { type:$("language-test-type").value, scoreScale:$("language-score-scale").value, variant:$("language-variant").value, scoreSource:$("language-score-source").value, score:valueOrUndefined(inputValue("language-test-score")), targetScore:valueOrUndefined(inputValue("language-target")), reading:valueOrUndefined(inputValue("language-reading")), listening:valueOrUndefined(inputValue("language-listening")), speaking:valueOrUndefined(inputValue("language-speaking")), writing:valueOrUndefined(inputValue("language-writing")), testDate:valueOrUndefined($("language-test-date").value) }, activity: { type:$("activity-type").value, description:inputValue("activity-desc"), hours:valueOrUndefined(inputValue("activity-hours")) }, academicContext: { graduationYear:valueOrUndefined(inputValue("graduation-year")), gpaScale:$("gpa-scale").value, curriculum:$("curriculum").value }, applicationContext: { applicationRound:$("application-round").value, englishMediumYears:$("english-medium-years").value, primaryEnglishInstruction:$("primary-english-instruction").checked, financialAidNeeded:$("financial-aid").value, materials: { graded_written_paper:$("material-graded-written-paper").checked, caltech_foundations:$("material-caltech-foundations").checked, transcript:$("material-transcript").checked, teacher_recommendations:$("material-teacher-recommendations").checked } } }; }
+function updateReadiness() { const data = collectProfileData(); const checks = [{ label:"申请方向", done:!!(data.grade && data.targetCountry && data.major) }, { label:"校内成绩", done:!!(data.unweightedGpa || data.weightedGpa) }, { label:"AP 课程", done:data.apCourses.length > 0 }, { label:"正式或模拟标化", done:!!(data.satAct.score || data.languageTest.score) }, { label:"英语考试小分 / 英语授课背景", done:!!(data.applicationContext.englishMediumYears || data.languageTest.reading || data.languageTest.listening || data.languageTest.speaking || data.languageTest.writing) }, { label:"活动经历", done:!!data.activity.description }]; const complete = checks.filter(item => item.done).length; const percent = Math.round(complete / checks.length * 100); $("readiness-number").textContent = `${percent}%`; $("readiness-fill").style.width = `${percent}%`; $("readiness-copy").textContent = complete === checks.length ? "档案已具备较完整的匹配信息；仍请在申请季复核学校官网政策。" : `已完成 ${complete}/${checks.length} 项。优先补齐黄色状态的字段。`; $("checklist").innerHTML = checks.map(item => `<li><span class="dot ${item.done ? "done" : "pending"}"></span><span>${item.label}${item.done ? " · 已记录" : " · 建议补充"}</span></li>`).join(""); }
+function saveDraft() { try { localStorage.setItem(DRAFT_KEY, JSON.stringify(collectProfileData())); $("save-status").textContent = "有未保存修改 · 已暂存到本机浏览器"; } catch (error) { console.warn("无法暂存草稿", error); } updateReadiness(); }
+function setValue(id, value) { if (value !== undefined && value !== null) $(id).value = value; }
+function fillProfileForm(profile) { const academic = profile.academicContext || {}; const application = profile.applicationContext || {}; const materials = application.materials || {}; setValue("grade", profile.grade || "9年级上"); setValue("target-country", profile.targetCountry || "美国"); setValue("major", profile.major || ""); setValue("weighted-gpa", profile.weightedGpa); setValue("unweighted-gpa", profile.unweightedGpa); setValue("graduation-year", academic.graduationYear); setValue("gpa-scale", academic.gpaScale); setValue("curriculum", academic.curriculum); setValue("application-round", application.applicationRound); setValue("english-medium-years", application.englishMediumYears); setValue("financial-aid", application.financialAidNeeded); $("primary-english-instruction").checked = !!application.primaryEnglishInstruction; $("material-graded-written-paper").checked = !!materials.graded_written_paper; $("material-caltech-foundations").checked = !!materials.caltech_foundations; $("material-transcript").checked = !!materials.transcript; $("material-teacher-recommendations").checked = !!materials.teacher_recommendations; apCourses = Array.isArray(profile.apCourses) && profile.apCourses.length ? profile.apCourses.map(item => ({ ...defaultAp(), ...item })) : [defaultAp()]; const sat = profile.satAct || {}; setValue("sat-act-type", sat.type || "SAT"); setValue("sat-score-source", sat.scoreSource || (sat.score ? "official" : "")); setValue("sat-act-score", sat.score); setValue("sat-verbal", sat.verbal); setValue("sat-math", sat.math); setValue("sat-test-date", sat.testDate); const language = profile.languageTest || {}; setValue("language-test-type", language.type || "托福"); setValue("language-score-scale", language.scoreScale || "legacy120"); updateLanguageLabels(); setValue("language-variant", language.variant || "standard"); setValue("language-score-source", language.scoreSource || (language.score ? "official" : "")); setValue("language-test-score", language.score); setValue("language-target", language.targetScore); setValue("language-reading", language.reading); setValue("language-listening", language.listening); setValue("language-speaking", language.speaking); setValue("language-writing", language.writing); setValue("language-test-date", language.testDate); const activity = profile.activity || {}; setValue("activity-type", activity.type || "科研项目"); setValue("activity-desc", activity.description); setValue("activity-hours", activity.hours); renderApRows(); updateLanguageLabels(); updateTestLabels(); updateSourceNote(); updateReadiness(); }
+async function loadCourseNames() { try { const response = await fetch(`${AUTH_BASE_URL}/api/courses`); const result = await response.json(); courseNames = (result.data?.courses || []).map(course => course.name).filter(Boolean); $("ap-course-options").innerHTML = courseNames.map(name => `<option value="${escapeHtml(name)}"></option>`).join(""); } catch (error) { console.warn("AP课程库加载失败", error); } }
+async function loadProfile(token) { try { const response = await fetch(`${AUTH_BASE_URL}/api/profile/me`, { headers:{ Authorization:`Bearer ${token}` } }); const result = await response.json(); serverProfile = result.code === 200 ? result.data : {}; fillProfileForm(serverProfile); const draft = localStorage.getItem(DRAFT_KEY); if (draft) { try { const draftData = JSON.parse(draft); const serverStamp = JSON.stringify(serverProfile || {}); const draftStamp = JSON.stringify(draftData); if (draftStamp !== serverStamp && confirm("Restore the unsaved profile draft from this browser?")) { fillProfileForm(draftData); $("save-status").textContent = "已恢复未保存草稿 · 保存后才会同步到匹配系统"; } else { localStorage.removeItem(DRAFT_KEY); } } catch (_) { localStorage.removeItem(DRAFT_KEY); } } $("save-status").textContent = "已读取服务器档案 · 修改后请保存"; } catch (error) { $("save-status").textContent = "读取失败 · 可继续填写并稍后保存"; showToast("档案读取失败，请确认后端服务已启动。"); } }
+function validate(data) { if (!data.major) return "请填写目标专业或偏好。"; const validateRange = (value,min,max,label) => { if (value !== undefined && (Number(value) < min || Number(value) > max)) return `${label}应在 ${min}–${max} 范围内。`; }; let error = validateRange(data.unweightedGpa,0,5,"未加权 GPA") || validateRange(data.weightedGpa,0,6,"加权 GPA"); if (error) return error; if (data.satAct.score) { error = data.satAct.type === "SAT" ? validateRange(data.satAct.score,400,1600,"SAT") : validateRange(data.satAct.score,1,36,"ACT"); if (error) return error; } const languageRange = data.languageTest.type === "托福" ? (data.languageTest.scoreScale === "new6" ? [1,6] : [0,120]) : { "雅思":[0,9], "多邻国":[10,160] }[data.languageTest.type]; if (data.languageTest.score && languageRange) return validateRange(data.languageTest.score,languageRange[0],languageRange[1],`${data.languageTest.type}总分`); if (data.apCourses.some(item => item.score !== undefined && (Number(item.score) < 0 || Number(item.score) > 5))) return "AP 分数应在 0–5 范围内。"; return ""; }
+async function submitProfile() { const profileData = collectProfileData(); const error = validate(profileData); if (error) { showToast(error); return; } const auth = await verifyToken(); if (!auth) { redirectToLogin(); return; } const token = auth.token; const button = $("save-profile"); button.disabled = true; button.textContent = "保存中…"; try { const response = await fetch(`${AUTH_BASE_URL}/api/profile/save`, { method:"POST", credentials:"same-origin", headers:{ "Content-Type":"application/json", ...authHeaders(token) }, body:JSON.stringify(profileData) }); const result = await response.json(); if (result.code !== 200) throw new Error(result.msg || "保存失败"); localStorage.setItem("profileData", JSON.stringify(profileData)); localStorage.removeItem(DRAFT_KEY); serverProfile = profileData; $("save-status").textContent = "已保存 · Dashboard、院校匹配与 AI 已同步"; showToast("档案已保存，匹配建议已更新。"); } catch (error) { showToast(error.message || "网络错误，请检查后端是否启动。"); } finally { button.disabled = false; button.textContent = "保存并更新匹配"; } }
+document.addEventListener("input", event => { if (event.target.closest("#profile-form")) { if (event.target.closest(".ap-row")) syncApFromDom(); saveDraft(); } });
+document.addEventListener("change", event => { if (event.target.closest("#profile-form")) { if (event.target.closest(".ap-row")) syncApFromDom(); if (["language-test-type","language-score-scale"].includes(event.target.id)) updateLanguageLabels(); if (["sat-act-type"].includes(event.target.id)) updateTestLabels(); if (["sat-score-source","language-score-source"].includes(event.target.id)) updateSourceNote(); saveDraft(); } });
+$("add-ap").addEventListener("click", () => { syncApFromDom(); apCourses.push(defaultAp()); renderApRows(); saveDraft(); document.querySelector(".ap-row:last-child input").focus(); });
+$("ap-list").addEventListener("click", event => { const index = event.target.dataset.remove; if (index === undefined) return; syncApFromDom(); apCourses.splice(Number(index),1); renderApRows(); saveDraft(); });
+$("save-profile").addEventListener("click", submitProfile);
+document.querySelectorAll(".section-nav button").forEach(button => button.addEventListener("click", () => $(button.dataset.target).scrollIntoView({ behavior:"auto", block:"start" })));
+requireLogin((user, token) => { renderAppLayout(user); loadCourseNames(); loadProfile(token); }, { requireProfile:false });
+</script></body></html>

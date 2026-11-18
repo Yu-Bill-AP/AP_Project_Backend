@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人设置 - AP Planner</title>
+    <title>Settings - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
         .content-wrap {
@@ -126,58 +126,62 @@
             }
         }
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-<body>
+<body data-notebook-page="settings">
 <header id="app-topbar" class="app-topbar"></header>
 <div class="app-shell">
 <aside id="app-sidebar" class="app-sidebar"></aside>
 <main class="page-content">
     <div class="content-wrap">
         <section class="page-header">
-            <h1>个人设置</h1>
-            <p>管理账号基础信息和登录密码。升学资料请在“个人信息完善”页面继续维护。</p>
+            <h1>Settings</h1>
+            <p>Manage your account and password. Application details are in Profile.</p>
         </section>
 
         <div class="settings-grid">
             <section class="card">
-                <h2>基础信息</h2>
-                <label>用户名</label>
+                <h2>Account details</h2>
+                <label>Name</label>
                 <input id="username" disabled>
 
-                <label>邮箱</label>
-                <input id="email" type="email" placeholder="请输入邮箱">
+                <label>Email</label>
+                <input id="email" type="email" placeholder="Email address">
 
-                <label>真实姓名</label>
-                <input id="name" placeholder="请输入真实姓名">
+                <label>Full name</label>
+                <input id="name" placeholder="Full name">
 
-                <label>当前年级</label>
+                <label>Current grade</label>
                 <select id="current-grade-term">
-                    <option value="9年级上">9年级上</option>
-                    <option value="9年级下">9年级下</option>
-                    <option value="10年级上">10年级上</option>
-                    <option value="10年级下">10年级下</option>
-                    <option value="11年级上">11年级上</option>
-                    <option value="11年级下">11年级下</option>
-                    <option value="12年级上">12年级上</option>
-                    <option value="12年级下">12年级下</option>
+                    <option value="9年级上">Grade 9 · Fall</option>
+                    <option value="9年级下">Grade 9 · Spring</option>
+                    <option value="10年级上">Grade 10 · Fall</option>
+                    <option value="10年级下">Grade 10 · Spring</option>
+                    <option value="11年级上">Grade 11 · Fall</option>
+                    <option value="11年级下">Grade 11 · Spring</option>
+                    <option value="12年级上">Grade 12 · Fall</option>
+                    <option value="12年级下">Grade 12 · Spring</option>
                 </select>
 
-                <button class="primary-btn" onclick="saveSettings()">保存基础信息</button>
+                <button class="primary-btn" onclick="saveSettings()">Save details</button>
                 <div id="settings-msg" class="message"></div>
             </section>
 
             <section class="card">
-                <h2>修改密码</h2>
-                <label>旧密码</label>
-                <input id="old-password" type="password" placeholder="请输入旧密码">
+                <h2>Change password</h2>
+                <label>Current password</label>
+                <input id="old-password" type="password" placeholder="Current password">
 
-                <label>新密码</label>
-                <input id="new-password" type="password" placeholder="至少8位">
+                <label>New password</label>
+                <input id="new-password" type="password" placeholder="At least 8 characters">
 
-                <label>确认新密码</label>
-                <input id="confirm-password" type="password" placeholder="再次输入新密码">
+                <label>Confirm new password</label>
+                <input id="confirm-password" type="password" placeholder="Repeat new password">
 
-                <button class="primary-btn" onclick="changePassword()">修改密码</button>
+                <button class="primary-btn" onclick="changePassword()">Change password</button>
                 <div id="password-msg" class="message"></div>
             </section>
         </div>

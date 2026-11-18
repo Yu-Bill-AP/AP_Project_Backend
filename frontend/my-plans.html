@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的规划 - AP Planner</title>
+    <title>Saved plans - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
         .content-wrap {
@@ -103,20 +103,24 @@
             font-size: 14px;
         }
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-<body>
+<body data-notebook-page="my-plans">
 <header id="app-topbar" class="app-topbar"></header>
 <div class="app-shell">
 <aside id="app-sidebar" class="app-sidebar"></aside>
 <main class="page-content">
     <div class="content-wrap">
         <section class="page-header">
-            <h1>我的规划</h1>
-            <p>查看 AI 规划对话记录，保留关键建议，方便后续继续完善申请方案。</p>
+            <h1>Saved plans</h1>
+            <p>Review your saved AI planning conversations.</p>
         </section>
 
         <section id="plans-list" class="plans-list">
-            <div class="empty">正在加载规划记录...</div>
+            <div class="empty">Loading saved plans...</div>
         </section>
     </div>
 </main>
@@ -187,7 +191,7 @@ async function loadPlans() {
 }
 
 async function deletePlan(planId) {
-    if (!confirm("确定删除这条规划记录吗？")) {
+    if (!confirm("Delete this saved plan?")) {
         return;
     }
 

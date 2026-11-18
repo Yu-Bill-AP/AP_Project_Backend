@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>背景库 - AP Planner</title>
+    <title>Portfolio - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
         .content-wrap {
@@ -123,48 +123,52 @@
             }
         }
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-<body>
+<body data-notebook-page="portfolio">
 <header id="app-topbar" class="app-topbar"></header>
 <div class="app-shell">
 <aside id="app-sidebar" class="app-sidebar"></aside>
 <main class="page-content">
     <div class="content-wrap">
         <section class="page-header">
-            <h1>背景库</h1>
-            <p>集中查看AP、课程兴趣、活动、竞赛、科研、志愿和夏校记录。对话页新增的信息也会进入这里。</p>
+            <h1>Portfolio</h1>
+            <p>Your courses, interests, activities, research and volunteering. New details from AI Planner appear here.</p>
         </section>
 
         <div class="portfolio-grid">
             <section>
                 <div class="card">
-                    <h2>AP与课程兴趣</h2>
+                    <h2>AP courses &amp; interests</h2>
                     <ul id="course-list" class="data-list">
-                        <li>正在加载课程记录...</li>
+                        <li>Loading course records...</li>
                     </ul>
                 </div>
 
                 <div class="card">
-                    <h2>背景经历</h2>
+                    <h2>Experience</h2>
                     <ul id="experience-list" class="data-list">
-                        <li>正在加载背景经历...</li>
+                        <li>Loading experience...</li>
                     </ul>
                 </div>
             </section>
 
             <aside>
                 <div class="card">
-                    <h2>画像标签</h2>
+                    <h2>Profile tags</h2>
                     <div id="profile-tags" class="tag-row">
-                        <span class="tag">加载中</span>
+                        <span class="tag">Loading...</span>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h2>快速同步</h2>
-                    <label class="field-label" for="quick-note">新增成绩或经历</label>
-                    <textarea id="quick-note" placeholder="例如：我新增了 AP Psychology 5分。或：我参加了心理学相关志愿活动。"></textarea>
-                    <button id="sync-btn" class="primary-btn" onclick="syncNote()">写入背景库</button>
+                    <h2>Quick update</h2>
+                    <label class="field-label" for="quick-note">New score or experience</label>
+                    <textarea id="quick-note" placeholder="e.g. I scored 5 in AP Psychology, or I joined a psychology volunteering project."></textarea>
+                    <button id="sync-btn" class="primary-btn" onclick="syncNote()">Update portfolio</button>
                     <div id="sync-msg" class="message"></div>
                 </div>
             </aside>

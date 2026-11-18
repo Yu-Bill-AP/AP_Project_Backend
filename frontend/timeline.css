@@ -1,0 +1,191 @@
+/* Keep the six tracks readable inside their own scrollable paper window. */
+body[data-notebook-page="timeline"] .board-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+body[data-notebook-page="timeline"] .board-navigation { display: flex; gap: 8px; flex-shrink: 0; }
+body[data-notebook-page="timeline"] .board-navigation button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    font-family: var(--hand-body);
+    font-size: 23px;
+}
+body[data-notebook-page="timeline"] .board-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 2px solid var(--black);
+    border-radius: 4px;
+    scrollbar-color: var(--blue) transparent;
+    scrollbar-width: thin;
+}
+body[data-notebook-page="timeline"] .board-scroll:focus-visible {
+    outline: 2px dashed var(--blue);
+    outline-offset: 4px;
+}
+body[data-notebook-page="timeline"] .board {
+    --axis-top: 118px;
+    --axis-span: 436px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 104px repeat(6, minmax(152px, 1fr));
+    min-width: 1016px;
+    height: 610px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+body[data-notebook-page="timeline"] .y-axis {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    border-right: 2px solid var(--black);
+    background-color: var(--paper);
+    background-image: var(--paper-pattern);
+    background-attachment: fixed;
+}
+body[data-notebook-page="timeline"] .y-title {
+    position: absolute;
+    top: 20px;
+    left: 13px;
+    color: var(--ink);
+    font-size: 13px;
+}
+body[data-notebook-page="timeline"] .time-label {
+    position: absolute;
+    left: 12px;
+    right: 13px;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+}
+body[data-notebook-page="timeline"] .time-label::after {
+    content: "";
+    position: absolute;
+    right: -17px;
+    top: 50%;
+    width: 7px;
+    border-top: 1px solid var(--black);
+}
+body[data-notebook-page="timeline"] .now { top: var(--axis-top); }
+body[data-notebook-page="timeline"] .month { top: calc(var(--axis-top) + var(--axis-span) * .28); }
+body[data-notebook-page="timeline"] .semester { top: calc(var(--axis-top) + var(--axis-span) * .58); }
+body[data-notebook-page="timeline"] .later { top: calc(var(--axis-top) + var(--axis-span) * .88); }
+body[data-notebook-page="timeline"] .axis-note {
+    position: absolute;
+    bottom: 17px;
+    left: 12px;
+    right: 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+body[data-notebook-page="timeline"] .lane {
+    grid-row: 1;
+    position: relative;
+    min-width: 0;
+    border-right: 1px dashed #cbd5db;
+}
+body[data-notebook-page="timeline"] .lane:last-child { border-right: 0; }
+body[data-notebook-page="timeline"] .lane-head {
+    position: absolute;
+    top: 18px;
+    left: 9px;
+    right: 9px;
+    text-align: center;
+}
+body[data-notebook-page="timeline"] .lane-code {
+    display: inline-grid;
+    place-items: center;
+    min-width: 37px;
+    min-height: 24px;
+    padding: 1px 7px;
+    font-size: 12px;
+}
+body[data-notebook-page="timeline"] .lane-name {
+    display: block;
+    margin-top: 7px;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.45;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+body[data-notebook-page="timeline"] .rail {
+    position: absolute;
+    top: var(--axis-top);
+    height: var(--axis-span);
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: currentColor;
+    opacity: .35;
+}
+body[data-notebook-page="timeline"] :is(.lane, .task-marker, .node).red { color: var(--red); }
+body[data-notebook-page="timeline"] :is(.lane, .task-marker, .node).orange { color: var(--orange); }
+body[data-notebook-page="timeline"] :is(.lane, .task-marker, .node).yellow { color: var(--yellow); }
+body[data-notebook-page="timeline"] :is(.lane, .task-marker, .node).green { color: var(--green); }
+body[data-notebook-page="timeline"] .task-marker {
+    position: absolute;
+    top: var(--axis-top);
+    left: 50%;
+    z-index: 1;
+    width: 12px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    background: var(--paper);
+    pointer-events: none;
+}
+body[data-notebook-page="timeline"] .node {
+    position: absolute;
+    top: calc(var(--axis-top) + 18px);
+    left: 50%;
+    z-index: 2;
+    width: calc(100% - 20px);
+    transform: translateX(-50%);
+    padding: 11px 10px;
+    background: var(--paper);
+    text-align: left;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+body[data-notebook-page="timeline"] .node::before { content: none; }
+body[data-notebook-page="timeline"] .node.active {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+}
+body[data-notebook-page="timeline"] .node b {
+    display: block;
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+body[data-notebook-page="timeline"] .node span {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+}
+body[data-notebook-page="timeline"] .node em {
+    display: block;
+    margin-top: 8px;
+    padding: 0;
+    color: var(--blue);
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1.45;
+}
+body[data-notebook-page="timeline"] .panel-top > div { min-width: 0; }
+body[data-notebook-page="timeline"] .window { white-space: normal; }

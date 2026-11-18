@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI规划 - AP Planner</title>
+    <title>AI Planner - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
         .content-wrap {
@@ -81,6 +81,35 @@
             background: white;
         }
 
+        .chat-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0 16px 16px;
+            background: white;
+            color: #5d6d7e;
+            font-size: 13px;
+        }
+
+        .search-toggle {
+            display: inline-flex;
+            align-items: center;
+            flex: 0 0 auto;
+            gap: 7px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .search-toggle input {
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+            margin: 0;
+            accent-color: #2f6f9f;
+        }
+        .ai-status { min-height: 20px; margin-left: auto; text-align: right; }
+
         textarea {
             resize: vertical;
             min-height: 72px;
@@ -138,6 +167,59 @@
             background: #e8f2fa;
         }
 
+        .weight-panel {
+            margin-bottom: 16px;
+            padding: 15px 17px;
+            background: #ffffff;
+            border: 1px solid #dfe9f1;
+            border-radius: 9px;
+        }
+
+        .weight-panel-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .weight-panel h2 {
+            margin: 0;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .weight-panel a {
+            color: #2f6f9f;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .weight-summary {
+            margin: 7px 0 10px;
+            color: #647789;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .weight-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .weight-chip {
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: #f1f4f7;
+            color: #5d6d7e;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .weight-chip.up { background: #edf8f1; color: #207a45; }
+        .weight-chip.down { background: #fff1f0; color: #b6382d; }
+
         @media (max-width: 800px) {
             .chat-input {
                 grid-template-columns: 1fr;
@@ -152,36 +234,55 @@
             }
         }
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-<body>
+<body data-notebook-page="ai-plan">
 <header id="app-topbar" class="app-topbar"></header>
 <div class="app-shell">
 <aside id="app-sidebar" class="app-sidebar"></aside>
 <main class="page-content">
     <div class="content-wrap">
         <section class="page-header">
-            <h1>AI规划</h1>
-            <p>围绕 AP 选课、GPA、标化、活动背景和院校申请进行专项对话。新成绩和经历会自动同步到Profile库。</p>
+            <h1>AI Planner</h1>
+            <p>Ask about courses, scores, activities and applications. New information can be synced to your profile.</p>
         </section>
 
         <div class="hint-list">
-            <button class="hint-btn" onclick="usePrompt('我现在的AP课程还需要补哪些？')">AP选课建议</button>
-            <button class="hint-btn" onclick="usePrompt('请根据我的Profile生成一份升学规划。')">生成规划报告</button>
-            <button class="hint-btn" onclick="usePrompt('我的活动背景应该怎么提升？')">活动背景提升</button>
-            <button class="hint-btn" onclick="usePrompt('我适合申请哪些层次的学校？')">院校层次判断</button>
-            <button class="hint-btn" onclick="usePrompt('我新增了 AP Calculus BC 5分，请更新我的规划。')">同步新成绩</button>
+            <button class="hint-btn" onclick="usePrompt('我现在的AP课程还需要补哪些？')">AP course advice</button>
+            <button class="hint-btn" onclick="usePrompt('请根据我的Profile生成一份升学规划。')">Generate a plan</button>
+            <button class="hint-btn" onclick="usePrompt('我的活动背景应该怎么提升？')">Activity advice</button>
+            <button class="hint-btn" onclick="usePrompt('我适合申请哪些层次的学校？')">University fit</button>
+            <button class="hint-btn" onclick="usePrompt('我新增了 AP Calculus BC 5分，请更新我的规划。')">Sync a score</button>
         </div>
+
+        <section class="weight-panel" aria-label="Personal course weights">
+            <div class="weight-panel-header">
+                <h2>Personal course weights</h2>
+                <a href="courses.html">Rate courses →</a>
+            </div>
+            <p id="weight-summary" class="weight-summary">Loading your ratings and course weights...</p>
+            <div id="weight-list" class="weight-list"></div>
+        </section>
 
         <section class="chat-card">
             <div id="chat-window" class="chat-window">
                 <div class="message assistant">
-                    <div class="bubble">你好，我是 AP Planner 的升学规划 AI 顾问。你可以问我 AP 选课、GPA、标化、活动背景、目标专业和院校匹配相关问题。你也可以直接告诉我新成绩或新活动，我会尝试写入Profile库并重新判断优先级。</div>
+                    <div class="bubble">Ask me about AP courses, GPA, tests, activities or university matching. Share a new score or activity to update your profile.</div>
                 </div>
             </div>
 
             <div class="chat-input">
-                <textarea id="chat-message" placeholder="例如：我想申请计算机专业，现在应该补哪些AP和活动？"></textarea>
-                <button id="send-btn" onclick="sendMessage()">发送</button>
+                <textarea id="chat-message" placeholder="e.g. Which AP courses and activities would help me prepare for computer science?"></textarea>
+                <button id="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+            <div class="chat-options">
+                <label class="search-toggle" for="web-search">
+                    <input id="web-search" type="checkbox"> Web search
+                </label>
+                <span id="ai-status" class="ai-status" role="status" aria-live="polite"></span>
             </div>
         </section>
     </div>
@@ -193,6 +294,38 @@
 <script>
 let currentToken = "";
 
+function renderWeightSnapshot(analysis) {
+    const personalization = (analysis && analysis.personalization) || {};
+    const weights = personalization.courseWeights || {};
+    document.getElementById("weight-summary").textContent =
+        personalization.summary || "尚未添加个人课程评价，当前使用基础选课权重。";
+    const strongest = Object.entries(weights)
+        .filter(([, item]) => Number(item.adjustment) !== 0)
+        .sort((a, b) => Math.abs(Number(b[1].adjustment)) - Math.abs(Number(a[1].adjustment)))
+        .slice(0, 8);
+    document.getElementById("weight-list").innerHTML = strongest.length
+        ? strongest.map(([course, item]) => {
+            const value = Number(item.adjustment);
+            return `<span class="weight-chip ${value > 0 ? "up" : "down"}" title="${escapeHtml((item.reasons || []).join("；"))}">
+                ${escapeHtml(course)} ${value > 0 ? "+" : ""}${escapeHtml(value)}
+            </span>`;
+        }).join("")
+        : '<span class="weight-chip">暂无个性化调整</span>';
+}
+
+async function loadWeightSnapshot(token) {
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/planning/analysis`, {
+            credentials: "same-origin",
+            headers: authHeaders(token)
+        });
+        const result = await response.json();
+        if (response.ok && result.code === 200) renderWeightSnapshot(result.data);
+    } catch (error) {
+        document.getElementById("weight-summary").textContent = "权重暂时无法同步，请稍后重试。";
+    }
+}
+
 function appendMessage(role, text) {
     const chatWindow = document.getElementById("chat-window");
     const message = document.createElement("div");
@@ -201,6 +334,7 @@ function appendMessage(role, text) {
     message.innerHTML = `<div class="bubble">${content}</div>`;
     chatWindow.appendChild(message);
     chatWindow.scrollTop = chatWindow.scrollHeight;
+    return message.querySelector(".bubble");
 }
 
 function escapeHtml(text) {
@@ -222,10 +356,57 @@ function usePrompt(text) {
     document.getElementById("chat-message").value = text;
 }
 
+async function consumeAIStream(response) {
+    const status = document.getElementById("ai-status");
+    const chatWindow = document.getElementById("chat-window");
+    const bubble = appendMessage("assistant", "");
+    const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+    let buffer = "";
+    let completed = false;
+
+    try {
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += value;
+            const frames = buffer.split("\n\n");
+            buffer = frames.pop();
+
+            for (const frame of frames) {
+                const eventName = frame.match(/^event:\s*(.+)$/m)?.[1];
+                const dataText = frame.match(/^data:\s*(.+)$/m)?.[1];
+                if (!eventName || !dataText) continue;
+                const data = JSON.parse(dataText);
+
+                if (eventName === "status") status.textContent = data.text;
+                if (eventName === "delta") bubble.textContent += data.text;
+                if (eventName === "reset") bubble.textContent = data.text;
+                if (eventName === "done") {
+                    completed = true;
+                    status.textContent = data.source === "local_fallback"
+                        ? "联网调用失败，已使用本地建议"
+                        : data.searched ? "已联网搜索" : "本次未实际搜索网页";
+                    if (!data.saved) status.textContent += " · 历史未保存";
+                    if (data.analysis) renderWeightSnapshot(data.analysis);
+                    if (data.detected_updates?.length) localStorage.removeItem("profileData");
+                }
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+        }
+    } finally {
+        reader.releaseLock();
+        bubble.innerHTML = formatPlanningText(bubble.textContent);
+    }
+
+    if (!completed) status.textContent = "连接中断，回答可能未保存";
+}
+
 async function sendMessage() {
     const input = document.getElementById("chat-message");
     const btn = document.getElementById("send-btn");
     const text = input.value.trim();
+    const webSearch = document.getElementById("web-search").checked;
+    const status = document.getElementById("ai-status");
 
     if (!text) {
         return;
@@ -235,6 +416,7 @@ async function sendMessage() {
     input.value = "";
     btn.disabled = true;
     btn.textContent = "生成中...";
+    status.textContent = webSearch ? "准备联网分析…" : "正在生成回答…";
 
     try {
         const response = await fetch(`${AUTH_BASE_URL}/api/ai-chat`, {
@@ -243,30 +425,44 @@ async function sendMessage() {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${currentToken}`
             },
-            body: JSON.stringify({ message: text })
+            body: JSON.stringify({ message: text, web_search: webSearch })
         });
+        if (response.headers.get("content-type")?.includes("text/event-stream")) {
+            await consumeAIStream(response);
+            return;
+        }
         const result = await response.json();
 
         if (result.code !== 200) {
             appendMessage("assistant", result.msg || "AI暂时无法回答，请稍后重试。");
+            status.textContent = "请求未完成";
             return;
         }
 
         appendMessage("assistant", result.data.answer);
+        status.textContent = result.data.source === "local_fallback"
+            ? "API调用失败，已使用本地建议"
+            : result.data.source === "local_reject"
+                ? "问题超出升学规划范围" : "未启用联网搜索";
+        if (result.data.analysis) {
+            renderWeightSnapshot(result.data.analysis);
+        }
         if (result.data.detected_updates && result.data.detected_updates.length) {
             localStorage.removeItem("profileData");
         }
     } catch (error) {
         appendMessage("assistant", "网络错误，请检查后端服务是否启动。");
+        status.textContent = "请求失败";
     } finally {
         btn.disabled = false;
         btn.textContent = "发送";
     }
 }
 
-requireLogin((user, token) => {
+requireLogin(async (user, token) => {
     currentToken = token;
     renderAppLayout(user);
+    await loadWeightSnapshot(token);
 });
 </script>
 </body>

@@ -1,7 +1,11 @@
-const AUTH_BASE_URL = "http://127.0.0.1:8000";
+const AUTH_BASE_URL = window.location.origin;
 
 function getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem("token") || "";
+}
+
+function authHeaders(token = getToken()) {
+    return token ? { "Authorization": `Bearer ${token}` } : {};
 }
 
 function clearAuth() {
@@ -25,9 +29,8 @@ function isProfilePage() {
 async function getOnboardingStatus(token) {
     try {
         const response = await fetch(`${AUTH_BASE_URL}/api/onboarding/status`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+            credentials: "same-origin",
+            headers: authHeaders(token)
         });
         const data = await response.json();
 
@@ -44,15 +47,10 @@ async function getOnboardingStatus(token) {
 async function verifyToken() {
     const token = getToken();
 
-    if (!token) {
-        return null;
-    }
-
     try {
         const response = await fetch(`${AUTH_BASE_URL}/api/user/info`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+            credentials: "same-origin",
+            headers: authHeaders(token)
         });
         const data = await response.json();
 
@@ -103,7 +101,24 @@ async function redirectIfLoggedIn() {
     }
 }
 
-function logout() {
+async function logout() {
+    try {
+        await fetch(`${AUTH_BASE_URL}/api/logout`, {
+            method: "POST",
+            credentials: "same-origin"
+        });
+    } catch (error) {
+        // 即使服务暂不可达，也要清理浏览器中的旧凭证。
+    }
     clearAuth();
     redirectToLogin();
+}
+
+function escapeHtml(text) {
+    return String(text || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }

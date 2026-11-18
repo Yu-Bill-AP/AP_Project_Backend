@@ -1,5 +1,4 @@
-// 你的后端地址，和你本地服务保持一致
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = window.location.origin;
 
 // 1. 测试后端连接
 async function checkHealth() {

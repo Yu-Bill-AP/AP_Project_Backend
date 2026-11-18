@@ -1,0 +1,3481 @@
+{
+  "catalogVersion": "us-2027-official-review-2026-11-18",
+  "checkedAt": "2026-11-18",
+  "defaultEntryYear": 2027,
+  "schoolCount": 41,
+  "schools": [
+    {
+      "name": "Princeton University",
+      "country": "美国",
+      "location": "Princeton, NJ",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 5",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "计算机": 100,
+        "工程": 94,
+        "人文社科": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application（QuestBridge 路径另见学校说明）",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "必交英文 graded written paper，原文及教师评语不可由其他语言翻译而来"
+      ],
+      "financialAidInternational": "国际生 need-blind；录取后满足经认定的全部经济需求，资助以需求为基础。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE"
+        ],
+        "officialSourceNote": "非英语母语且未满足至少 3 年英语主授课中学经历时须交考试；未公布统一最低分。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        }
+      },
+      "specialRequirements": [
+        {
+          "id": "graded_written_paper",
+          "label": "英文批改写作样本",
+          "detail": "提交原本以英文撰写并附英文教师评语的写作样本。",
+          "severity": "required"
+        }
+      ],
+      "officialSources": {
+        "application": "https://admission.princeton.edu/apply/application-checklist",
+        "international": "https://admission.princeton.edu/apply/international-students",
+        "testing": "https://admission.princeton.edu/apply/standardized-testing",
+        "english": "https://admission.princeton.edu/apply/international-students"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Fall 2027 仍可选；Fall 2028 起恢复 SAT/ACT 必交，现役军人有官网例外。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        },
+        {
+          "fromEntryYear": 2028,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Massachusetts Institute of Technology",
+      "country": "美国",
+      "location": "Cambridge, MA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 5",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "生物医学": 88,
+        "商科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "MIT First-Year Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：EA 11/1；RA 1/4；必需测试分别在 11/30、12/31 前完成。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "MIT 申请表及短文",
+        "各高中/大学成绩单与 Secondary School Report",
+        "2 封教师推荐；建议数学/科学 1 封及人文/社科/语言 1 封",
+        "SAT 或 ACT",
+        "February Updates & Notes（如适用）；Counselor 推荐信为可选"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE",
+          "Cambridge"
+        ],
+        "recommendedUnless": {
+          "englishMediumYears": 5,
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 90,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 120,
+          "PTE": 65,
+          "Cambridge": 185
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5.5
+          },
+          "雅思": 7.5,
+          "多邻国": 125,
+          "PTE": 70,
+          "Cambridge": 190
+        },
+        "officialSourceNote": "英语使用不足 5 年或家庭/学校不使用英语时强烈建议提交；英语考试最低分与建议分分列。正式考试成绩可自报，入学时核验；勿填模考或自行拼分。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://mitadmissions.org/apply/firstyear/deadlines-requirements/",
+        "international": "https://mitadmissions.org/apply/firstyear/tests-scores/",
+        "testing": "https://mitadmissions.org/apply/firstyear/tests-scores/",
+        "english": "https://mitadmissions.org/apply/firstyear/tests-scores/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Harvard University",
+      "country": "美国",
+      "location": "Cambridge, MA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 5",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "商科": 94,
+        "生物医学": 88,
+        "计算机": 82,
+        "艺术": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "required_sat_act_with_access_exceptions",
+      "englishPolicy": "not_required",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "SAT 或 ACT；测试不可及的特殊情况可依官网提交 AP、IB、A-level 或外部毕业考试"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {},
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://college.harvard.edu/admissions/apply/application-requirements",
+        "international": "https://college.harvard.edu/admissions/apply/international-applicants",
+        "testing": "https://college.harvard.edu/admissions/apply/application-requirements",
+        "english": "https://college.harvard.edu/admissions/apply/international-applicants"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "可及性例外需要说明；TOEFL/IELTS/DET 不可替代 SAT/ACT 要求。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Stanford University",
+      "country": "美国",
+      "location": "Stanford, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 5",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "计算机": 100,
+        "工程": 94,
+        "商科": 88,
+        "艺术": 82,
+        "人文社科": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：REA 11/1；RD 1/5；艺术作品集申请更早，分别为 10/15、12/5。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "not_required",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "SAT 或 ACT；申请可自报，入学前须核验正式成绩"
+      ],
+      "financialAidInternational": "国际生申请资助会影响录取审查；录取后满足经认定的需求，须在申请入学时声明资助需求。",
+      "englishRequirements": {},
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.stanford.edu/apply/first-year/index.html",
+        "international": "https://admission.stanford.edu/apply/international/index.html",
+        "testing": "https://admission.stanford.edu/apply/first-year/testing.html",
+        "english": "https://admission.stanford.edu/apply/international/index.html"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Yale University",
+      "country": "美国",
+      "location": "New Haven, CT",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "艺术": 94,
+        "生物医学": 88,
+        "计算机": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：SCEA 11/1；RD 1/2。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "SAT 或 ACT；AP/IB 不能单独替代当前 SAT/ACT 要求"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "Cambridge",
+          "多邻国"
+        ],
+        "officialSourceNote": "SAT/ACT 与英语要求分开；英语授课满 2 年可走豁免路径。所列英语分数为典型竞争力水平，不是最低分。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 2
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "Cambridge": 185,
+          "多邻国": 120
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.yale.edu/apply",
+        "international": "https://admissions.yale.edu/standardized-testing",
+        "testing": "https://admissions.yale.edu/standardized-testing",
+        "english": "https://admissions.yale.edu/standardized-testing"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Chicago",
+      "country": "美国",
+      "location": "Chicago, IL",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "商科": 94,
+        "计算机": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "not_required",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {},
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://collegeadmissions.uchicago.edu/apply/application/required-materials/",
+        "international": "https://collegeadmissions.uchicago.edu/apply/international-applicants/",
+        "testing": "https://collegeadmissions.uchicago.edu/apply/application/required-materials/",
+        "english": "https://collegeadmissions.uchicago.edu/apply/international-applicants/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 可选；若申请材料已展现英语能力，可不提交正式英语考试。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Duke University",
+      "country": "美国",
+      "location": "Durham, NC",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "工程": 94,
+        "商科": 88,
+        "人文社科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED 11/2；RD 1/4。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "Pratt 工程申请须有微积分课程；物理为强烈建议"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE",
+          "Cambridge"
+        ],
+        "recommendedUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 130,
+          "PTE": 70,
+          "Cambridge": 180
+        },
+        "officialSourceNote": "2026–27 SAT/ACT 可选；英语考试为建议项，列出的是学校期望成绩，不将未提交英语考试视为硬性阻断。"
+      },
+      "specialRequirements": [
+        {
+          "id": "duke_pratt_calculus",
+          "label": "Pratt 微积分准备",
+          "tracks": [
+            "工程"
+          ],
+          "detail": "申请 Pratt 工程学院时微积分课程为要求；需核对完整中学成绩单。",
+          "severity": "required"
+        }
+      ],
+      "officialSources": {
+        "application": "https://admissions.duke.edu/apply/",
+        "international": "https://admissions.duke.edu/apply/",
+        "testing": "https://admissions.duke.edu/apply/",
+        "english": "https://admissions.duke.edu/apply/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Johns Hopkins University",
+      "country": "美国",
+      "location": "Baltimore, MD",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "工程": 94,
+        "计算机": 88,
+        "人文社科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED I 11/1/2026；ED II、RD 1/2/2027。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "所有国际生提交 Certification of Finances；申请资助者须 CSS Profile"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "Cambridge"
+        ],
+        "recommendedUnless": {
+          "englishMediumYears": 3,
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 120,
+          "Cambridge": 185
+        },
+        "officialSourceNote": "英语考试建议而非必交；TOEFL 新制 5、IELTS 每项 7、DET 120 等为竞争力参考。SAT/ACT 对本科新生必交。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://apply.jhu.edu/how-to-apply/application-deadlines-requirements/",
+        "international": "https://apply.jhu.edu/international-applicants/",
+        "testing": "https://apply.jhu.edu/how-to-apply/application-deadlines-requirements/standardized-testing/",
+        "english": "https://apply.jhu.edu/international-applicants/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Pennsylvania",
+      "country": "美国",
+      "location": "Philadelphia, PA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "计算机": 94,
+        "工程": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED 11/1/2026；RD 1/5/2027。",
+      "testPolicy": "required_sat_act_with_access_exceptions",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common App / Coalition / QuestBridge 与 Penn 补充问题",
+        "高中成绩单、School Report、期中成绩（如有）",
+        "1 封 Counselor 推荐 + 1 封学科教师推荐；额外 1 封可选",
+        "SAT/ACT 或按困难说明申请 waiver",
+        "英语证明（若未满足豁免）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "未满足母语或至少 3 年英语主授课豁免时须交官方英语成绩；2026–27 仅接受 2025/4/1 起参加的考试。不收 IELTS OSR 或 TOEFL MyBest。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "notBeforeDate": "2025-04-01"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.upenn.edu/how-to-apply/first-year-applicants",
+        "international": "https://admissions.upenn.edu/how-to-apply/preparing-your-application/testing",
+        "testing": "https://admissions.upenn.edu/how-to-apply/preparing-your-application/testing",
+        "english": "https://admissions.upenn.edu/how-to-apply/preparing-your-application/testing",
+        "recommendations": "https://admissions.upenn.edu/how-to-apply/preparing-your-application/letters-of-recommendation"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 必交；存在困难时可在申请中提交 waiver，已考者仍须报告。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "California Institute of Technology",
+      "country": "美国",
+      "location": "Pasadena, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 10",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "生物医学": 88
+      },
+      "programNote": "Caltech 对数学、微积分、物理和化学准备有明确要求；系统会在专业匹配之外提示逐项课程核验。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：REA 11/1/2026；RD 1/4/2027。",
+      "testPolicy": "required_sat_act_with_access_exceptions",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表及 Caltech 补充问题",
+        "学校直接发送的成绩单、预测成绩及必要翻译",
+        "2 封教师推荐：STEM 1 封 + 人文社科 1 封（部分课程体系有例外）",
+        "SAT/ACT；已参加的 AP/IB 考试须全部报告",
+        "数学含微积分、物理、化学、英语及社科基础；课程不可及时按官网替代证明路径"
+      ],
+      "financialAidInternational": "国际生 need-aware；满足获录学生经认定的全部需求，通常须在首次申请时一并申请资助。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "英语非母语且中学非英语主授课者须交；总分与每项最低分独立核验。英语授课非母语者仍强烈建议提交。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "primaryEnglishInstruction": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 130
+        },
+        "minimumEach": {
+          "托福": {
+            "legacy120": 25,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 130
+        }
+      },
+      "specialRequirements": [
+        {
+          "id": "caltech_foundations",
+          "label": "Caltech 课程基础",
+          "detail": "4 年数学含微积分、1 年物理、1 年化学、4 年英语、2 年社科；特定课程体系或不可及情况按官网例外逐项核验。",
+          "severity": "required"
+        }
+      ],
+      "officialSources": {
+        "application": "https://www.admissions.caltech.edu/apply/first-year-applicants/international-applicants",
+        "international": "https://www.admissions.caltech.edu/apply/first-year-applicants/international-applicants",
+        "testing": "https://www.admissions.caltech.edu/apply/first-year-applicants/standardized-tests",
+        "english": "https://www.admissions.caltech.edu/apply/first-year-applicants/international-applicants"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Northwestern University",
+      "country": "美国",
+      "location": "Evanston, IL",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 15",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "商科": 94,
+        "人文社科": 88,
+        "艺术": 82,
+        "计算机": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir / QuestBridge",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application / Coalition / QuestBridge 与 Northwestern 补充问题",
+        "高中成绩单与 School Report",
+        "1 封学校 Counselor 推荐 + 1 封教师推荐",
+        "英语成绩（适用时）；SAT/ACT 可选",
+        "Bienen 音乐、ISP、MMSS 等项目有独立补充申请；Common App 个人主文书可选"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "国际生英语背景豁免须单独确认；无统一最低分，不接受 TOEFL MyBest，英语成绩须由机构正式发送。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest",
+            "itp_plus"
+          ]
+        },
+        "manualExemptionReview": true
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.northwestern.edu/apply/requirements.html",
+        "international": "https://admissions.northwestern.edu/faqs/international-applicants/",
+        "testing": "https://admissions.northwestern.edu/faqs/standardized-testing-policy/",
+        "english": "https://admissions.northwestern.edu/faqs/international-applicants/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "全校 SAT/ACT 可选，ISP、MMSS 等独立项目仍须查项目要求。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Cornell University",
+      "country": "美国",
+      "location": "Ithaca, NY",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "商科": 88,
+        "生物医学": 82,
+        "人文社科": 76
+      },
+      "programNote": "学院/专业不同，Cornell 的课程前置和材料要求可能不同。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED 11/1；RD 1/2；其他材料分别于 11/13、1/19 前提交。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "SAT 或 ACT",
+        "学院指定补充文书、作品集或设计材料（适用时）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "Cambridge"
+        ],
+        "officialSourceNote": "官网将旧制 TOEFL 100、IELTS 7.5、DET 130、Cambridge 191 称为最低竞争力参考；TOEFL 新制最低 5、建议 5.5。英语主授课至少 4 年等路径可申请豁免。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 4
+        },
+        "minimumTotal": {
+          "托福": {
+            "new6": 5
+          }
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5.5
+          },
+          "雅思": 7.5,
+          "多邻国": 130,
+          "Cambridge": 191
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.cornell.edu/how-to-apply/first-year-applicants",
+        "international": "https://admissions.cornell.edu/resources/submit-english-language-proficiency",
+        "testing": "https://admissions.cornell.edu/how-to-apply/first-year-applicants",
+        "english": "https://admissions.cornell.edu/resources/submit-english-language-proficiency"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Brown University",
+      "country": "美国",
+      "location": "Providence, RI",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "计算机": 94,
+        "生物医学": 88,
+        "艺术": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED 11/1；RD 1/5。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "SAT 或 ACT",
+        "ED 须首季成绩；期中报告按官网提交；BS/PLME 推荐信应含数学或科学教师"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE",
+          "Cambridge"
+        ],
+        "recommendedUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 105,
+            "new6": 5.5
+          },
+          "雅思": 8,
+          "多邻国": 130,
+          "PTE": 75,
+          "Cambridge": 191
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "indicator"
+          ]
+        },
+        "officialSourceNote": "英语考试为强烈建议；105/5.5 TOEFL、IELTS 8 等是官网通常期望值，不作为统一申请硬门槛。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.brown.edu/first-year/application-checklist",
+        "international": "https://admission.brown.edu/ask/standardized-tests",
+        "testing": "https://admission.brown.edu/ask/standardized-tests",
+        "english": "https://admission.brown.edu/ask/standardized-tests"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Dartmouth College",
+      "country": "美国",
+      "location": "Hanover, NH",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "计算机": 94,
+        "商科": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_flexible",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "强烈鼓励同龄人推荐信（不是必交）",
+        "美国高中申请者须 SAT/ACT；美国境外高中可用 3 门 AP、IB、A-level 或同等国家考试满足测试要求"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "Cambridge"
+        ],
+        "officialSourceNote": "未满足至少 2 年英语授课等豁免时必交；无最低分，成功申请者常见成绩仅作参考。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 2
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 135,
+          "Cambridge": 185
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest",
+            "essentials"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.dartmouth.edu/apply-dartmouth",
+        "international": "https://admissions.dartmouth.edu/glossary-question/if-english-not-my-first-language-am-i-required-submit-language-proficiency-test",
+        "testing": "https://admissions.dartmouth.edu/glossary-question/i-attend-school-outside-us-do-i-have-submit-act-or-sat",
+        "english": "https://admissions.dartmouth.edu/glossary-question/if-english-not-my-first-language-am-i-required-submit-language-proficiency-test"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "按就读学校所在地分流：美国高中须 SAT/ACT；境外高中有 AP/IB/A-level/国家考试替代路径。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_flexible"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Vanderbilt University",
+      "country": "美国",
+      "location": "Nashville, TN",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "工程": 94,
+        "人文社科": 88,
+        "商科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition / QuestBridge",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "Cambridge",
+          "LanguageCert",
+          "多邻国"
+        ],
+        "officialSourceNote": "第一语言或授课语言为英语，或 SAT EBRW >630 / ACT English >26 等可豁免。英语 5 TOEFL、IELTS 7、DET 130 等为建议最低分，非统一硬门槛；TOEFL Essentials 使用独立评分制。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "primaryEnglishInstruction": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "new6": 5
+          },
+          "雅思": 7,
+          "Cambridge": 185,
+          "LanguageCert": 75,
+          "多邻国": 130
+        },
+        "alternativeTestSections": {
+          "satVerbal": 631,
+          "actEnglish": 27
+        },
+        "variantRules": {
+          "托福": {
+            "essentials": {
+              "recommendedTotal": 10.5
+            }
+          }
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.vanderbilt.edu/apply/first-year-process/",
+        "international": "https://admissions.vanderbilt.edu/apply/first-year-process/",
+        "testing": "https://admissions.vanderbilt.edu/apply/testing-policies/",
+        "english": "https://admissions.vanderbilt.edu/apply/first-year-process/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Fall 2027、2028 可选；Fall 2029 起恢复 ACT/SAT 必交。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2028,
+          "policy": "test_optional"
+        },
+        {
+          "fromEntryYear": 2029,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Rice University",
+      "country": "美国",
+      "location": "Houston, TX",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "生物医学": 94,
+        "计算机": 88,
+        "艺术": 82
+      },
+      "programNote": "工程与建筑/设计相关路径应按学院官网逐项核验。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED I 11/1；ED II、RD 1/4；音乐申请 12/1。",
+      "testPolicy": "test_recommended",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "International Student Financial Statement",
+        "建筑申请作品集；Shepherd 音乐学院有试演与独立期限"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "Cambridge"
+        ],
+        "officialSourceNote": "非英语母语且未满 2 年全日制英语课程时须证明英语能力。最低 TOEFL 100/5、IELTS 7、DET 130、Cambridge 185；单次考试，不接受 TOEFL MyBest。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 2
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 130,
+          "Cambridge": 185
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest"
+          ],
+          "雅思": [
+            "general_training"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.rice.edu/apply/first-year-international-applicants",
+        "international": "https://admission.rice.edu/frequently-asked-questions",
+        "testing": "https://admission.rice.edu/apply/first-year-international-applicants",
+        "english": "https://admission.rice.edu/frequently-asked-questions"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "建议提交 SAT/ACT，但未提交仍获完整审查。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_recommended"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Washington University in St. Louis",
+      "country": "美国",
+      "location": "St. Louis, MO",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "商科": 94,
+        "工程": 88,
+        "艺术": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表及补充问题、申请费或减免",
+        "高中成绩单、课程与评分说明、必要的英文翻译及毕业/外部考试证明",
+        "Counselor 推荐 + 1 封教师评价",
+        "英语考试（除获准豁免者）",
+        "艺术学院作品集必交；建筑学院强烈鼓励作品集",
+        "申请资助或提交国际生财务信息表"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "Fall 2027 起 SAT/ACT 不再替代英语考试；英语授课至少 3 年等豁免为个案审核，不能仅凭授课语言勾选自动通过。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "多邻国": 130
+        },
+        "manualExemptionReview": true
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.washu.edu/how-to-apply/first-year-international-applicants/",
+        "international": "https://admissions.washu.edu/how-to-apply/english-testing-requirements/",
+        "testing": "https://admissions.washu.edu/how-to-apply/first-year-international-applicants/",
+        "english": "https://admissions.washu.edu/how-to-apply/english-testing-requirements/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 为可选；境外高中也可提交 AP/IB/A-level/国家考试等学术补充材料。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Columbia University",
+      "country": "美国",
+      "location": "New York, NY",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 20",
+      "selectivityBand": "ultra",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.9,
+        "sat": 1520
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "商科": 94,
+        "人文社科": 88,
+        "计算机": 82,
+        "艺术": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application 或学校指定平台",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "cycle_check",
+      "requirements": [
+        "当前本科新生申请清单待官网人工复核；不要套用研究生或 Combined Plan 3–2 要求"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {},
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://undergrad.admissions.columbia.edu/apply/firstyear",
+        "international": "https://undergrad.admissions.columbia.edu/apply/international",
+        "testing": "https://communications.news.columbia.edu/news/update-columbia-college-and-columbia-engineering-testing-policy",
+        "english": "https://undergrad.admissions.columbia.edu/apply/international/english-proficiency",
+        "testingDetails": "https://undergrad.admissions.columbia.edu/apply/process/testing"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Columbia College / Engineering：Fall 2027 入学 SAT/ACT 可选；Fall 2028 起恢复必交，测试可及性困难者可申请 waiver。2026-06-12 官方公告已确认；英语与其他材料仍须核对本科招生清单。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        },
+        {
+          "fromEntryYear": 2028,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "partial",
+        "verifiedFields": [
+          "testing"
+        ],
+        "pendingFields": [
+          "english",
+          "materials"
+        ],
+        "note": "已由校方 2026-06-12 公告核实 2027/2028 测试变更；本科招生英语与材料页面仍返回 403，未套用 GS、Combined Plan 或研究生项目要求。"
+      }
+    },
+    {
+      "name": "University of California, Berkeley",
+      "country": "美国",
+      "location": "Berkeley, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 25",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "计算机": 100,
+        "工程": 94,
+        "商科": 88,
+        "生物医学": 82,
+        "人文社科": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "UC Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "not_considered",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "UC Application：如实自报课程、成绩与外部考试",
+        "4 篇 Personal Insight Questions",
+        "按校区/专业要求提交艺术材料（适用时）",
+        "通常录取后才交正式成绩单；推荐信仅在校方特别要求时提交",
+        "国际生英语能力证明或合格替代路径",
+        "非加州居民须满足 UC A–G 课程及专门计算的 GPA 资格；不可直接拿 Profile 未加权 GPA 判定达标"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 90,
+            "new6": 4.5
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "acceptsApEnglish": true,
+        "officialSourceNote": "Berkeley 校区最低 TOEFL 90/4.5，不是 UC 系统通用的 80；英语主授课至少 3 年且不可混合授课，或指定 AP/IB 英语考试等路径。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.berkeley.edu/apply-to-berkeley/international-students/requirements-for-international-students/",
+        "international": "https://admissions.berkeley.edu/apply-to-berkeley/international-students/requirements-for-international-students/",
+        "testing": "https://admissions.berkeley.edu/apply-to-berkeley/international-students/requirements-for-international-students/",
+        "english": "https://admissions.berkeley.edu/apply-to-berkeley/international-students/requirements-for-international-students/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 不参与录取或奖学金评审；满足特定英语能力或课程要求的替代路径另行判断。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "not_considered"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of California, Los Angeles",
+      "country": "美国",
+      "location": "Los Angeles, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 25",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "艺术": 100,
+        "生物医学": 94,
+        "商科": 88,
+        "工程": 82,
+        "人文社科": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "UC Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "not_considered",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "UC Application：如实自报课程、成绩与外部考试",
+        "4 篇 Personal Insight Questions",
+        "按校区/专业要求提交艺术材料（适用时）",
+        "通常录取后才交正式成绩单；推荐信仅在校方特别要求时提交",
+        "国际生英语能力证明或合格替代路径",
+        "非加州居民须满足 UC A–G 课程及专门计算的 GPA 资格；不可直接拿 Profile 未加权 GPA 判定达标"
+      ],
+      "financialAidInternational": "UCLA 不向非美国公民或永久居民本科生发放校方奖学金或助学金；国际生须证明可承担教育费用。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 80,
+            "new6": 4.5
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "acceptsApEnglish": true,
+        "officialSourceNote": "UC 基础资格与 UCLA 竞争力参考分开。UCLA 看重旧制 TOEFL >100（每项 >24）、新制 5（每项 5）、IELTS 7.5、DET 135；这些竞争力分数不充作统一最低录取线。",
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 101,
+            "new6": 5
+          },
+          "雅思": 7.5,
+          "多邻国": 135
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.ucla.edu/apply/international-applicants",
+        "international": "https://admission.ucla.edu/apply/international-applicants",
+        "testing": "https://admission.ucla.edu/apply/international-applicants",
+        "english": "https://admission.ucla.edu/apply/international-applicants"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 不参与录取或奖学金评审；满足特定英语能力或课程要求的替代路径另行判断。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "not_considered"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      },
+      "financialAidEligibility": "unavailable_need_based"
+    },
+    {
+      "name": "University of Notre Dame",
+      "country": "美国",
+      "location": "Notre Dame, IN",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 25",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "人文社科": 94,
+        "工程": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：REA 11/1；RD 1/4。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application / Coalition 与 Notre Dame 写作补充",
+        "正式高中成绩单及国家考试记录",
+        "1 封核心科目教师评价；Counselor 评价建议但非必交",
+        "英语考试（适用时）；国际生资助申请 CSS Profile",
+        "Fall 2027 SAT/ACT 可选"
+      ],
+      "financialAidInternational": "所有申请者（含国际生）need-blind；国际生申请 need-based aid 须交 CSS Profile。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE"
+        ],
+        "officialSourceNote": "英语授课不自动构成豁免；SAT EBRW 650 或 ACT English/Reading 26 等可豁免。不接受 TOEFL Home Edition。官网标题将英语表列分数称为强烈建议，按参考而非统一硬分数线处理。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5.5
+          },
+          "雅思": 7.5,
+          "多邻国": 125
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "home_edition"
+          ]
+        },
+        "manualExemptionReview": true,
+        "alternativeTestSections": {
+          "satVerbal": 650,
+          "actEnglish": 26
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.nd.edu/information-for/international-applicants/application-information/",
+        "international": "https://admissions.nd.edu/information-for/international-applicants/application-information/",
+        "testing": "https://admissions.nd.edu/information-for/international-applicants/application-information/",
+        "english": "https://admissions.nd.edu/information-for/international-applicants/application-information/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Fall 2028 起恢复测试要求；境外 IBDP、3+ A-level、French Baccalaureate 有官网替代路径。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        },
+        {
+          "fromEntryYear": 2028,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Carnegie Mellon University",
+      "country": "美国",
+      "location": "Pittsburgh, PA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 30",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "计算机": 100,
+        "工程": 94,
+        "艺术": 88,
+        "商科": 82
+      },
+      "programNote": "学院间录取竞争度与作品集/课程要求差异明显，尤其计算机、设计和艺术方向。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "program_dependent",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application、主文书及 CMU 写作补充",
+        "高中成绩单与学校报告/Counselor 评价",
+        "1 封教师推荐",
+        "依学院提交所需测试成绩与英语成绩",
+        "艺术学院须作品集、预筛选或试演"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "Cambridge",
+          "多邻国"
+        ],
+        "officialSourceNote": "非英语母语者须交英语考试，英语授课年数不是统一豁免。旧制 TOEFL 102、新制 5、IELTS 7.5、DET 135 为最低总分；官网小分参考另行审阅。TOEFL Essentials 为另外的评分制，不能按 iBT 总分比较。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 102,
+            "new6": 5
+          },
+          "雅思": 7.5,
+          "Cambridge": 191,
+          "多邻国": 135
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest"
+          ]
+        },
+        "variantRules": {
+          "托福": {
+            "essentials": {
+              "minimumTotal": 11
+            }
+          }
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://www.cmu.edu/admission/admission/undergraduate-admission-requirements",
+        "international": "https://www.cmu.edu/admission/admission/standardized-testing",
+        "testing": "https://www.cmu.edu/admission/admission/standardized-testing",
+        "english": "https://www.cmu.edu/admission/admission/standardized-testing"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "计算机学院须 SAT/ACT；工程、Dietrich、Heinz 信息系统、Mellon 科学、Tepper 为 test-flexible；艺术学院为 test-optional。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "program_dependent"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Emory University",
+      "country": "美国",
+      "location": "Atlanta, GA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 30",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "商科": 94,
+        "人文社科": 88
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "申请表、学校补充问题与申请费或减免",
+        "高中成绩单与 School Report",
+        "Counselor 推荐信",
+        "2 封学科教师推荐信",
+        "期中成绩（如有）",
+        "国际生英语证明及 Documentation of Finances；ED 签署协议（如适用）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "最近 4 年全部学术科目以英语授课、SAT EBRW 700 或 ACT English 30 等可证明英语。TOEFL/IELTS/DET 参考分数不是严格截止线；ITP 等版本须按独立评分制核验。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 4
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5.5
+          },
+          "雅思": 7.5,
+          "多邻国": 130
+        },
+        "alternativeTestSections": {
+          "satVerbal": 700,
+          "actEnglish": 30
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://apply.emory.edu/apply/requirements",
+        "international": "https://apply.emory.edu/apply/requirements/exams",
+        "testing": "https://apply.emory.edu/apply/requirements/exams",
+        "english": "https://apply.emory.edu/apply/requirements/exams",
+        "materials": "https://apply.emory.edu/apply/missing-items"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Fall 2027 SAT/ACT 可选；不把缺少 SAT/ACT 视为学术分扣分项。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Georgetown University",
+      "country": "美国",
+      "location": "Washington, DC",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 30",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "商科": 94,
+        "生物医学": 88
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Georgetown Application / Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：EA 11/1；RD 1/1。",
+      "testPolicy": "required_sat_act_with_access_exceptions",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "Georgetown Application 或 Common Application 与 Georgetown 写作补充",
+        "学校成绩单、School Profile 与 Counselor 推荐",
+        "1 封学科教师推荐；第二封教师推荐可选",
+        "SAT 或 ACT 正式机构送分",
+        "期中报告（2/10 或成绩可用后）；如获分配则须完成校友面试"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "recommendedUnless": {
+          "primaryEnglishInstruction": true
+        },
+        "officialSourceNote": "非英语授课学校申请者建议提交英语测试，但非必交；SAT/ACT 则必交，存在测试不可及例外。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://uadmissions.georgetown.edu/apply/first-year-applicants/application-requirements-and-forms/",
+        "international": "https://uadmissions.georgetown.edu/apply/international-applicants/",
+        "testing": "https://uadmissions.georgetown.edu/apply/international-applicants/",
+        "english": "https://uadmissions.georgetown.edu/apply/international-applicants/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "已支持 Common Application；原先“只能用 Georgetown 自有申请”的描述已失效。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_with_access_exceptions"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Michigan–Ann Arbor",
+      "country": "美国",
+      "location": "Ann Arbor, MI",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "商科": 94,
+        "计算机": 88,
+        "生物医学": 82,
+        "艺术": 76
+      },
+      "programNote": "学院/专业（尤其工程、商学院、艺术设计）可能有额外材料或容量限制。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application、U-M 补充问题",
+        "高中成绩单、School Report，必要时英文翻译",
+        "1 封教师评价；Counselor 推荐鼓励但非必交",
+        "英语成绩（适用时）；SAT/ACT 可选",
+        "申请学院/项目特定材料"
+      ],
+      "financialAidInternational": "临时签证国际生不能获得 U-M need-based aid，奖学金很少，通常需承担全部费用。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "PTE",
+          "Cambridge",
+          "MET"
+        ],
+        "officialSourceNote": "官方列英语能力分数范围及分项要求。豁免涉及 SAT/ACT 分项与指定国家教育经历，不能仅凭英语授课年限认定。当前页面未列 DET，不据旧 PDF 设为接受。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "PTE": 68,
+          "Cambridge": 185,
+          "MET": 64
+        },
+        "manualExemptionReview": true
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.umich.edu/apply/international-applicants/requirements-deadlines",
+        "international": "https://admissions.umich.edu/apply/international-applicants/exams-visas",
+        "testing": "https://admissions.umich.edu/apply/first-year-applicants/requirements-deadlines/application-changes",
+        "english": "https://admissions.umich.edu/apply/international-applicants/exams-visas"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "2027 可选；官网已更新 CS 及 Ross 申请路径，学院要求须以新页面为准。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      },
+      "financialAidEligibility": "unavailable_need_based"
+    },
+    {
+      "name": "University of Southern California",
+      "country": "美国",
+      "location": "Los Angeles, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "艺术": 94,
+        "工程": 88,
+        "计算机": 82,
+        "人文社科": 76
+      },
+      "programNote": "电影、艺术、建筑等项目的作品集/补充材料需逐专业核验。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application 与 USC 补充问题",
+        "高中成绩单、必要的预测/外部考试成绩",
+        "1 封学校 Counselor 或教师推荐（部分项目要求更多）",
+        "英语证明、国际生财务与护照材料",
+        "艺术/电影/建筑等项目独立作品集或试演材料"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "Cambridge",
+          "PTE",
+          "多邻国"
+        ],
+        "officialSourceNote": "非英语母语者须用认可考试证明英语；可用 SAT EBRW 650 或 ACT English 27，不能仅凭英语授课豁免。TOEFL 100/5、IELTS 7 等为建议，低于建议仍可录取。DET 为无法参加认可考试时的替代方案，至少 130，入学须参加 ISE。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "多邻国": 130
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "Cambridge": 185,
+          "PTE": 68
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "itp_plus"
+          ]
+        },
+        "alternativeTestSections": {
+          "satVerbal": 650,
+          "actEnglish": 27
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.usc.edu/prospective-students/how-to-apply/first-year-students/",
+        "international": "https://admission.usc.edu/prospective-students/how-to-apply/international-students/",
+        "testing": "https://admission.usc.edu/test-optional-faq/",
+        "english": "https://admission.usc.edu/prospective-students/how-to-apply/international-students/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 可选；用于英语证明的 SAT/ACT 也将进入整体录取审查，选择送分时须机构正式送分。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of North Carolina at Chapel Hill",
+      "country": "美国",
+      "location": "Chapel Hill, NC",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "商科": 94,
+        "人文社科": 88,
+        "计算机": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "EA 10/15；RD 1/15。EA 材料/成绩 11/7；国际生页面列 RD 材料/成绩 2/15，通用页面列 2/21，存在差异，须以 MyCarolina / 招生办确认并优先按较早日期准备。",
+      "testPolicy": "conditional_sat_act",
+      "englishPolicy": "required_for_international",
+      "requirements": [
+        "Common Application、个人陈述及 UNC 补充题",
+        "1 封核心学科教师推荐信",
+        "学校官方成绩单、英文翻译及 School Report",
+        "完成中学/大学预备课程，按课程体系提交 A-level/外部考试等成绩",
+        "按加权 GPA / 课程体系核对 SAT 或 ACT 是否必交",
+        "非美国公民/永久居民须提供认可的英语考试；官方参考分不是最低分"
+      ],
+      "financialAidInternational": "国际学生不具备 need-based financial aid 资格；须核对非本州学生全部费用和外部资助。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "Cambridge"
+        ],
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7.5,
+          "多邻国": 130
+        },
+        "officialSourceNote": "非美国公民/永久居民申请时须提供英语考试：TOEFL（含 Home Edition）、IELTS Academic、DET、Cambridge C1/C2。强申请者通常达到 TOEFL 100（旧制）/5（新制）、IELTS 7.5、DET 130、C1 185；这些明确不是最低分。C2 接受但未列数值；不套用通用英语授课年限豁免。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.unc.edu/apply/types-of-applications/first-year/",
+        "international": "https://admissions.unc.edu/apply/types-of-applications/international-first-year-students/",
+        "testing": "https://admissions.unc.edu/apply/types-of-applications/first-year/",
+        "english": "https://admissions.unc.edu/apply/types-of-applications/international-first-year-students/",
+        "deadlines": "https://admissions.unc.edu/apply/types-of-applications/first-year/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "加权 GPA 按 4.0 制达到 2.8 时 SAT/ACT 可选；低于 2.8 须 SAT 至少 930 或 ACT 至少 17。不是 4.0 制的学校另按 B+ 以上成绩或 A-level/外部考试评估，不自行换算。这里的分数是测试资格最低要求，不是 Chapel Hill 录取参考线。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "policy": "conditional_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english",
+          "materials"
+        ],
+        "pendingFields": [],
+        "note": "已读本科新生及国际本科新生两份清单；英语数值明确为竞争力参考。两页 RD 材料日期不一致，单独记录来源冲突。"
+      },
+      "testingMinimumByType": {
+        "SAT": 930,
+        "ACT": 17
+      },
+      "financialAidEligibility": "unavailable_need_based",
+      "officialSourceConflicts": [
+        {
+          "field": "deadlines",
+          "title": "RD supporting-material deadline differs between official pages",
+          "detail": "国际本科新生页面列 2/15；通用本科新生页面列 2/21。不要将较晚日期当成已确认延期；应按较早日期准备并查看 MyCarolina 或向招生办确认。",
+          "sources": [
+            "https://admissions.unc.edu/apply/types-of-applications/international-first-year-students/",
+            "https://admissions.unc.edu/apply/types-of-applications/first-year/"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "New York University",
+      "country": "美国",
+      "location": "New York, NY",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "艺术": 100,
+        "商科": 94,
+        "计算机": 88,
+        "人文社科": 82
+      },
+      "programNote": "Stern、Tisch、艺术及部分项目有不同补充材料和容量要求。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application 与学校成绩单/School Report",
+        "STARS（Self-reported Transcript and Academic Record System）",
+        "至少 1 封推荐信；可由教师、Counselor、教练、主管等有权威且了解你的推荐人撰写，最多接受 3 封",
+        "英语能力证明（适用时）；艺术项目作品集/试演（适用时）",
+        "课程体系要求的毕业/国家考试结果（适用时）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国",
+          "PTE",
+          "Cambridge",
+          "iTEP"
+        ],
+        "officialSourceNote": "英语证明与 SAT/ACT 分开；语言考试一般须在申请时两年内。接受的考试类型与豁免条件详见 NYU 官方本科说明；各校区与艺术项目附加要求须单独核对。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "itp_plus",
+            "essentials"
+          ],
+          "雅思": [
+            "indicator"
+          ],
+          "PTE": [
+            "online"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://meet.nyu.edu/advice/why-isnt-my-checklist-updating/",
+        "international": "https://meet.nyu.edu/advice/test-optional-at-nyu-what-it-is-and-isnt/",
+        "testing": "https://nyuad.nyu.edu/en/apply/undergraduate/apply/entry-requirements.html",
+        "english": "https://meet.nyu.edu/advice/test-optional-at-nyu-what-it-is-and-isnt/",
+        "recommendations": "https://meet.nyu.edu/advice/application-tips/is-one-rec-letter-enough-for-nyu/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "NYU 官方说明 SAT/ACT test-optional 延续至 2027–28 申请季；Abu Dhabi 专属年龄/财务材料未套用到纽约校区。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2028,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english",
+          "materials"
+        ],
+        "pendingFields": [],
+        "note": "通过 NYU 本科招生办公室 2026 年官方说明补核 STARS、推荐信与学校报告；校区和艺术项目专项要求仍须逐项确认。"
+      }
+    },
+    {
+      "name": "University of Virginia",
+      "country": "美国",
+      "location": "Charlottesville, VA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "人文社科": 94,
+        "工程": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "recommended",
+      "requirements": [
+        "Common Application 与 UVA 补充问题",
+        "Secondary School Report、School Profile 与成绩单",
+        "1 封学科教师评价；Counselor 可随学校报告提交推荐",
+        "英语考试建议（适用背景）；SAT/ACT 可选"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思"
+        ],
+        "recommendedUnless": {
+          "englishMediumYears": 2,
+          "nativeEnglish": true
+        },
+        "officialSourceNote": "第一语言非英语或英语学校不足 2 年时鼓励提供 TOEFL/IELTS；不把建议项当硬性门槛。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.virginia.edu/admission/deadlines-instructions",
+        "international": "https://admission.virginia.edu/admission/deadlines-instructions",
+        "testing": "https://admission.virginia.edu/admission/deadlines-instructions",
+        "english": "https://admission.virginia.edu/admission/deadlines-instructions"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "Fall 2027 SAT/ACT 可选；正式考试可自报，入学前机构核验。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of California, San Diego",
+      "country": "美国",
+      "location": "La Jolla, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 35",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "工程": 94,
+        "计算机": 88,
+        "人文社科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "UC Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "not_considered",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "UC Application：如实自报课程、成绩与外部考试",
+        "4 篇 Personal Insight Questions",
+        "按校区/专业要求提交艺术材料（适用时）",
+        "通常录取后才交正式成绩单；推荐信仅在校方特别要求时提交",
+        "国际生英语能力证明或合格替代路径",
+        "非加州居民须满足 UC A–G 课程及专门计算的 GPA 资格；不可直接拿 Profile 未加权 GPA 判定达标"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 83,
+            "new6": 4.5
+          },
+          "雅思": 7,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "acceptsApEnglish": true,
+        "officialSourceNote": "UCSD 校区最低 TOEFL 83/4.5、IELTS 7、DET 115；不是系统通用 80/6.5。指定 AP/IB 英语考试也是认可路径。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.ucsd.edu/first-year/application-requirements.html",
+        "international": "https://admissions.ucsd.edu/international/",
+        "testing": "https://admissions.ucsd.edu/first-year/application-requirements.html",
+        "english": "https://admissions.ucsd.edu/international/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 不参与录取或奖学金评审；满足特定英语能力或课程要求的替代路径另行判断。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "not_considered"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Florida",
+      "country": "美国",
+      "location": "Gainesville, FL",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "生物医学": 100,
+        "工程": 94,
+        "商科": 88,
+        "计算机": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED 10/15；EA 11/1；RD 1/15；材料期限比申请晚 7 天。",
+      "testPolicy": "required_sat_act_clt",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application 与申请费或减免",
+        "SAT、ACT 或 CLT（三者之一）；可先自报，入学前按期送正式成绩",
+        "境外成绩单与认证英文翻译；至少最近三个完整学年及最后学年课程/预测成绩",
+        "境外逐科 credential evaluation：招生办页面要求提交，catalog 写鼓励但非新生必需，需核对本人 Gator Portal 清单",
+        "是否使用 STARS 取决于就读学校及评分体系",
+        "非英语母语者按本科 catalog 提交英语证明；考试总分门槛仍需校方确认"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思"
+        ],
+        "acceptedTestListIsExhaustive": false,
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "scoreThresholdNeedsReview": true,
+        "officialSourceNote": "官方本科 catalog 要求非英语母语者提供 TOEFL 或 IELTS；未列可核实的本科新生总分门槛，不能借用转学、UF Online 或研究生最低分，也不能据此断言未列出的考试一定不被接受。英语授课年限不自动豁免。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.ufl.edu/apply/freshman/international",
+        "international": "https://admissions.ufl.edu/apply/freshman/international",
+        "testing": "https://admissions.ufl.edu/apply/freshman/requirements",
+        "english": "https://catalog.ufl.edu/UGRD/admission/",
+        "deadlines": "https://admissions.ufl.edu/apply/freshman/deadlines",
+        "englishCatalog": "https://catalog.ufl.edu/UGRD/admission/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "确认所有本科新生须 SAT/ACT/CLT；未把转学生页面上的英语分数直接套用本科新生。 当前 Profile 仅支持 SAT/ACT 录入；如已取得 CLT，需通过官网路径人工确认，未记录不等于没有成绩。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_clt"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已读本科招生办及本科 catalog，确认 SAT/ACT/CLT 和英语证明路径；catalog 未列新生英语数值，且与招生办对境外逐科评估的要求不一致，保留提示而不自动判定全部达标。"
+      },
+      "officialSourceConflicts": [
+        {
+          "field": "credential_evaluation",
+          "title": "Credential-evaluation guidance differs between official pages",
+          "detail": "本科招生办国际新生清单要求境外课程逐科评估并计算 GPA；本科 catalog 则写新生鼓励提交但非必需。请核对 Gator Portal 和招生办要求；本系统不据其中一页自动豁免此材料。",
+          "sources": [
+            "https://admissions.ufl.edu/apply/freshman/international",
+            "https://catalog.ufl.edu/UGRD/admission/"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The University of Texas at Austin",
+      "country": "美国",
+      "location": "Austin, TX",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "商科": 88,
+        "艺术": 82
+      },
+      "programNote": "计算机、工程、商学院等专业容量与录取竞争度显著不同。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：EA 10/15，材料 10/22；RD 12/1，材料 12/10。",
+      "testPolicy": "required_sat_act_clt",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application、申请费及短文",
+        "SAT/ACT 或官网认可的 CLT，必须机构正式送分",
+        "9–12 年级成绩单及高中期间大学课程成绩单",
+        "高中先修课程及目标专业所需附加材料",
+        "英语证明（未满足国别/学历豁免时）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "指定国家或美国/指定国家高中至少 3 年并毕业等可豁免；不能将任意英语授课 3 年直接当作豁免。TOEFL 79/4、IELTS 6.5、DET 115。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 79,
+            "new6": 4
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "itp_plus",
+            "essentials"
+          ],
+          "雅思": [
+            "general_training"
+          ]
+        },
+        "manualExemptionReview": true
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.utexas.edu/apply/international-students/",
+        "international": "https://admissions.utexas.edu/info-for/international-students/",
+        "testing": "https://admissions.utexas.edu/apply/international-students/",
+        "english": "https://admissions.utexas.edu/info-for/international-students/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "当前国际本科新生页允许 CLT 满足测试要求；推荐信为可选，不能列作所有人必交。 当前 Profile 仅支持 SAT/ACT 录入；如已取得 CLT，需通过官网路径人工确认，未记录不等于没有成绩。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act_clt"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Georgia Institute of Technology",
+      "country": "美国",
+      "location": "Atlanta, GA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "商科": 88,
+        "生物医学": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application 与短文",
+        "SAT 或 ACT（CLT 不能替代）",
+        "各年中学成绩单及必要翻译、课程体系毕业/外部考试证明",
+        "满足 USG 英语证明路径；推荐信及 DET/访谈作为补充材料"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "PTE",
+          "Cambridge",
+          "MET"
+        ],
+        "officialSourceNote": "须满足 USG 认可路径；USG 底线不是 GT 录取竞争力线，校方可要求更高。SAT EBRW 480/ACT English 17 为路径之一；DET、InitialView 仅为补充，不能替代 USG 英语要求。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 69,
+            "new6": 3.5
+          },
+          "雅思": 6,
+          "PTE": 53,
+          "Cambridge": 169,
+          "MET": 55
+        },
+        "manualExemptionReview": true,
+        "alternativeTestSections": {
+          "satVerbal": 480,
+          "actEnglish": 17
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admission.gatech.edu/first-year",
+        "international": "https://admission.gatech.edu/international/first-year",
+        "testing": "https://admission.gatech.edu/first-year/standardized-tests",
+        "english": "https://admission.gatech.edu/international/first-year",
+        "englishMethods": "https://www.usg.edu/international-education/esl-programs/english-proficiency-requirements/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "所有本科新生须 SAT/ACT；不要把 CLT 可作补充误写成可替代。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Illinois Urbana-Champaign",
+      "country": "美国",
+      "location": "Champaign, IL",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "high",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.8,
+        "sat": 1450
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "计算机": 94,
+        "商科": 88,
+        "艺术": 82
+      },
+      "programNote": "CS、工程、商科和艺术设计等项目按专业/学院有不同竞争度。",
+      "applicationSystem": "Common Application / 校方指定本科申请平台",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "本科申请及申请费或减免、自报学业记录 SRAR",
+        "专业相关补充问题与英语证明（适用时）",
+        "高中课程：英语 4 年；数学 3 年或指定专业 3.5 年；社科、实验科学、同一外语各 2 年及灵活课程",
+        "艺术等项目的补充材料（适用时）；通常不接受普通推荐信"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "最近 10–12 年级是否在认可英语国家就读及是否提交 SAT/ACT 决定语言路径；不可仅按授课语言推断。未用转学页面的数值最低分套用本科新生。Home Edition 目前仅明确接受 Fall 2027。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest"
+          ],
+          "雅思": [
+            "one_skill_retake",
+            "general_training"
+          ]
+        },
+        "manualExemptionReview": true
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://www.admissions.illinois.edu/first-year-requirements/",
+        "international": "https://www.admissions.illinois.edu/international-requirements/",
+        "testing": "https://www.admissions.illinois.edu/first-year-requirements/",
+        "english": "https://www.admissions.illinois.edu/international-requirements/",
+        "englishPolicyDetails": "https://www.admissions.illinois.edu/general-admission-policies/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 可选；用于英语证明的 SAT/ACT 会用于所有录取审查，不能只作语言证明。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of Wisconsin–Madison",
+      "country": "美国",
+      "location": "Madison, WI",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "生物医学": 94,
+        "商科": 88,
+        "计算机": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Universities of Wisconsin Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "本科申请与补充文书",
+        "9–12 年级成绩与全部中学/大学正式记录",
+        "至少 1 封学术推荐信",
+        "英语成绩或获准豁免（适用时）；ACT/SAT 可选"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "中学四年英语主授课等路径可申请语言豁免；必须机构送分，两年有效，不拼英语成绩。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 4
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 80,
+            "new6": 4.5
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest",
+            "itp_plus"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.wisc.edu/apply-as-a-freshman/",
+        "international": "https://admissions.wisc.edu/apply-as-a-freshman/",
+        "testing": "https://admissions.wisc.edu/apply-as-a-freshman/",
+        "english": "https://admissions.wisc.edu/apply-as-a-freshman/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "当季页面为 SAT/ACT 可选；未将过往仅延续到某年的政策自动外推到所有未来年份。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of California, Irvine",
+      "country": "美国",
+      "location": "Irvine, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "计算机": 100,
+        "工程": 94,
+        "生物医学": 88,
+        "商科": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "UC Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "not_considered",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "UC Application：如实自报课程、成绩与外部考试",
+        "4 篇 Personal Insight Questions",
+        "按校区/专业要求提交艺术材料（适用时）",
+        "通常录取后才交正式成绩单；推荐信仅在校方特别要求时提交",
+        "国际生英语能力证明或合格替代路径",
+        "非加州居民须满足 UC A–G 课程及专门计算的 GPA 资格；不可直接拿 Profile 未加权 GPA 判定达标"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 80,
+            "new6": 4.5
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "acceptsApEnglish": true,
+        "officialSourceNote": "英语授课少于 3 年须走考试或指定 AP/IB 英语等路径。TOEFL 80/4.5、IELTS 6.5、DET 115；不接受 IELTS OSR、TOEFL MyBest。",
+        "alternativeTestSections": {
+          "satVerbal": 680
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://www.admissions.uci.edu/apply/international-students.php",
+        "international": "https://www.admissions.uci.edu/apply/international-students.php",
+        "testing": "https://www.admissions.uci.edu/apply/international-students.php",
+        "english": "https://www.admissions.uci.edu/apply/international-students.php"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 不参与录取或奖学金评审；满足特定英语能力或课程要求的替代路径另行判断。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "not_considered"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "University of California, Santa Barbara",
+      "country": "美国",
+      "location": "Santa Barbara, CA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 40",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "生物医学": 94,
+        "人文社科": 88,
+        "艺术": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "UC Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "not_considered",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "UC Application：如实自报课程、成绩与外部考试",
+        "4 篇 Personal Insight Questions",
+        "按校区/专业要求提交艺术材料（适用时）",
+        "通常录取后才交正式成绩单；推荐信仅在校方特别要求时提交",
+        "国际生英语能力证明或合格替代路径",
+        "非加州居民须满足 UC A–G 课程及专门计算的 GPA 资格；不可直接拿 Profile 未加权 GPA 判定达标"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 80,
+            "new6": 4.5
+          },
+          "雅思": 6.5,
+          "多邻国": 115
+        },
+        "notAcceptedVariants": {
+          "雅思": [
+            "one_skill_retake"
+          ],
+          "托福": [
+            "mybest"
+          ]
+        },
+        "acceptsApEnglish": true,
+        "officialSourceNote": "TOEFL 80/4.5、IELTS 6.5、DET 115 或指定课程/考试路径。不接受 IELTS OSR、TOEFL MyBest；数字 SAT Reading/Writing 尚未获批用于本校语言证明。"
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.sa.ucsb.edu/international-freshman-eligibility-selection",
+        "international": "https://admissions.sa.ucsb.edu/english-language-proficiency",
+        "testing": "https://admissions.sa.ucsb.edu/international-freshman-eligibility-selection",
+        "english": "https://admissions.sa.ucsb.edu/english-language-proficiency"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 不参与录取或奖学金评审；满足特定英语能力或课程要求的替代路径另行判断。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "not_considered"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Boston College",
+      "country": "美国",
+      "location": "Chestnut Hill, MA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 45",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "人文社科": 94,
+        "生物医学": 88
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application 与 BC 补充问题",
+        "高中成绩单、School Report 与推荐信按本科清单",
+        "英语成绩（适用时）；SAT/ACT 可选",
+        "国际生须准备完整教育费用及财务证明"
+      ],
+      "financialAidInternational": "非美国公民/永久居民不能获得 BC need-based aid，通常需负担完整费用。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "英语母语、美国/多数英语母语国家高中至少 3 年无 ESOL，或 SAT EBRW 650 / ACT English 29 等有豁免；100/5、7.5、130 为建议最低值，非统一硬门槛。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7.5,
+          "多邻国": 130
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "mybest"
+          ]
+        },
+        "manualExemptionReview": true,
+        "alternativeTestSections": {
+          "satVerbal": 650,
+          "actEnglish": 29
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://www.bc.edu/content/bc-web/admission/apply/international.html",
+        "international": "https://www.bc.edu/content/bc-web/admission/apply/international.html",
+        "testing": "https://www.bc.edu/content/bc-web/admission/apply/test-optional.html",
+        "english": "https://www.bc.edu/content/bc-web/admission/apply/international.html"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      },
+      "financialAidEligibility": "unavailable_need_based"
+    },
+    {
+      "name": "Tufts University",
+      "country": "美国",
+      "location": "Medford, MA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 45",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "人文社科": 100,
+        "生物医学": 94,
+        "工程": 88,
+        "艺术": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / Coalition on Scoir / QuestBridge",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：ED I 11/2/2026；ED II、RD 1/4/2027。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "本科申请、Tufts 补充文书及申请费或减免",
+        "高中成绩单、学校报告及推荐信",
+        "英语证明（适用时）；SAT/ACT 可选",
+        "SMFA 等艺术路径须按项目提交作品集"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "PTE",
+          "多邻国"
+        ],
+        "officialSourceNote": "无统一最低分；所列 100/5、IELTS 7、PTE 68、DET 130 为常见成功申请者参考。英语主授课至少 3 年可走豁免，ESOL 情况可能仍需证明。",
+        "requiredUnless": {
+          "nativeEnglish": true,
+          "englishMediumYears": 3
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 100,
+            "new6": 5
+          },
+          "雅思": 7,
+          "PTE": 68,
+          "多邻国": 130
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "itp_plus"
+          ],
+          "雅思": [
+            "indicator"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://admissions.tufts.edu/apply/applying-to-tufts/",
+        "international": "https://admissions.tufts.edu/apply/applying-as-an-international-s",
+        "testing": "https://admissions.tufts.edu/apply/applying-to-tufts/",
+        "english": "https://admissions.tufts.edu/apply/applying-as-an-international-s"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "Boston University",
+      "country": "美国",
+      "location": "Boston, MA",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 50",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "商科": 100,
+        "工程": 94,
+        "计算机": 88,
+        "艺术": 82,
+        "生物医学": 76
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application / QuestBridge",
+      "deadlineNote": "申请与补充材料可能有不同期限；请按本校当季申请清单分别确认各项提交日期。",
+      "testPolicy": "test_optional",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application / QuestBridge",
+        "高中成绩单、Senior Year Grades",
+        "Counselor 推荐与 School Report + 1 封 Teacher Evaluation",
+        "英语证明、护照资料页、国际生财务材料（ED 须随申请）",
+        "College of Fine Arts 的作品集/试演（如适用）"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "国际生英语考试与可选 SAT/ACT 分开；语言豁免须申请并由招生委员会决定。TOEFL 90–100、DET 125–135 是竞争力区间；IELTS 7 可满足语言要求。官网未在已读页面明确新制 TOEFL 数值，未自行换算。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "雅思": 7
+        },
+        "recommendedTotal": {
+          "托福": {
+            "legacy120": 90
+          },
+          "多邻国": 125
+        },
+        "notAcceptedVariants": {
+          "托福": [
+            "itp_plus",
+            "essentials"
+          ],
+          "雅思": [
+            "indicator",
+            "one_skill_retake"
+          ]
+        },
+        "manualExemptionReview": true,
+        "unverifiedScales": {
+          "托福": [
+            "new6"
+          ]
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://www.bu.edu/admissions/apply/first-year/",
+        "international": "https://www.bu.edu/admissions/apply/international/",
+        "testing": "https://www.bu.edu/admissions/apply/first-year/",
+        "english": "https://www.bu.edu/admissions/apply/international/"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "SAT/ACT 可选明确延续至 Fall 2028 / Spring 2029。",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2028,
+          "policy": "test_optional"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    },
+    {
+      "name": "The Ohio State University",
+      "country": "美国",
+      "location": "Columbus, OH",
+      "usNewsScope": "U.S. News 2026 National Universities top-60 research pool",
+      "usNewsRankBand": "Top 50",
+      "selectivityBand": "selective",
+      "plannerAcademicTarget": {
+        "unweightedGpa": 3.65,
+        "sat": 1350
+      },
+      "majorStrengths": {
+        "工程": 100,
+        "商科": 94,
+        "生物医学": 88,
+        "计算机": 82
+      },
+      "programNote": "专业强项用于兴趣匹配，不等同于录取难度或专业直录保证。",
+      "applicationSystem": "Common Application",
+      "deadlineNote": "2026–27 申请季 / Fall 2027：Autumn 2027：EA 11/1/2026；RD 1/15/2027。",
+      "testPolicy": "required_sat_act",
+      "englishPolicy": "required_when_no_english_medium",
+      "requirements": [
+        "Common Application（Columbus）及申请费",
+        "9–12 年级中学成绩单/外部考试证书及必要英文翻译",
+        "SAT 或 ACT，机构正式发送",
+        "正式英语证明或满足官网替代路径",
+        "推荐信可选，最多 2 封；录取后提供财务证明"
+      ],
+      "financialAidInternational": "资助资格、是否影响录取及申请期限，需查本校国际生资助页面；本次不将未核验的资助描述作为硬性门槛。",
+      "englishRequirements": {
+        "acceptedTests": [
+          "托福",
+          "雅思",
+          "多邻国"
+        ],
+        "officialSourceNote": "Columbus 本科新生 SAT/ACT 必交。英语也可用 ACT English 21、SAT EBRW 550、美国高中 3 年并毕业或认可国家公民/学历等路径满足；不能用任意英语授课年数自动豁免。",
+        "requiredUnless": {
+          "nativeEnglish": true
+        },
+        "minimumTotal": {
+          "托福": {
+            "legacy120": 79,
+            "new6": 4
+          },
+          "雅思": 6.5,
+          "多邻国": 120
+        },
+        "manualExemptionReview": true,
+        "alternativeTestSections": {
+          "satVerbal": 550,
+          "actEnglish": 21
+        }
+      },
+      "specialRequirements": [],
+      "officialSources": {
+        "application": "https://undergrad.osu.edu/apply/international-freshmen/apply-step-by-step",
+        "international": "https://undergrad.osu.edu/apply/international-freshmen/apply-step-by-step",
+        "testing": "https://undergrad.osu.edu/apply/international-freshmen/apply-step-by-step",
+        "english": "https://undergrad.osu.edu/apply/international-freshmen/apply-step-by-step"
+      },
+      "lastReviewed": "2026-11-18",
+      "testPolicyNote": "",
+      "testPolicyTimeline": [
+        {
+          "fromEntryYear": 2027,
+          "throughEntryYear": 2027,
+          "policy": "required_sat_act"
+        }
+      ],
+      "officialReview": {
+        "checkedAt": "2026-11-18",
+        "entryYear": 2027,
+        "applicantType": "international_first_year",
+        "status": "reviewed",
+        "verifiedFields": [
+          "testing",
+          "english"
+        ],
+        "pendingFields": [],
+        "note": "已复核本科新生测试与英语政策；学院专项材料、国家课程等仍须按申请路径核对。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+databases:
+  - name: ap-planner-db
+    databaseName: ap_planner
+    user: ap_planner
+    ipAllowList: []
+
+services:
+  - type: web
+    name: ap-planner
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ap-planner-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: AUTO_CREATE_SCHEMA
+        value: "false"
+      - key: CREATE_DEMO_USER
+        value: "false"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_BASE_URL
+        value: https://api.deepseek.com
+      - key: DEEPSEEK_MODEL
+        value: deepseek-flash
+      - key: DEEPSEEK_SEARCH_MODEL
+        value: deepseek-v4-pro

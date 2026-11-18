@@ -9,4 +9,5 @@ fi
 
 source venv/bin/activate
 pip install -r requirements.txt
-venv/bin/python -m uvicorn app.main:app --reload
+venv/bin/alembic upgrade head
+venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port "${PORT:-8000}" --reload

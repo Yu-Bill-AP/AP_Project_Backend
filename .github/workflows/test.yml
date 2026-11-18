@@ -1,0 +1,26 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Verify migrations on a fresh database
+        env:
+          DATABASE_URL: sqlite:////tmp/ap_planner_migration.db
+        run: alembic upgrade head
+      - name: Run backend smoke and security checks
+        env:
+          DATABASE_URL: sqlite:////tmp/ap_planner_test.db
+          CREATE_DEMO_USER: "false"
+          DEEPSEEK_API_KEY: ""
+        run: python test.py

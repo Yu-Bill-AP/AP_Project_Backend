@@ -1,13 +1,14 @@
 const APP_NAV_ITEMS = [
-    { label: "仪表盘", href: "dashboard.html" },
-    { label: "AP课程库", href: "courses.html" },
-    { label: "院校匹配", href: "match.html" },
-    { label: "申请时间线", href: "timeline.html" },
-    { label: "背景库", href: "portfolio.html" },
-    { label: "AI规划", href: "ai-plan.html" },
-    { label: "我的规划", href: "my-plans.html" },
-    { label: "升学指南", href: "guide.html" },
-    { label: "个人设置", href: "settings.html" }
+    { label: "Dashboard", href: "dashboard.html" },
+    { label: "Profile", href: "profile.html" },
+    { label: "AP Courses", href: "courses.html" },
+    { label: "Matches", href: "match.html" },
+    { label: "Timeline", href: "timeline.html" },
+    { label: "Portfolio", href: "portfolio.html" },
+    { label: "AI Planner", href: "ai-plan.html" },
+    { label: "Saved Plans", href: "my-plans.html" },
+    { label: "Guide", href: "guide.html" },
+    { label: "Settings", href: "settings.html" }
 ];
 
 function getCurrentPageName() {
@@ -22,13 +23,13 @@ function renderTopbar(user) {
         return;
     }
 
-    const displayName = user && user.name ? `${user.name}同学` : "学生中心";
+    const displayName = user && user.name ? `${escapeHtml(user.name)}` : "Student";
 
     target.innerHTML = `
-        <a class="app-logo" href="dashboard.html">AP Planner</a>
+        <a class="app-logo" href="dashboard.html"><img class="app-wordmark" src="assets/login/title.png" alt="AP Planner" width="164" height="35"><img class="app-cat" src="assets/login/cat.png" alt="" width="39" height="37"></a>
         <div class="app-nav-right">
             <span id="layout-user-name">${displayName}</span>
-            <button class="app-logout-btn" onclick="logout()">退出登录</button>
+            <button class="app-logout-btn" onclick="logout()">Log out</button>
         </div>
     `;
 }
@@ -53,3 +54,7 @@ function renderAppLayout(user) {
     renderTopbar(user);
     renderSidebar();
 }
+
+// Draw the shared shell immediately; account data fills in after verification.
+renderTopbar();
+renderSidebar();

@@ -1,229 +1,170 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>申请时间线 - AP Planner</title>
+    <title>Application timeline - AP Planner</title>
     <link rel="stylesheet" href="layout.css">
     <style>
-        .content-wrap {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-
-        .page-header {
-            margin-bottom: 22px;
-        }
-
-        .page-header h1 {
-            font-size: 28px;
-            margin: 0 0 8px;
-        }
-
-        .page-header p {
-            margin: 0;
-            color: #6b7b8c;
-            font-size: 15px;
-        }
-
-        .focus-card,
-        .timeline-card {
-            background: #ffffff;
-            border: 1px solid #e8eef4;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-        }
-
-        .focus-card {
-            padding: 22px;
-            margin-bottom: 16px;
-        }
-
-        .focus-card h2 {
-            margin: 0 0 10px;
-            font-size: 18px;
-        }
-
-        .focus-card p {
-            color: #536475;
-            font-size: 14px;
-            line-height: 1.65;
-            margin: 0;
-        }
-
-        .timeline {
-            display: grid;
-            gap: 14px;
-        }
-
-        .timeline-card {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 18px;
-            padding: 20px;
-        }
-
-        .period {
-            color: #2f6f9f;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .timeline-card h3 {
-            margin: 0 0 8px;
-            font-size: 18px;
-        }
-
-        .timeline-card ul {
-            margin: 0;
-            padding-left: 18px;
-            color: #536475;
-            font-size: 14px;
-            line-height: 1.75;
-        }
-
-        @media (max-width: 760px) {
-            .timeline-card {
-                grid-template-columns: 1fr;
-            }
-        }
+        :root { --ink:#193144; --muted:#66798a; --line:#dce7ef; --blue:#17689e; --red:#d9514a; --orange:#e38b31; --yellow:#cda62a; --green:#319576; }
+        .content-wrap { max-width:1200px; margin:0 auto; }
+        .hero { display:grid; grid-template-columns:1.42fr .8fr; gap:20px; padding:28px; border-radius:16px; background:linear-gradient(125deg,#143a57,#17689e); color:#fff; }
+        .eyebrow { margin:0 0 8px; font-size:12px; letter-spacing:.11em; opacity:.78; }
+        h1 { margin:0; font-size:29px; }.hero p:not(.eyebrow) { max-width:690px; margin:11px 0 0; color:#e2f0f8; line-height:1.65; font-size:14px; }
+        .focus { align-self:center; padding:17px; border:1px solid rgba(255,255,255,.2); border-radius:12px; background:rgba(255,255,255,.11); }.focus span{display:block;font-size:12px;opacity:.78}.focus strong{display:block;margin:5px 0;font-size:17px}.focus small{color:#ddedf7;line-height:1.5}
+        .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:11px; margin:17px 0; }.stat { padding:14px; background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 4px 15px rgba(22,49,72,.035); }.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;margin-top:5px;color:var(--ink);font-size:21px}
+        .legend { display:flex; flex-wrap:wrap; gap:12px; margin:2px 0 14px; color:#597083; font-size:12px; }.legend span{display:flex;gap:6px;align-items:center}.legend i{width:9px;height:9px;border-radius:50%}
+        .board-card { padding:21px; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 4px 15px rgba(22,49,72,.04); }.board-card h2{margin:0;font-size:18px}.board-card>p{margin:6px 0 18px;color:var(--muted);font-size:12px;line-height:1.55}
+        .task-panel{display:none;margin-top:17px;padding:19px;border:1px solid #cfe0eb;border-radius:11px;background:#f8fcff}.task-panel.show{display:block}.panel-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.panel-top h3{margin:0;font-size:17px}.panel-top p{margin:6px 0 0;color:#536c7e;font-size:13px;line-height:1.6}.window{padding:4px 8px;border-radius:999px;background:#eaf3f8;color:#45667b;font-size:11px;white-space:nowrap}.controls{display:grid;grid-template-columns:170px 1fr;gap:12px;margin-top:15px}.field label{display:block;margin-bottom:6px;color:#4b6577;font-size:12px;font-weight:700}.field select,.field textarea{width:100%;padding:8px 9px;border:1px solid #cddce6;border-radius:8px;background:#fff;color:var(--ink);font:inherit}.field textarea{min-height:70px;resize:vertical}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}.step{display:flex;gap:8px;padding:10px;border:1px solid #dfe8ef;border-radius:8px;background:#fff;color:#4d6678;font-size:12px;line-height:1.45}.step input{width:15px;height:15px;margin:1px 0 0;accent-color:var(--blue)}.panel-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px}.save{border:0;border-radius:8px;padding:9px 13px;background:var(--blue);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.save:disabled{opacity:.65}.status{color:#5a7283;font-size:12px}.toast{position:fixed;right:22px;bottom:22px;z-index:10;padding:11px 14px;border-radius:9px;background:#163d5a;color:#fff;font-size:13px;opacity:0;transform:translateY(70px);transition:.2s}.toast.show{opacity:1;transform:translateY(0)}
+        @media(max-width:860px){.hero{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.controls{grid-template-columns:1fr}}@media(max-width:520px){.hero{padding:22px}h1{font-size:25px}.stats{grid-template-columns:1fr 1fr}.board-card{padding:15px}.panel-top{display:block}.window{display:inline-block;margin-top:8px}.panel-foot{align-items:flex-start;flex-direction:column}}
     </style>
+<link rel="preload" href="assets/fonts/NotebookHan-Common.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/handwriting.css?v=2">
+<link rel="stylesheet" href="notebook.css?v=sheet-4-timeline">
+<link rel="stylesheet" href="timeline.css?v=1">
+<script src="notebook.js?v=sheet-2" defer></script>
 </head>
-<body>
+<body data-notebook-page="timeline">
 <header id="app-topbar" class="app-topbar"></header>
-<div class="app-shell">
-<aside id="app-sidebar" class="app-sidebar"></aside>
-<main class="page-content">
-    <div class="content-wrap">
-        <section class="page-header">
-            <h1>申请时间线</h1>
-            <p>根据年级和当前短板动态排序，把GPA、语言、AP、活动和文书放到合适阶段。</p>
-        </section>
-
-        <section class="focus-card">
-            <h2>当前阶段重点</h2>
-            <p id="current-focus">正在生成阶段重点...</p>
-        </section>
-
-        <section id="timeline" class="timeline">
-            <article class="timeline-card">
-                <div class="period">加载中</div>
-                <div>
-                    <h3>正在读取画像</h3>
-                    <ul>
-                        <li>请稍候。</li>
-                    </ul>
-                </div>
-            </article>
-        </section>
-    </div>
-</main>
-</div>
-
-<script src="auth.js"></script>
-<script src="layout.js"></script>
+<div class="app-shell"><aside id="app-sidebar" class="app-sidebar"></aside><main class="page-content"><div class="content-wrap">
+    <section class="hero"><div><p class="eyebrow">SIX-LANE APPLICATION MAP · FOURTH QUADRANT</p><h1>Application timeline</h1><p>Six tracks, with near-term tasks at the top. Select a task to update its progress.</p></div><div class="focus"><span>Current focus</span><strong id="focus-title">Loading...</strong><small id="focus-detail">Select a task, check off steps and save.</small></div></section>
+    <section class="stats"><div class="stat"><span>Overall progress</span><strong id="completion">—</strong></div><div class="stat"><span>Completed tasks</span><strong id="completed">—</strong></div><div class="stat"><span>Current grade</span><strong id="grade">—</strong></div><div class="stat"><span>Target direction</span><strong id="major">—</strong></div></section>
+    <section class="legend"><span><i style="background:var(--red)"></i>Red: urgent / core</span><span><i style="background:var(--orange)"></i>Orange: current focus</span><span><i style="background:var(--yellow)"></i>Yellow: next up</span><span><i style="background:var(--green)"></i>Green: ongoing</span></section>
+    <section class="board-card"><h2>Task map</h2><p>Time runs down the left side. Each track contains its own tasks.</p><div class="board-tools" id="board-tools" hidden><span>Scroll sideways to see all six tracks.</span><div class="board-navigation"><button type="button" id="board-prev" aria-label="Previous tracks" aria-controls="board" disabled>&larr;</button><button type="button" id="board-next" aria-label="Next tracks" aria-controls="board">&rarr;</button></div></div><div class="board-scroll" id="board-scroll" tabindex="0" role="region" aria-label="Application timeline, six tracks"><div class="board" id="board"></div></div><section class="task-panel" id="task-panel" role="region" aria-label="Task details"></section></section>
+</div></main></div><div class="toast" id="toast"></div>
+<script src="auth.js"></script><script src="layout.js"></script>
 <script>
-function getGradeNumber(grade) {
-    const match = String(grade || "").match(/9|10|11|12/);
-    return match ? Number(match[0]) : 10;
+let timelineData = null;
+let activeToken = "";
+let selectedTaskId = null;
+const $ = id => document.getElementById(id);
+const escape = value => escapeHtml(value || "");
+function statusLabel(status) { return ({not_started:"尚未开始",in_progress:"进行中",completed:"已完成",blocked:"受阻",not_applicable:"不适用"})[status] || "尚未开始"; }
+function showToast(message) { const toast = $("toast"); toast.textContent = message; toast.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600); }
+function taskById(id) { return (timelineData.tracks || []).flatMap(track => track.tasks).find(task => task.id === id); }
+let boardLayoutFrame = 0;
+function normalizedPosition(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? Math.max(0, Math.min(100, number)) : 50;
 }
-
-function buildTimeline(analysis) {
-    const grade = getGradeNumber(analysis.profile.grade);
-    const topPriority = analysis.priorities[0];
-    const coursePlan = analysis.coursePlan;
-    const items = [];
-
-    if (grade <= 10) {
-        items.push({
-            period: "现在-本学期",
-            title: "稳定GPA和基础方向",
-            tasks: [
-                `最高优先级：${topPriority.name}`,
-                "把校内成绩稳定在可解释、可持续的水平",
-                "AP先控制在1-2门，不用为了数量牺牲GPA"
-            ]
-        });
-        items.push({
-            period: "接下来6个月",
-            title: "探索专业画像",
-            tasks: [
-                `核心AP可优先考虑：${coursePlan.core.slice(0, 2).join("、") || "先补充Profile"}`,
-                `平衡课程可考虑：${coursePlan.balance[0] || "English Language或社科课程"}`,
-                "活动和竞赛以尝试为主，先验证兴趣和投入方式"
-            ]
-        });
-    } else if (grade === 11) {
-        items.push({
-            period: "现在-暑假前",
-            title: "形成申请主线",
-            tasks: [
-                "确认目标专业和院校层次",
-                "把AP、语言和活动串成同一个申请方向",
-                "开始整理文书素材，但不必过早定稿"
-            ]
-        });
-        items.push({
-            period: "11年级暑假",
-            title: "准备申请材料",
-            tasks: [
-                "完成选校初稿和活动列表",
-                "补齐语言或标化短板",
-                "开始主文书和补充文书素材库"
-            ]
-        });
-    } else {
-        items.push({
-            period: "现在-申请季",
-            title: "收束申请材料",
-            tasks: [
-                "减少高风险新增任务，优先完成已有材料",
-                "明确Reach、Match、Likely三档选校",
-                "集中处理文书、推荐信和补充材料"
-            ]
-        });
+function updateBoardNavigation() {
+    const viewport = $("board-scroll");
+    const limit = viewport.scrollWidth - viewport.clientWidth;
+    $("board-tools").hidden = !$("board").querySelector(".lane") || limit <= 1;
+    $("board-prev").disabled = viewport.scrollLeft <= 1;
+    $("board-next").disabled = viewport.scrollLeft >= limit - 1;
+}
+function layoutBoard() {
+    const board = $("board");
+    const lanes = [...board.querySelectorAll(".lane")];
+    if (!lanes.length) { updateBoardNavigation(); return; }
+    // Font loading and wrapping can change both headings and task card heights.
+    const headingBottom = Math.max(...lanes.map(lane => {
+        const heading = lane.querySelector(".lane-head");
+        return heading.offsetTop + heading.offsetHeight;
+    }));
+    const cards = lanes.map(lane => lane.querySelector(".node")).filter(Boolean);
+    const tallestCard = Math.max(0, ...cards.map(card => card.offsetHeight));
+    const axisTop = Math.max(118, headingBottom + 26);
+    const height = Math.max(610, axisTop + 2 * tallestCard + 72);
+    const axisSpan = height - axisTop - 56;
+    board.style.height = height + "px";
+    board.style.setProperty("--axis-top", axisTop + "px");
+    board.style.setProperty("--axis-span", axisSpan + "px");
+    for (const lane of lanes) {
+        const card = lane.querySelector(".node");
+        if (!card) continue;
+        const point = axisTop + normalizedPosition(card.dataset.timePosition) / 100 * axisSpan;
+        lane.querySelector(".task-marker").style.top = point + "px";
+        // Near the bottom, put the card above its time point instead of clipping it.
+        const below = point + 18;
+        card.style.top = (below + card.offsetHeight <= height - 24 ? below : point - 18 - card.offsetHeight) + "px";
     }
-
-    items.push({
-        period: "持续更新",
-        title: "资料库维护",
-        tasks: analysis.nextActions
-    });
-
-    return items;
+    updateBoardNavigation();
 }
-
-function renderTimeline(analysis) {
-    document.getElementById("current-focus").textContent =
-        `${analysis.priorities[0].name} 是当前最重要事项。${analysis.priorities[0].reason}`;
-
-    document.getElementById("timeline").innerHTML = buildTimeline(analysis).map(item => `
-        <article class="timeline-card">
-            <div class="period">${item.period}</div>
-            <div>
-                <h3>${item.title}</h3>
-                <ul>${item.tasks.map(task => `<li>${task}</li>`).join("")}</ul>
-            </div>
-        </article>
-    `).join("");
+function scheduleBoardLayout() {
+    cancelAnimationFrame(boardLayoutFrame);
+    boardLayoutFrame = requestAnimationFrame(layoutBoard);
 }
-
-async function loadAnalysis(token) {
-    const response = await fetch(`${AUTH_BASE_URL}/api/planning/analysis`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    });
-    const result = await response.json();
-    if (result.code === 200) {
-        renderTimeline(result.data);
-    }
+function scrollTracks(direction) {
+    const viewport = $("board-scroll");
+    const lane = $("board").querySelector(".lane");
+    if (!lane) return;
+    const laneWidth = lane.getBoundingClientRect().width;
+    const visibleTracks = Math.max(1, Math.floor((viewport.clientWidth - 104) / laneWidth));
+    viewport.scrollBy({ left: direction * laneWidth * visibleTracks, behavior: "instant" });
+    updateBoardNavigation();
 }
-
-requireLogin((user, token) => {
-    renderAppLayout(user);
-    loadAnalysis(token);
-});
+function renderAxis() {
+    return '<aside class="y-axis"><span class="y-title">Time</span><span class="time-label now">Now</span><span class="time-label month">Within a month</span><span class="time-label semester">This semester</span><span class="time-label later">Later</span><span class="axis-note">Sooner at the top</span></aside>';
+}
+function renderBoard() {
+    if (!timelineData) return;
+    const { profile, summary, tracks } = timelineData;
+    $("completion").textContent = summary.completion + "%";
+    $("completed").textContent = summary.completedTasks + " / " + summary.taskCount;
+    $("grade").textContent = profile.grade || "未填写";
+    $("major").textContent = profile.majorTrack || "未确定";
+    $("focus-title").textContent = summary.topFocus.title;
+    $("focus-detail").textContent = summary.topFocus.window + " · " + summary.topFocus.details;
+    $("board").innerHTML = renderAxis() + tracks.map((track, index) => {
+        const task = track.tasks[0];
+        const selected = selectedTaskId === task.id;
+        return '<section class="lane ' + escape(track.color) + '" style="grid-column:' + (index + 2) + '">' +
+            '<div class="lane-head"><b class="lane-code">' + escape(track.icon) + '</b><span class="lane-name">' + escape(track.label) + '</span></div>' +
+            '<div class="rail" aria-hidden="true"></div>' +
+            '<span class="task-marker ' + escape(task.color) + '" aria-hidden="true"></span>' +
+            '<button type="button" class="node ' + escape(task.color) + (selected ? ' active' : '') + '" data-task-id="' + escape(task.id) + '" data-time-position="' + normalizedPosition(task.timePosition) + '" aria-controls="task-panel" aria-expanded="' + selected + '">' +
+                '<b>' + escape(task.title) + '</b><span>' + escape(task.window) + '</span><em>' + task.progress + '% · ' + statusLabel(task.status) + '</em>' +
+            '</button></section>';
+    }).join("");
+    if (selectedTaskId) renderTaskPanel(taskById(selectedTaskId));
+    scheduleBoardLayout();
+}
+function renderTaskPanel(task) {
+    const panel = $("task-panel");
+    if (!task) { panel.classList.remove("show"); return; }
+    panel.classList.add("show");
+    panel.innerHTML = `<div class="panel-top"><div><h3>${escape(task.title)}</h3><p>${escape(task.details)}</p></div><span class="window">${escape(task.window)} · 紧迫度 ${task.urgency}</span></div>
+        <div class="controls"><div class="field"><label for="task-status">本阶段状态</label><select id="task-status"><option value="not_started" ${task.status === "not_started" ? "selected" : ""}>尚未开始</option><option value="in_progress" ${task.status === "in_progress" ? "selected" : ""}>进行中</option><option value="completed" ${task.status === "completed" ? "selected" : ""}>已完成</option><option value="blocked" ${task.status === "blocked" ? "selected" : ""}>受阻，需要调整</option><option value="not_applicable" ${task.status === "not_applicable" ? "selected" : ""}>当前不适用</option></select></div><div class="field"><label for="task-note">备注（可选）</label><textarea id="task-note" placeholder="例如：下周完成一次完整模考">${escape(task.note)}</textarea></div></div>
+        <div class="steps">${task.checklist.map(step => `<label class="step"><input class="step-check" type="checkbox" value="${escape(step.id)}" ${step.completed ? "checked" : ""}><span>${escape(step.label)}</span></label>`).join("")}</div>
+        <div class="panel-foot"><span class="status">当前：${statusLabel(task.status)} · ${task.progress}% 完成。完成后会自动下调这个节点的紧迫度。</span><button type="button" class="save" id="save-task">保存并更新坐标图</button></div>`;
+}
+async function loadTimeline() {
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/timeline`, { headers: authHeaders(activeToken) });
+        const result = await response.json();
+        if (!response.ok || result.code !== 200) throw new Error(result.msg || "时间线加载失败");
+        timelineData = result.data;
+        renderBoard();
+    } catch (error) { $("board").innerHTML = `<div style="padding:30px;color:#647789">${escape(error.message || "时间线暂时无法加载")}</div>`; }
+}
+async function saveTask() {
+    const task = taskById(selectedTaskId);
+    const button = $("save-task");
+    const payload = { taskId: task.id, status: $("task-status").value, completedSteps: [...document.querySelectorAll(".step-check:checked")].map(item => item.value), note: $("task-note").value.trim() };
+    button.disabled = true; button.textContent = "保存中…";
+    try {
+        const response = await fetch(`${AUTH_BASE_URL}/api/timeline/progress`, { method:"POST", headers:{"Content-Type":"application/json", ...authHeaders(activeToken)}, body:JSON.stringify(payload) });
+        const result = await response.json();
+        if (!response.ok || result.code !== 200) throw new Error(result.msg || "保存失败");
+        timelineData = result.data;
+        renderBoard();
+        showToast("进度已保存，节点颜色、位置和优先级已更新。");
+    } catch (error) { showToast(error.message || "保存失败，请稍后重试。"); }
+    finally { button.disabled = false; button.textContent = "保存并更新坐标图"; }
+}
+$("board").addEventListener("click", event => { const node = event.target.closest(".node"); if (!node) return; selectedTaskId = node.dataset.taskId; renderBoard(); });
+$("task-panel").addEventListener("click", event => { if (event.target.id === "save-task") saveTask(); });
+$("board-prev").addEventListener("click", () => scrollTracks(-1));
+$("board-next").addEventListener("click", () => scrollTracks(1));
+$("board-scroll").addEventListener("scroll", updateBoardNavigation, { passive: true });
+window.addEventListener("resize", scheduleBoardLayout);
+if (window.ResizeObserver) new ResizeObserver(scheduleBoardLayout).observe($("board-scroll"));
+if (document.fonts) {
+    document.fonts.ready.then(scheduleBoardLayout);
+    document.fonts.addEventListener("loadingdone", scheduleBoardLayout);
+}
+requireLogin((user, token) => { activeToken = token; renderAppLayout(user); loadTimeline(); });
 </script>
-</body>
-</html>
+</body></html>
